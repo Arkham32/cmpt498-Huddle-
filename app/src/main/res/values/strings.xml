@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Huddle</string>
+    <string name="loginButtonLogin">Login</string>
+    <string name="loginButtonNext">Next</string>
+    <string name="loginPasswordField">Password</string>
+    <string name="loginEmailField">Email Address</string>
 </resources>
