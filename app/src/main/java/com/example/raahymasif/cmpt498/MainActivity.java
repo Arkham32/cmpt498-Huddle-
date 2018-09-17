@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
+        //on click go to the SignUp file
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(signUp);
             }
         });
-
+        //on click go to SignIn file
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -10,12 +10,12 @@ public class User {
     public User() {
     }
 
-    public User(String Fname, String Lname, String password, String email, String username) {
+    public User(String Fname, String Lname, String password, String email){ //String username) {
         FirstName = Fname;
         LastName = Lname;
         Password = password;
         Email = email;
-        Username = username;
+        //Username = username;
     }
 
     public String getFirstName() {
@@ -24,8 +24,11 @@ public class User {
     
     public String getLastName() {return LastName;}
 
-    public void setName(String name) {
-        FirstName = name;
+    public void setFirstName(String Fname) {
+        FirstName = Fname;
+    }
+    public void setLastName(String Lname) {
+        LastName = Lname;
     }
 
     public String getPassword() {
@@ -44,11 +47,17 @@ public class User {
         Email = email;
     }
 
-    public String getUsername() {
-        return Username;
+
+    //this will change it back to "." for use in the code
+    public static String DecodeString(String string) {
+        return string.replace(",", ".");
     }
 
-    public void setUsername(String username) {
+    /*public String getUsername() {
+        return Username;
+    }*/
+
+    /*public void setUsername(String username) {
         Username = username;
-    }
+    }*/
 }

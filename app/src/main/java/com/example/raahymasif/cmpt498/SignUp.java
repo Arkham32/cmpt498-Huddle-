@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.raahymasif.cmpt498.Model.User;
@@ -21,6 +22,9 @@ public class SignUp extends AppCompatActivity {
 
     MaterialEditText edtFirstName,edtLastName,edtPassword,edtEmail,edtUsername;
     Button btnSignUp;
+    String encodeEmail;
+
+    //private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +37,9 @@ public class SignUp extends AppCompatActivity {
         edtPassword = (MaterialEditText)findViewById(R.id.edtPassword);
         edtUsername = (MaterialEditText)findViewById(R.id.edtUsername);
 
+
         btnSignUp = (Button)findViewById(R.id.btnSignUp);
+
 
         // Initialize the database
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -46,27 +52,32 @@ public class SignUp extends AppCompatActivity {
                 mDialog.setMessage("Please wait...");
                 mDialog.show();
 
+                //need to replace any "." due to firebase not being able to handle them
+                encodeEmail = EncodeString(edtEmail.getText().toString());
+
 
                 table_user.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                         // Check if username already exists
-                        if(dataSnapshot.child(edtUsername.getText().toString()).exists()){
+                        if(dataSnapshot.child(edtUsername.getText().toString()).exists()) {
                             mDialog.dismiss();
                             Toast.makeText(SignUp.this, "Username already exists!", Toast.LENGTH_SHORT).show();
 
                         }
                         else
                             {
-                            if(dataSnapshot.child(edtEmail.getText().toString()).exists()) {
+                                // check if email already exists
+                            if(dataSnapshot.child(encodeEmail.toString()).exists()) {
                                 mDialog.dismiss();
                                 Toast.makeText(SignUp.this, "Account already exists under this email!", Toast.LENGTH_SHORT).show();
                             }
                             else
                                 {
                                 mDialog.dismiss();
-                                User user = new User(edtFirstName.getText().toString(),edtLastName.getText().toString(),edtPassword.getText().toString(),edtEmail.getText().toString(),edtUsername.getText().toString());
+                                //User user = new User(edtFirstName.getText().toString(),edtLastName.getText().toString(),edtPassword.getText().toString(),edtEmail.getText().toString(),edtUsername.getText().toString());
+                                User user = new User(edtFirstName.getText().toString(),edtLastName.getText().toString(),edtPassword.getText().toString(),encodeEmail.toString());
                                 table_user.child(edtUsername.getText().toString()).setValue(user);
                                 Toast.makeText(SignUp.this, "Account Created!", Toast.LENGTH_SHORT).show();
                                 finish();
@@ -84,5 +95,11 @@ public class SignUp extends AppCompatActivity {
                 });
             }
         });
+
+    }
+
+    //since fire base can not handle "." we need to replace it with ","
+    public static String EncodeString(String string) {
+        return string.replace(".", ",");
     }
 }
