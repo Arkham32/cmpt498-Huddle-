@@ -1,6 +1,7 @@
 package com.example.raahymasif.cmpt498;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -55,6 +56,9 @@ public class SignIn extends AppCompatActivity {
                             User user = dataSnapshot.child(edtUsername.getText().toString()).getValue(User.class);
                             if (user.getPassword().equals(edtPassword.getText().toString())) {
                                 Toast.makeText(SignIn.this, "Sign in Successful!", Toast.LENGTH_SHORT).show();
+
+                                Intent homePage = new Intent(SignIn.this,HomePageActivity.class);
+                                startActivity(homePage);
                             } else {
                                 Toast.makeText(SignIn.this, "Incorrect Password", Toast.LENGTH_SHORT).show();
                             }

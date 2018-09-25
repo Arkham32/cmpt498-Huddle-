@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Huddle</string>
     <string name="slogan">Search. Meet. Play</string>
+    <string name="title_activity_home_page">HomePageActivity</string>
+    <string name="navigation_draw_open">Open Navigation Drawer</string>
+    <string name="navigation_draw_close">Close Navigation Drawer</string>
 </resources>
