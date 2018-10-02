@@ -6,15 +6,17 @@ public class User {
     private String Password;
     private String Email;
     private String Username;
+    private String Admin;
 
     public User() {
     }
 
-    public User(String Fname, String Lname, String password, String email){ //String username) {
+    public User(String Fname, String Lname, String password, String email, String admin){ //String username) {
         FirstName = Fname;
         LastName = Lname;
         Password = password;
         Email = email;
+        this.Admin = admin;
         //Username = username;
     }
 
@@ -30,6 +32,9 @@ public class User {
     public void setLastName(String Lname) {
         LastName = Lname;
     }
+
+    public String checkAdminStatus(String admin){ return Admin; }
+    public void setAdmin(String admin) { Admin = admin; }
 
     public String getPassword() {
         return Password;
