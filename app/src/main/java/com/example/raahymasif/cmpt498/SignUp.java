@@ -10,6 +10,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.raahymasif.cmpt498.Model.User;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,6 +24,7 @@ public class SignUp extends AppCompatActivity {
     MaterialEditText edtFirstName,edtLastName,edtPassword,edtEmail,edtUsername;
     Button btnSignUp;
     String encodeEmail;
+    String adminStatus = "admin";
 
     //private ProgressDialog progressDialog;
 
@@ -76,8 +78,8 @@ public class SignUp extends AppCompatActivity {
                             else
                                 {
                                 mDialog.dismiss();
-                                //User user = new User(edtFirstName.getText().toString(),edtLastName.getText().toString(),edtPassword.getText().toString(),edtEmail.getText().toString(),edtUsername.getText().toString());
-                                User user = new User(edtFirstName.getText().toString(),edtLastName.getText().toString(),edtPassword.getText().toString(),encodeEmail.toString());
+                                // add to the database
+                                User user = new User(edtFirstName.getText().toString(),edtLastName.getText().toString(),edtPassword.getText().toString(),encodeEmail.toString(), adminStatus.toString());
                                 table_user.child(edtUsername.getText().toString()).setValue(user);
                                 Toast.makeText(SignUp.this, "Account Created!", Toast.LENGTH_SHORT).show();
                                 finish();
