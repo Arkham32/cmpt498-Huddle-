@@ -32,6 +32,13 @@
             android:name=".HomePageActivity"
             android:label="@string/title_activity_home_page"
             android:theme="@style/AppTheme"/>
+
+        <activity
+            android:name=".CreateGameActivity"
+            android:label="Create Game"
+            android:theme="@style/AppTheme"/>
+
     </application>
+
 
 </manifest>
