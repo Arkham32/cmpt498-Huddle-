@@ -3,6 +3,7 @@ package com.example.raahymasif.cmpt498;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -11,6 +12,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import com.google.android.gms.maps.SupportMapFragment;
+
 
 public class HomePageActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     private DrawerLayout drawer;
@@ -50,6 +54,9 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
                 break;
             case R.id.nav_findgame:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FindMatchFragment()).commit();
+                break;
+            case R.id.nav_map:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Map_Fragment()).commit();
                 break;
             case R.id.nav_settings:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SettingsFragment()).commit();
