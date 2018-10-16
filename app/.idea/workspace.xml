@@ -13,12 +13,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d43c0c70-a8e8-4bc0-9ca4-83b9a3867376" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/raahymasif/cmpt498/CreateGameFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/raahymasif/cmpt498/CreateGameFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/fragment_creategame.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/fragment_creategame.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/fragment_findmatch.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/fragment_findmatch.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -54,7 +49,7 @@
       <file leaf-file-name="CreateGameActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/example/raahymasif/cmpt498/CreateGameActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
+            <state relative-caret-position="867">
               <caret line="53" column="40" selection-start-line="53" selection-start-column="40" selection-end-line="53" selection-end-column="40" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -2350,8 +2345,8 @@
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-12" />
     <option name="y" value="-12" />
-    <option name="width" value="1943" />
-    <option name="height" value="1043" />
+    <option name="width" value="1944" />
+    <option name="height" value="1044" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -2361,7 +2356,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="AndroidView">
         <subPane>
           <expand>
@@ -2373,8 +2367,9 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="ProjectPane" />
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -2567,7 +2562,7 @@
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18461539" />
-      <window_info anchor="right" id="Assistant" weight="0.32955465" />
+      <window_info anchor="right" id="Assistant" order="4" weight="0.32955465" />
       <window_info anchor="bottom" id="Build" order="7" sideWeight="0.49959514" weight="0.3291592" />
       <window_info anchor="right" id="Gradle" order="3" weight="0.32955465" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -2589,6 +2584,30 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/raahymasif/cmpt498/CreateGameActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="901">
+          <caret line="53" column="40" selection-start-line="53" selection-start-column="40" selection-end-line="53" selection-end-column="40" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/raahymasif/cmpt498/SignUp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1394">
+          <caret line="82" column="96" selection-start-line="82" selection-start-column="92" selection-end-line="82" selection-end-column="96" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/raahymasif/cmpt498/SignIn.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="748">
+          <caret line="60" column="56" selection-start-line="60" selection-start-column="56" selection-end-line="60" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/raahymasif/cmpt498/CreateGameActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="901">
@@ -2915,7 +2934,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/raahymasif/cmpt498/CreateGameActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
+        <state relative-caret-position="867">
           <caret line="53" column="40" selection-start-line="53" selection-start-column="40" selection-end-line="53" selection-end-column="40" />
           <folding>
             <element signature="imports" expanded="true" />
