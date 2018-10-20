@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#C0C0C0">
@@ -41,8 +42,8 @@
         android:id="@+id/InfoText"
         android:layout_width="match_parent"
         android:layout_height="145dp"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
         android:layout_marginBottom="180dp"
         android:ems="10"
         android:hint="Info"
