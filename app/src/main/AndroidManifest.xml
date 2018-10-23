@@ -38,6 +38,11 @@
             android:label="Create Game"
             android:theme="@style/AppTheme"/>
 
+        <activity
+            android:name=".FindMatchActivity"
+            android:label="Find Match"
+            android:theme="@style/AppTheme"/>
+
     </application>
 
 
