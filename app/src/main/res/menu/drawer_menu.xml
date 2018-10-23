@@ -11,11 +11,15 @@
         <item
             android:id="@+id/nav_findgame"
             android:icon="@drawable/ic_find"
-            android:title="Find Match" />
+            android:title="Home" />
         <item
             android:id="@+id/nav_creategame"
             android:icon="@drawable/ic_game"
             android:title="Create a game" />
+        <item
+            android:id="@+id/nav_map"
+            android:icon="@drawable/ic_game"
+            android:title="Map" />
         <item
             android:id="@+id/nav_send"
             android:icon="@drawable/ic_send"
