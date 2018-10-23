@@ -45,6 +45,7 @@
         <activity
             android:name=".HomePageActivity"
             android:label="@string/title_activity_home_page"
+<<<<<<< HEAD
             android:theme="@style/AppTheme" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -66,6 +67,21 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps"></activity>
+=======
+            android:theme="@style/AppTheme"/>
+
+        <activity
+            android:name=".CreateGameActivity"
+            android:label="Create Game"
+            android:theme="@style/AppTheme"/>
+
+        <activity
+            android:name=".FindMatchActivity"
+            android:label="Find Match"
+            android:theme="@style/AppTheme"/>
+
+>>>>>>> master
     </application>
+
 
 </manifest>

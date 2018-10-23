@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#C0C0C0">
@@ -13,19 +14,19 @@
                 android:text="Create Game"
                 android:textSize="36sp" />
 
-    <EditText
-        android:id="@+id/editText2"
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/SportText"
         android:layout_width="match_parent"
         android:layout_height="79dp"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/editText3"
+        android:layout_below="@+id/LocationText"
         android:ems="10"
         android:hint="Sport"
         android:inputType="textAutoComplete|textPersonName"
         android:textSize="24sp" />
 
-    <EditText
-        android:id="@+id/editText3"
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/LocationText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -37,12 +38,12 @@
         android:textColor="@android:color/black"
         android:textSize="24sp" />
 
-    <EditText
-        android:id="@+id/editText5"
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/InfoText"
         android:layout_width="match_parent"
         android:layout_height="145dp"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
         android:layout_marginBottom="180dp"
         android:ems="10"
         android:hint="Info"
@@ -50,8 +51,8 @@
         android:textColor="@android:color/black"
         android:textSize="24sp" />
 
-    <EditText
-        android:id="@+id/editText6"
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/NumberOfPlayerText"
         android:layout_width="78dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -63,7 +64,7 @@
         android:textColor="@android:color/black"
         android:textSize="24sp" />
 
-    <TextView
+    <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/textView2"
         android:layout_width="226dp"
         android:layout_height="48dp"
@@ -75,16 +76,16 @@
         android:textSize="24sp" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/PostButton"
         android:layout_width="151dp"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/button2"
+        android:layout_alignTop="@+id/CancelButton"
         android:layout_marginEnd="27dp"
         android:text="Post" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/CancelButton"
         android:layout_width="151dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
