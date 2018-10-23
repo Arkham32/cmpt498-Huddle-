@@ -1,8 +1,14 @@
 package com.example.raahymasif.cmpt498;
 
+import android.app.Activity;
+import android.view.LayoutInflater;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -12,11 +18,20 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.SupportMapFragment;
+
+import java.util.Map;
+
+import static android.app.PendingIntent.getActivity;
+
+
 public class HomePageActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     private DrawerLayout drawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
@@ -52,6 +67,18 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
             case R.id.nav_findgame:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FindMatchFragment()).commit();
                 break;
+            case R.id.nav_map:
+                //Fragment frg = null;
+                //Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.map);
+                //FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                //fragmentTransaction.detach(currentFragment);
+                //fragmentTransaction.attach(currentFragment);
+                //fragmentTransaction.commit();
+                Intent createmap = new Intent(getApplicationContext(), MapsActivity.class);
+                startActivity(createmap);
+                //break;
+                //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Map_Fragment()).commit();
+                break;
             case R.id.nav_settings:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SettingsFragment()).commit();
                 break;
@@ -78,3 +105,7 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
     }
 
 }
+
+
+
+

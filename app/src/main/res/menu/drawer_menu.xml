@@ -17,6 +17,10 @@
             android:icon="@drawable/ic_game"
             android:title="Create a game" />
         <item
+            android:id="@+id/nav_map"
+            android:icon="@drawable/ic_game"
+            android:title="Map" />
+        <item
             android:id="@+id/nav_send"
             android:icon="@drawable/ic_send"
             android:title="Send a message" />
