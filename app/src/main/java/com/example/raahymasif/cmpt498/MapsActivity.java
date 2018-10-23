@@ -62,7 +62,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         String str = addressList.get(0).getLocality() + ",";
                         str += addressList.get(0).getCountryName();
                         mMap.addMarker(new MarkerOptions().position(latLng).title(str));
-                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10.2f));
+                        //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10.2f));
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -83,7 +83,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                 }
             });
-        } else if (locationManager.isProviderEnabled((LocationManager.GPS_PROVIDER))) {
+        } else {// (locationManager.isProviderEnabled((LocationManager.GPS_PROVIDER))) {
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, new LocationListener() {
                 @Override
                 public void onLocationChanged(Location location) {
@@ -96,7 +96,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         String str = addressList.get(0).getLocality() + ",";
                         str += addressList.get(0).getCountryName();
                         mMap.addMarker(new MarkerOptions().position(latLng).title(str));
-                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10.2f));
+                        //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10.2f));
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -148,6 +148,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Add a marker in Sydney and move the camera
         LatLng sydney = new LatLng(-34, 151);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 10.2f));
+        //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 10.2f));
     }
 }
