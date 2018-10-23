@@ -73,10 +73,10 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
                 //fragmentTransaction.detach(currentFragment);
                 //fragmentTransaction.attach(currentFragment);
                 //fragmentTransaction.commit();
-                //Intent createmap = new Intent(getActivity(), MapsActivity.class);
-                //startActivity(createmap);
+                Intent createmap = new Intent(getApplicationContext(), MapsActivity.class);
+                startActivity(createmap);
                 //break;
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Map_Fragment()).commit();
+                //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Map_Fragment()).commit();
                 break;
             case R.id.nav_settings:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SettingsFragment()).commit();

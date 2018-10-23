@@ -15,6 +15,7 @@ public class Map_Fragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState) {
+
         return inflater.inflate(R.layout.activity_maps, container, false);
 
         //Intent showmap =  new Intent(getActivity(), MapsActivity.class);
