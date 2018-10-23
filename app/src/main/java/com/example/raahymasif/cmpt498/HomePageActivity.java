@@ -10,14 +10,28 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class HomePageActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     private DrawerLayout drawer;
+    private FirebaseDatabase mDatabase;
+    private DatabaseReference mDatabaseRef;
+    private TextView name_view;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_home_page);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -27,6 +41,30 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        //gets view of header
+        View hView = navigationView.getHeaderView(0);
+        // Initialize the textview
+        name_view = (TextView)hView.findViewById(R.id.headerName);
+
+        // initlaize the firebase realtime database variables
+        mDatabase = FirebaseDatabase.getInstance();
+        mDatabaseRef = mDatabase.getReference();
+
+        //database listener that sets text of username in the header
+        mDatabaseRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String s = dataSnapshot.child("User").child("karn").child("Fname").getValue(String.class);
+
+                name_view.setText("Hello: "+ s);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+
+        });
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_draw_open,R.string.navigation_draw_close);
@@ -34,16 +72,19 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+
         //this is just for what we should see first at the homescreen when they login
         //we need to later change this to be able to see posts instead of the finding match
         if(savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FindMatchFragment()).commit();
             navigationView.setCheckedItem(R.id.nav_findgame);
         }
+
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
         switch (item.getItemId()){
             case R.id.nav_creategame:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CreateGameFragment()).commit();
