@@ -69,9 +69,9 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         mDatabaseRef = mDatabase.getReference();
 
         //database listener that sets text of username in the header
-        mDatabaseRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+        //mDatabaseRef.addValueEventListener(new ValueEventListener() {
+            /*@Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
                 String s = dataSnapshot.child("User").child("karn").child("Fname").getValue(String.class);
 
                 name_view.setText("Hello: "+ s);
@@ -80,9 +80,9 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
+            }*/
 
-        });
+        //});
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_draw_open,R.string.navigation_draw_close);
