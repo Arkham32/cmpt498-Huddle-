@@ -1,6 +1,6 @@
 package com.example.raahymasif.cmpt498;
 
-import android.content.Intent;
+//import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,26 +10,21 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import com.google.firebase.database.FirebaseDatabase;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.example.raahymasif.cmpt498.Model.CreatePosts;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.google.firebase.database.DatabaseReference;
+
 
 public class FindMatchFragment extends Fragment {
-    private TextView textView;
+    //private TextView textView;
     //private FirebaseDatabase mDatabase;
-    private DatabaseReference mDatabaseRef;
-    private TextView hello;
+   // private DatabaseReference mDatabaseRef;
+    //private TextView hello;
 
 
 
@@ -42,26 +37,11 @@ public class FindMatchFragment extends Fragment {
         //empty constructor
     }
 
-    /*@Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.fragment_findmatch);
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("Posts");
-        mDatabase.keepSynced(true);
-
-        mPostList = (RecyclerView)findViewById(R.id.myRecycleView);
-        mPostList.setHasFixedSize(true);
-        mPostList.setLayoutManager(new LinearLayoutManager(this ));
-
-    }*/
-
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View rootview = inflater.inflate(R.layout.fragment_findmatch, container, false);
+       // View rootview = inflater.inflate(R.layout.fragment_findmatch, container, false);
 
         
         View view = inflater.inflate(R.layout.fragment_findmatch, container, false);
@@ -100,34 +80,7 @@ public class FindMatchFragment extends Fragment {
 
     }
 
-    /*public static class PostViewHolder extends RecyclerView.ViewHolder{
 
-        View mView;
-        public PostViewHolder(View itemView){
-            super(itemView);
-            mView = itemView;
-        }
-
-        public void setInfo(String info){
-            TextView post_info = (TextView)mView.findViewById(R.id.post_info);
-            post_info.setText(info);
-        }
-
-        public void setLocation(String location){
-            TextView post_location = (TextView)mView.findViewById(R.id.post_location);
-            post_location.setText(location);
-        }
-
-        public void setPlayers(String players){
-            TextView post_players = (TextView)mView.findViewById(R.id.post_players);
-            post_players.setText(players);
-        }
-
-        public void setSport(String sport){
-            TextView post_sport = (TextView)mView.findViewById(R.id.post_sport);
-            post_sport.setText(sport);
-        }
-    }*/
 }
- //------------------
+
 
