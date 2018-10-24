@@ -40,6 +40,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:16.0.1'
     implementation 'com.google.firebase:firebase-database:16.0.1'
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of 054b0d7... Tahmid+Raahym merge
+=======
 >>>>>>> parent of 054b0d7... Tahmid+Raahym merge
     implementation 'com.github.jd-alexander:android-flat-button:v1.1'
     implementation 'com.rengwuxian.materialedittext:library:2.1.4'
@@ -53,9 +56,13 @@ dependencies {
     implementation 'com.android.support:cardview-v7:27.1.1'
     implementation 'com.android.support:recyclerview-v7:27.1.1'
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     implementation 'com.firebase:firebase-client-android:2.5.0'
 
+=======
+>>>>>>> master
+>>>>>>> parent of 054b0d7... Tahmid+Raahym merge
 =======
 >>>>>>> master
 >>>>>>> parent of 054b0d7... Tahmid+Raahym merge
