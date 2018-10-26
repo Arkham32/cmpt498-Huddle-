@@ -40,7 +40,7 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
     private DrawerLayout drawer;
     private FirebaseDatabase mDatabase;
     private DatabaseReference mDatabaseRef;
-    private TextView name_view;
+    private TextView name_view, email;
 
 
     @Override
@@ -63,7 +63,7 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         View hView = navigationView.getHeaderView(0);
         // Initialize the textview
         name_view = (TextView)hView.findViewById(R.id.headerName);
-
+        email = (TextView)hView.findViewById(R.id.user_email);
         // initlaize the firebase realtime database variables
         mDatabase = FirebaseDatabase.getInstance();
         mDatabaseRef = mDatabase.getReference();
@@ -72,9 +72,13 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         mDatabaseRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String s = dataSnapshot.child("User").child("karn").child("Fname").getValue(String.class);
+                String s = getIntent().getStringExtra("user_name");
+                String x = getIntent().getStringExtra("email");
+                //String s = dataSnapshot.child("User").child("karn").child("Fname").getValue(String.class);
 
-                name_view.setText("Hello: "+ s);
+                name_view.setText(s);
+                String decodeEmail = DecodeString(x);
+                email.setText(decodeEmail);
             }
 
             @Override
@@ -146,7 +150,10 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
             super.onBackPressed();
         }
     }
-
+    //since fire base can not handle "." we need to replace it with ","
+    public static String DecodeString(String string) {
+        return string.replace(",", ".");
+    }
 }
 
 

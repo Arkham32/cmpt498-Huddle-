@@ -58,6 +58,8 @@ public class SignIn extends AppCompatActivity {
                                 Toast.makeText(SignIn.this, "Sign in Successful!", Toast.LENGTH_SHORT).show();
 
                                 Intent homePage = new Intent(SignIn.this,HomePageActivity.class);
+                                homePage.putExtra("user_name", edtUsername.getText().toString());
+                                homePage.putExtra("email", user.getEmail());
                                 startActivity(homePage);
                             } else {
                                 Toast.makeText(SignIn.this, "Incorrect Password", Toast.LENGTH_SHORT).show();
