@@ -51,26 +51,15 @@
 
     <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/NumberOfPlayerText"
-        android:layout_width="78dp"
+        android:layout_width="313dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
         android:layout_marginBottom="95dp"
         android:ems="10"
-        android:hint="    #"
+        android:hint="Number of Players Needed"
         android:inputType="number"
         android:textColor="@android:color/black"
-        android:textSize="24sp" />
-
-    <com.rengwuxian.materialedittext.MaterialEditText
-        android:id="@+id/textView2"
-        android:layout_width="226dp"
-        android:layout_height="48dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="83dp"
-        android:layout_marginEnd="62dp"
-        android:text="Players Needed"
         android:textSize="24sp" />
 
     <Button

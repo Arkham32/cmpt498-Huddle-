@@ -36,9 +36,10 @@ import java.util.Random;
 public class CreateGameActivity extends Activity {
     MaterialEditText LocationText, SportText, NumberOfPlayersText, InfoText;
     Button PostButton, CancelButton;
-    String uniqueId = new String();
+    String uniqueId = "1";
+    String PostedBy = "NYE", UsersJoined = " ";
     Place eventAddress;
-
+    //String x = System.getProperty("user.name");
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,7 +91,7 @@ public class CreateGameActivity extends Activity {
                 mDialog.setMessage("Please wait...");
                 mDialog.show();
 
-                uniqueId = generateUniqueId();
+                //uniqueId = generateUniqueId();
 
                 table_post.addValueEventListener(new ValueEventListener() {
                     @Override
@@ -100,7 +101,9 @@ public class CreateGameActivity extends Activity {
                             mDialog.dismiss();
                             //if unique id exists it will redo the unique id to find the one that doesn't exist
                             while(dataSnapshot.child(uniqueId.toString()).exists()){
-                                uniqueId = generateUniqueId();
+                                String newId = generateUniqueId(uniqueId);
+                                uniqueId = newId;
+
                             }
                         }
 
@@ -108,7 +111,7 @@ public class CreateGameActivity extends Activity {
                         {
                             mDialog.dismiss();
                             // add to the database
-                            CreatePosts createPosts = new CreatePosts(InfoText.getText().toString(),eventAddress.getAddress().toString(),NumberOfPlayersText.getText().toString(), SportText.getText().toString());
+                            CreatePosts createPosts = new CreatePosts(InfoText.getText().toString(),eventAddress.getAddress().toString(),NumberOfPlayersText.getText().toString(), SportText.getText().toString(), PostedBy.toString(), UsersJoined.toString());
                             table_post.child(uniqueId.toString()).setValue(createPosts);
                             Toast.makeText(CreateGameActivity.this, "Post Submitted!", Toast.LENGTH_SHORT).show();
                             finish();
@@ -133,10 +136,11 @@ public class CreateGameActivity extends Activity {
     }
     //generates unique Id for the posts to distinguish between them
     //later have to implement characters to make it more unique
-    public String generateUniqueId(){
+    public String generateUniqueId(String id){
         String string = new String();
-        Random rand = new Random();
-        int num = rand.nextInt(1000);
+        //Random rand = new Random();
+        int num = Integer.parseInt(id) + 1;
+
         string = Integer.toString(num);
 
 

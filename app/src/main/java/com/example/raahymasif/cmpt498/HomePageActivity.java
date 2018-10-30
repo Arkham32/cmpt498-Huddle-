@@ -41,7 +41,7 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
     private FirebaseDatabase mDatabase;
     private DatabaseReference mDatabaseRef;
     private TextView name_view, email;
-
+    //String s = getIntent().getStringExtra("user_name");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,6 +110,12 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
 
         switch (item.getItemId()){
             case R.id.nav_creategame:
+                /*String s = getIntent().getStringExtra("user_name");
+
+                Intent creategame = new Intent(getApplicationContext(),CreateGameActivity.class);
+                creategame.putExtra("username",s);
+
+                startActivity(creategame);*/
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CreateGameFragment()).commit();
                 break;
             case R.id.nav_findgame:
