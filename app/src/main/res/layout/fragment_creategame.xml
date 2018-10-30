@@ -14,17 +14,6 @@
                 android:text="Create Game"
                 android:textSize="36sp" />
 
-    <com.rengwuxian.materialedittext.MaterialEditText
-        android:id="@+id/SportText"
-        android:layout_width="match_parent"
-        android:layout_height="79dp"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/LocationText"
-        android:ems="10"
-        android:hint="Sport"
-        android:inputType="textAutoComplete|textPersonName"
-        android:textSize="24sp" />
-
     <fragment
         android:id="@+id/LocationText"
         android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
@@ -35,6 +24,16 @@
         android:layout_marginStart="0dp"
         android:layout_marginTop="105dp" />
 
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/SportText"
+        android:layout_width="match_parent"
+        android:layout_height="79dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/LocationText"
+        android:ems="10"
+        android:hint="Sport"
+        android:inputType="textAutoComplete|textPersonName"
+        android:textSize="24sp" />
 
 
     <com.rengwuxian.materialedittext.MaterialEditText
