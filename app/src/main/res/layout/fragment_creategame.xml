@@ -25,18 +25,17 @@
         android:inputType="textAutoComplete|textPersonName"
         android:textSize="24sp" />
 
-    <com.rengwuxian.materialedittext.MaterialEditText
+    <fragment
         android:id="@+id/LocationText"
+        android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="97dp"
-        android:ems="10"
-        android:hint="Location"
-        android:inputType="textPersonName"
-        android:textColor="@android:color/black"
-        android:textSize="24sp" />
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="105dp" />
+
+
 
     <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/InfoText"
