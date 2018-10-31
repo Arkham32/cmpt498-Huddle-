@@ -7,15 +7,10 @@ import android.icu.text.IDNA;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.gms.common.api.Status;
-import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
-import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.example.raahymasif.cmpt498.Model.CreatePosts;
 import com.rengwuxian.materialedittext.MaterialEditText;
@@ -26,44 +21,20 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.android.gms.location.places.Place;
 
 import java.util.Random;
-
-
-
 
 public class CreateGameActivity extends Activity {
     MaterialEditText LocationText, SportText, NumberOfPlayersText, InfoText;
     Button PostButton, CancelButton;
-    String uniqueId = "1";
-    String PostedBy = "NYE", UsersJoined = " ";
-    Place eventAddress;
-    //String x = System.getProperty("user.name");
+    String uniqueId = new String();
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_creategame);
 
-        //LocationText = (MaterialEditText)findViewById(R.id.LocationText);
-        final PlaceAutocompleteFragment LocationText = (PlaceAutocompleteFragment)getFragmentManager().findFragmentById(R.id.LocationText);
-        LocationText.getView().findViewById(R.id.place_autocomplete_search_button).setVisibility(View.GONE);
-        ((EditText) LocationText.getView().findViewById(R.id.place_autocomplete_search_input))
-                .setHint("Enter an address");
-        ((EditText) LocationText.getView().findViewById(R.id.place_autocomplete_search_input))
-                .setTextSize(14);
-
-        LocationText.setOnPlaceSelectedListener(new PlaceSelectionListener() {
-            @Override
-            public void onPlaceSelected(Place place) {
-                eventAddress = place;
-            }
-
-            @Override
-            public void onError(Status status) {
-                Log.e("ERROR", status.getStatusMessage());
-            }
-        });
+        LocationText = (MaterialEditText)findViewById(R.id.LocationText);
         SportText = (MaterialEditText)findViewById(R.id.SportText);
         NumberOfPlayersText = (MaterialEditText)findViewById(R.id.NumberOfPlayerText);
         InfoText  = (MaterialEditText)findViewById(R.id.InfoText);
@@ -91,7 +62,7 @@ public class CreateGameActivity extends Activity {
                 mDialog.setMessage("Please wait...");
                 mDialog.show();
 
-                //uniqueId = generateUniqueId();
+                uniqueId = generateUniqueId();
 
                 table_post.addValueEventListener(new ValueEventListener() {
                     @Override
@@ -101,9 +72,7 @@ public class CreateGameActivity extends Activity {
                             mDialog.dismiss();
                             //if unique id exists it will redo the unique id to find the one that doesn't exist
                             while(dataSnapshot.child(uniqueId.toString()).exists()){
-                                String newId = generateUniqueId(uniqueId);
-                                uniqueId = newId;
-
+                                uniqueId = generateUniqueId();
                             }
                         }
 
@@ -111,7 +80,7 @@ public class CreateGameActivity extends Activity {
                         {
                             mDialog.dismiss();
                             // add to the database
-                            CreatePosts createPosts = new CreatePosts(InfoText.getText().toString(),eventAddress.getAddress().toString(),NumberOfPlayersText.getText().toString(), SportText.getText().toString(), PostedBy.toString(), UsersJoined.toString());
+                            CreatePosts createPosts = new CreatePosts(InfoText.getText().toString(),LocationText.getText().toString(),NumberOfPlayersText.getText().toString(), SportText.getText().toString());
                             table_post.child(uniqueId.toString()).setValue(createPosts);
                             Toast.makeText(CreateGameActivity.this, "Post Submitted!", Toast.LENGTH_SHORT).show();
                             finish();
@@ -136,11 +105,10 @@ public class CreateGameActivity extends Activity {
     }
     //generates unique Id for the posts to distinguish between them
     //later have to implement characters to make it more unique
-    public String generateUniqueId(String id){
+    public String generateUniqueId(){
         String string = new String();
-        //Random rand = new Random();
-        int num = Integer.parseInt(id) + 1;
-
+        Random rand = new Random();
+        int num = rand.nextInt(1000);
         string = Integer.toString(num);
 
 

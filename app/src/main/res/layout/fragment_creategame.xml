@@ -14,16 +14,6 @@
                 android:text="Create Game"
                 android:textSize="36sp" />
 
-    <fragment
-        android:id="@+id/LocationText"
-        android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="105dp" />
-
     <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/SportText"
         android:layout_width="match_parent"
@@ -35,6 +25,18 @@
         android:inputType="textAutoComplete|textPersonName"
         android:textSize="24sp" />
 
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/LocationText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="97dp"
+        android:ems="10"
+        android:hint="Location"
+        android:inputType="textPersonName"
+        android:textColor="@android:color/black"
+        android:textSize="24sp" />
 
     <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/InfoText"
@@ -51,15 +53,26 @@
 
     <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/NumberOfPlayerText"
-        android:layout_width="313dp"
+        android:layout_width="78dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
         android:layout_marginBottom="95dp"
         android:ems="10"
-        android:hint="Number of Players Needed"
+        android:hint="    #"
         android:inputType="number"
         android:textColor="@android:color/black"
+        android:textSize="24sp" />
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/textView2"
+        android:layout_width="226dp"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="83dp"
+        android:layout_marginEnd="62dp"
+        android:text="Players Needed"
         android:textSize="24sp" />
 
     <Button
