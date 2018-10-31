@@ -7,10 +7,15 @@ import android.icu.text.IDNA;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
+import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.example.raahymasif.cmpt498.Model.CreatePosts;
 import com.rengwuxian.materialedittext.MaterialEditText;
@@ -21,20 +26,43 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.android.gms.location.places.Place;
 
 import java.util.Random;
+
+
+
 
 public class CreateGameActivity extends Activity {
     MaterialEditText LocationText, SportText, NumberOfPlayersText, InfoText;
     Button PostButton, CancelButton;
     String uniqueId = new String();
+    Place eventAddress;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_creategame);
 
-        LocationText = (MaterialEditText)findViewById(R.id.LocationText);
+        //LocationText = (MaterialEditText)findViewById(R.id.LocationText);
+        final PlaceAutocompleteFragment LocationText = (PlaceAutocompleteFragment)getFragmentManager().findFragmentById(R.id.LocationText);
+        LocationText.getView().findViewById(R.id.place_autocomplete_search_button).setVisibility(View.GONE);
+        ((EditText) LocationText.getView().findViewById(R.id.place_autocomplete_search_input))
+                .setHint("Enter an address");
+        ((EditText) LocationText.getView().findViewById(R.id.place_autocomplete_search_input))
+                .setTextSize(14);
+
+        LocationText.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+            @Override
+            public void onPlaceSelected(Place place) {
+                eventAddress = place;
+            }
+
+            @Override
+            public void onError(Status status) {
+                Log.e("ERROR", status.getStatusMessage());
+            }
+        });
         SportText = (MaterialEditText)findViewById(R.id.SportText);
         NumberOfPlayersText = (MaterialEditText)findViewById(R.id.NumberOfPlayerText);
         InfoText  = (MaterialEditText)findViewById(R.id.InfoText);
@@ -80,7 +108,7 @@ public class CreateGameActivity extends Activity {
                         {
                             mDialog.dismiss();
                             // add to the database
-                            CreatePosts createPosts = new CreatePosts(InfoText.getText().toString(),LocationText.getText().toString(),NumberOfPlayersText.getText().toString(), SportText.getText().toString());
+                            CreatePosts createPosts = new CreatePosts(InfoText.getText().toString(),eventAddress.getAddress().toString(),NumberOfPlayersText.getText().toString(), SportText.getText().toString());
                             table_post.child(uniqueId.toString()).setValue(createPosts);
                             Toast.makeText(CreateGameActivity.this, "Post Submitted!", Toast.LENGTH_SHORT).show();
                             finish();
