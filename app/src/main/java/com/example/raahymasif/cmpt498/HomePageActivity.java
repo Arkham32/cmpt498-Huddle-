@@ -77,8 +77,9 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
                 //String s = dataSnapshot.child("User").child("karn").child("Fname").getValue(String.class);
 
                 name_view.setText(s);
-                String decodeEmail = DecodeString(x);
-                email.setText(decodeEmail);
+                if (x != null){
+                String decodeEmail = x.replace(",", ".");
+                email.setText(decodeEmail);}
             }
 
             @Override
@@ -86,8 +87,7 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
 
             }
 
-        }
-        );
+        });
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_draw_open,R.string.navigation_draw_close);
@@ -152,9 +152,9 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         }
     }
     //since fire base can not handle "." we need to replace it with ","
-    public static String DecodeString(String string) {
-        return string.replace(",", ".");
-    }
+    //public static String DecodeString(String string) {
+      //  return string.replace(",", ".");
+    //}
 }
 
 
