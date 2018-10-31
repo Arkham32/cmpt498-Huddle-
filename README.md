@@ -9,5 +9,5 @@ adding and removing events
 display the name and the email in the drawer
 tahmid:
 gui
-karn:
+karn: hi
 admin
