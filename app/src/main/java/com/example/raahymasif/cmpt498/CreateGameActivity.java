@@ -38,6 +38,8 @@ public class CreateGameActivity extends Activity {
     Button PostButton, CancelButton;
     String uniqueId = new String();
     Place eventAddress;
+    String postedBy = new String();
+    String usersJoined = " ";
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -75,6 +77,7 @@ public class CreateGameActivity extends Activity {
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference table_post = database.getReference("Posts");
 
+        //when cancel is clicked
         CancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,7 +85,7 @@ public class CreateGameActivity extends Activity {
                 startActivity(homePage);
             }
         });
-
+        //when post is clicked
         PostButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -90,12 +93,17 @@ public class CreateGameActivity extends Activity {
                 mDialog.setMessage("Please wait...");
                 mDialog.show();
 
+                //generates the ID
                 uniqueId = generateUniqueId();
+
+                //get the username;
+                Bundle extras = getIntent().getExtras();
+                postedBy = extras.getString("username");
 
                 table_post.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        // Check if username already exists
+                        // Check if uniqueID already exists
                         if(dataSnapshot.child(uniqueId.toString()).exists()) {
                             mDialog.dismiss();
                             //if unique id exists it will redo the unique id to find the one that doesn't exist
@@ -108,9 +116,11 @@ public class CreateGameActivity extends Activity {
                         {
                             mDialog.dismiss();
                             // add to the database
-                            CreatePosts createPosts = new CreatePosts(InfoText.getText().toString(),eventAddress.getAddress().toString(),NumberOfPlayersText.getText().toString(), SportText.getText().toString());
+                            //(info, address, num of players, sport, user, joined users)
+                            CreatePosts createPosts = new CreatePosts(InfoText.getText().toString(),eventAddress.getAddress().toString(),NumberOfPlayersText.getText().toString(), SportText.getText().toString(), postedBy.toString(), usersJoined.toString());
                             table_post.child(uniqueId.toString()).setValue(createPosts);
-                            Toast.makeText(CreateGameActivity.this, "Post Submitted!", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(CreateGameActivity.this, "Post Submitted!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(CreateGameActivity.this, uniqueId, Toast.LENGTH_SHORT).show();
                             finish();
 
                             Intent homePage = new Intent(CreateGameActivity.this,HomePageActivity.class);

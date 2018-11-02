@@ -107,10 +107,21 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        String s = getIntent().getStringExtra("user_name");
 
         switch (item.getItemId()){
             case R.id.nav_creategame:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CreateGameFragment()).commit();
+                //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CreateGameFragment()).commit();
+                CreateGameFragment fragment = new CreateGameFragment();
+                Bundle arguments = new Bundle();
+
+                arguments.putString("username",s );
+                fragment.setArguments(arguments);
+
+                final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.fragment_container, fragment, String.valueOf(new CreateGameFragment())).commit();
+
+
                 break;
             case R.id.nav_findgame:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FindMatchFragment()).commit();

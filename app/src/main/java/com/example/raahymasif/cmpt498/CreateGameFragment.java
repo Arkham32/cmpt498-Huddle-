@@ -30,7 +30,13 @@ public class CreateGameFragment extends Fragment {
         //return inflater.inflate(R.layout.fragment_creategame, container, false);
         View view = inflater.inflate(R.layout.fragment_creategame, container, false);
 
+        //getting the username
+        Bundle arguments = getArguments();
+        String user = arguments.getString("username");
+
+        //calling createGameActivity and passing the username to it
         Intent createGame = new Intent(getActivity(), CreateGameActivity.class);
+        createGame.putExtra("username", user);
         startActivity(createGame);
 
         return view;
