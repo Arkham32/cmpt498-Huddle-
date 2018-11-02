@@ -145,7 +145,15 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
                 Toast.makeText(this, "Message Sent", Toast.LENGTH_SHORT).show();
                 break;*/
             case R.id.nav_send:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SendMessageFragment()).commit();
+                //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SendMessageFragment()).commit();
+                SendMessageFragment fragmentChat = new SendMessageFragment();
+                Bundle argumentsChat = new Bundle();
+
+                argumentsChat.putString("username",s );
+                fragmentChat.setArguments(argumentsChat);
+
+                final FragmentTransaction ftChat = getSupportFragmentManager().beginTransaction();
+                ftChat.replace(R.id.fragment_container, fragmentChat, String.valueOf(new SendMessageFragment())).commit();
                 break;
         }
 
