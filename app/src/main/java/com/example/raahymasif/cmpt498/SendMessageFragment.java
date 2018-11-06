@@ -58,9 +58,22 @@ public class SendMessageFragment extends Fragment {
 
         setHasOptionsMenu(true);
 
-        mUsername = "user";
+        //getting the username
+        //Bundle extras = getIntent().getExtras();
+        //postedBy = extras.getString("username");
+
+
+        Bundle arguments = getArguments();
+        String user = arguments.getString("username");
+
+        //testing
+        System.out.println("---------------------------------" + user);
+
+        mUsername = user;
         mUserId = "0000";
 
+        //testing
+        System.out.println(mUsername +  "-----------------------------------------");
         setupConnection();
     }
 

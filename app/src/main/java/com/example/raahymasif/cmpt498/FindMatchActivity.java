@@ -43,6 +43,7 @@ public class FindMatchActivity extends AppCompatActivity {
                 viewHolder.setLocation(model.getLocation());
                 viewHolder.setPlayers(model.getPlayers());
                 viewHolder.setSport(model.getSport());
+                //viewHolder.setPostedBy(model.getPostedBy());
             }
 
         };
@@ -58,6 +59,7 @@ public class FindMatchActivity extends AppCompatActivity {
             super(itemView);
             mView = itemView;
         }
+
 
         public void setInfo(String info){
             TextView post_info = (TextView)mView.findViewById(R.id.post_info);
@@ -78,5 +80,10 @@ public class FindMatchActivity extends AppCompatActivity {
             TextView post_sport = (TextView)mView.findViewById(R.id.post_sport);
             post_sport.setText(sport);
         }
+
+        /*public void setPostedBy(String postedBy){
+            TextView posted_by = (TextView)mView.findViewById(R.id.posted_by);
+            posted_by.setText(postedBy);
+        }*/
     }
 }
