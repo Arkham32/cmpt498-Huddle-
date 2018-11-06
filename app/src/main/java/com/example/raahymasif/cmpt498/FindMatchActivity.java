@@ -43,7 +43,7 @@ public class FindMatchActivity extends AppCompatActivity {
                 viewHolder.setLocation(model.getLocation());
                 viewHolder.setPlayers(model.getPlayers());
                 viewHolder.setSport(model.getSport());
-                viewHolder.setPostedBy(model.getPostedBy());
+                //viewHolder.setPostedBy(model.getPostedBy());
             }
 
         };
@@ -81,9 +81,9 @@ public class FindMatchActivity extends AppCompatActivity {
             post_sport.setText(sport);
         }
 
-        public void setPostedBy(String postedBy){
+        /*public void setPostedBy(String postedBy){
             TextView posted_by = (TextView)mView.findViewById(R.id.posted_by);
             posted_by.setText(postedBy);
-        }
+        }*/
     }
 }

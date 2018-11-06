@@ -50,9 +50,9 @@ public class CreateGameActivity extends Activity {
         final PlaceAutocompleteFragment LocationText = (PlaceAutocompleteFragment)getFragmentManager().findFragmentById(R.id.LocationText);
         LocationText.getView().findViewById(R.id.place_autocomplete_search_button).setVisibility(View.GONE);
         ((EditText) LocationText.getView().findViewById(R.id.place_autocomplete_search_input))
-                .setHint("Enter an address");
+                .setHint(" Click To Select A Location ");
         ((EditText) LocationText.getView().findViewById(R.id.place_autocomplete_search_input))
-                .setTextSize(14);
+                .setTextSize(20);
 
         LocationText.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
