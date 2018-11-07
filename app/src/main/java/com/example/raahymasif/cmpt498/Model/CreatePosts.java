@@ -1,7 +1,7 @@
 package com.example.raahymasif.cmpt498.Model;
 
 public class CreatePosts {
-    //private String Id;
+    private String Id;
     private String Info;
     private String Location;
     private String Players;
@@ -10,13 +10,13 @@ public class CreatePosts {
     private String UsersJoined;
 
 
-    /*public String getId() {
+    public String getId() {
         return Id;
     }
 
     public void setId(String id) {
         Id = id;
-    }*/
+    }
 
 
     public String getPostedBy() {
@@ -72,8 +72,8 @@ public class CreatePosts {
 
     }
 
-    public CreatePosts(String info, String location, String players, String sport, String postedBy, String usersJoined){ //String username) {
-        //this.Id = id;
+    public CreatePosts(String info, String location, String players, String sport, String postedBy, String usersJoined, String Id){ //String username) {
+        this.Id = Id;
         this.Info = info;
         this.Location = location;
         this.Players = players;

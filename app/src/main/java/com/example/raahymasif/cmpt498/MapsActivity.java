@@ -170,8 +170,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        //LatLng sydney = new LatLng(-34, 151);
+        //mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 10.2f));
     }
 
@@ -187,6 +187,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             //Get phone field and append to list
             location.add((String) singleUser.get("location"));
         }
+
+        ArrayList<String> locationID = new ArrayList<>();
+
+        //iterate through each user, ignoring their UID
+        for (Map.Entry<String, Object> entry : users.entrySet()){
+
+            //Get user map
+            Map singleUser = (Map) entry.getValue();
+            //Get phone field and append to list
+            locationID.add((String) singleUser.get("id"));
+        }
         //System.out.println("=====================================================================");
 
         //System.out.println (location.toString());
@@ -195,14 +206,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             if (g == null) {
                 continue;
             } else {
-                getLocationFromAddress(this, g);
-
+                for(String i: locationID) {
+                    getLocationFromAddress(this, g, i);
+                }
             }
         }
     }
 
-    public void getLocationFromAddress(Context context, String inputtedAddress) {
-
+    public void getLocationFromAddress(Context context, String inputtedAddress, String id){
         Geocoder coder = new Geocoder(context);
         List<Address> address;
         LatLng resLatLng = null;
@@ -229,9 +240,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             ex.printStackTrace();
             Toast.makeText(context, ex.getMessage(), Toast.LENGTH_LONG).show();
         }
-        mMap.addMarker(new MarkerOptions().position(resLatLng).title("Marker"));
+        if(resLatLng != null) {
+            mMap.addMarker(new MarkerOptions().position(resLatLng).title(id));
+        }
         return;
         //return resLatLng;
     }
+
+
 }
 
