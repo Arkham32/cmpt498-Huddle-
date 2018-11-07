@@ -117,7 +117,7 @@ public class CreateGameActivity extends Activity {
                             mDialog.dismiss();
                             // add to the database
                             //(info, address, num of players, sport, user, joined users)
-                            CreatePosts createPosts = new CreatePosts(InfoText.getText().toString(),eventAddress.getAddress().toString(),NumberOfPlayersText.getText().toString(), SportText.getText().toString(), postedBy.toString(), usersJoined.toString());
+                            CreatePosts createPosts = new CreatePosts(InfoText.getText().toString(),eventAddress.getAddress().toString(),NumberOfPlayersText.getText().toString(), SportText.getText().toString(), postedBy.toString(), usersJoined.toString(), uniqueId.toString());
                             table_post.child(uniqueId.toString()).setValue(createPosts);
                             //Toast.makeText(CreateGameActivity.this, "Post Submitted!", Toast.LENGTH_SHORT).show();
                             Toast.makeText(CreateGameActivity.this, uniqueId, Toast.LENGTH_SHORT).show();
