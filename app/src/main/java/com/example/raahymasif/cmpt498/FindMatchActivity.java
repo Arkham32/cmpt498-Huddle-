@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.raahymasif.cmpt498.Model.CreatePosts;
 import com.google.firebase.database.DatabaseReference;
@@ -44,6 +45,15 @@ public class FindMatchActivity extends AppCompatActivity {
                 viewHolder.setPlayers(model.getPlayers());
                 viewHolder.setSport(model.getSport());
                 //viewHolder.setPostedBy(model.getPostedBy());
+
+                /*viewHolder.mView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(FindMatchActivity.this, "post clicked", Toast.LENGTH_SHORT).show();
+                        System.out.println("post is clicked");
+                    }
+                });*/
+
             }
 
         };

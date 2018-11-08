@@ -1,6 +1,7 @@
 package com.example.raahymasif.cmpt498;
 
 //import android.content.Intent;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -68,10 +70,26 @@ public class FindMatchFragment extends Fragment {
                 (CreatePosts.class,R.layout.post_row,FindMatchActivity.PostViewHolder.class,mDatabase){
             @Override
             protected void populateViewHolder(FindMatchActivity.PostViewHolder viewHolder, CreatePosts model, int position) {
+
+                //this is to get the key(UID) of the post
+                final String post_key = getRef(position).getKey();
+
                 viewHolder.setInfo(model.getInfo());
                 viewHolder.setLocation(model.getLocation());
                 viewHolder.setPlayers(model.getPlayers());
                 viewHolder.setSport(model.getSport());
+
+                viewHolder.mView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //Toast.makeText(FindMatchFragment.this,"post clicked", Toast.LENGTH_LONG).show();
+                        System.out.println("--------------------post clicked-----------------"+ post_key);
+
+                    }
+                });
+
+
+
             }
 
         };
