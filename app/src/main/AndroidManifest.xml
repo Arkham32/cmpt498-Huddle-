@@ -81,6 +81,12 @@
             android:name=".FindMatchActivity"
             android:label="Find Match"
             android:theme="@style/AppTheme"/>
+
+        <activity
+            android:name=".DisplaySpecificPostActivity"
+            android:label="Display Post"
+            android:theme="@style/AppTheme"/>
+
     </application>
 
 

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -74,6 +75,10 @@ public class FindMatchFragment extends Fragment {
                 //this is to get the key(UID) of the post
                 final String post_key = getRef(position).getKey();
 
+                //this gets the username
+                Bundle arguments = getArguments();
+                final String user = arguments.getString("username");
+
                 viewHolder.setInfo(model.getInfo());
                 viewHolder.setLocation(model.getLocation());
                 viewHolder.setPlayers(model.getPlayers());
@@ -84,6 +89,19 @@ public class FindMatchFragment extends Fragment {
                     public void onClick(View v) {
                         //Toast.makeText(FindMatchFragment.this,"post clicked", Toast.LENGTH_LONG).show();
                         System.out.println("--------------------post clicked-----------------"+ post_key);
+
+                        /*Intent createGame = new Intent(getActivity(), CreateGameActivity.class);
+                        createGame.putExtra("username", user);
+                        startActivity(createGame);
+                        */
+
+                        Intent displayPost = new Intent(getActivity(),DisplaySpecificPostActivity.class);
+                        displayPost.putExtra("post_key", post_key);
+                        displayPost.putExtra("username",user);
+                        startActivity(displayPost);
+
+
+
 
                     }
                 });

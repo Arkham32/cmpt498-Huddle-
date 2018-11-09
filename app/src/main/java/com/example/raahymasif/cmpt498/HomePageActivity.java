@@ -99,7 +99,20 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         //this is just for what we should see first at the homescreen when they login
         //we need to later change this to be able to see posts instead of the finding match
         if(savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FindMatchFragment()).commit();
+            //do not remove
+            //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FindMatchFragment()).commit();
+            String s = getIntent().getStringExtra("user_name");
+
+            FindMatchFragment fragment = new FindMatchFragment();
+            Bundle arguments = new Bundle();
+
+            arguments.putString("username",s );
+            fragment.setArguments(arguments);
+
+            final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.fragment_container, fragment, String.valueOf(new FindMatchFragment())).commit();
+
+            //do not remove
             navigationView.setCheckedItem(R.id.nav_findgame);
         }
 

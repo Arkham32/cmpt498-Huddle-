@@ -27,91 +27,130 @@
         android:background="#EEE6F1"
         android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/LocationTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="0dp"
-            android:layout_marginTop="0dp"
-            android:text="Location"
-            android:textColor="@color/fbutton_color_orange"
-            android:textSize="36sp" />
 
-        <TextView
-            android:id="@+id/textView3"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="0dp"
-            android:layout_marginTop="0dp"
-            android:text="Info:"
-            android:textColor="@color/fbutton_color_orange"
-            android:textSize="36sp" />
+            android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/postInfoTextView"
-            android:layout_width="match_parent"
-            android:layout_height="199dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="0dp"
-            android:layout_marginTop="0dp"
-            android:maxLines="5"
-            android:text="Post Info"
-            android:textColor="@color/fbutton_color_orange"
-            android:textSize="30dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="0dp"
-            android:layout_marginTop="0dp"
-            android:text="Players Needed:"
-            android:textColor="@color/fbutton_color_orange"
-            android:textSize="30dp" />
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:text="Posted By:"
+                    android:textColor="@color/fbutton_color_orange"
+                    android:textSize="25dp" />
 
-        <TextView
-            android:id="@+id/playersNeededTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="0dp"
-            android:layout_marginTop="0dp"
-            android:text="Players Needed Goes Here"
-            android:textColor="@color/fbutton_color_orange"
-            android:textSize="25dp" />
+                <TextView
+                    android:id="@+id/postedByTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:text="Posted By Goes Here"
+                    android:textColor="@color/fbutton_color_orange"
+                    android:textSize="25dp" />
 
-        <TextView
-            android:id="@+id/textView1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="0dp"
-            android:layout_marginTop="0dp"
-            android:text="Players Joined:"
-            android:textColor="@color/fbutton_color_orange"
-            android:textSize="25dp" />
 
-        <TextView
-            android:id="@+id/joinedTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="0dp"
-            android:layout_marginTop="0dp"
-            android:text="Players Joined Goes Here"
-            android:textColor="@color/fbutton_color_orange"
-            android:textSize="25dp" />
+                <TextView
+                    android:id="@+id/locationTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:text="Location"
+                    android:textColor="@color/fbutton_color_orange"
+                    android:textSize="36sp" />
 
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:text="Info:"
+                    android:textColor="@color/fbutton_color_orange"
+                    android:textSize="36sp" />
+
+                <TextView
+                    android:id="@+id/postInfoTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="93dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:maxLines="5"
+                    android:text="Post Info"
+                    android:textColor="@color/fbutton_color_orange"
+                    android:textSize="30dp" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:text="Players Needed:"
+                    android:textColor="@color/fbutton_color_orange"
+                    android:textSize="30dp" />
+
+                <TextView
+                    android:id="@+id/playersNeededTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:text="Players Needed Goes Here"
+                    android:textColor="@color/fbutton_color_orange"
+                    android:textSize="25dp" />
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:text="Players Joined:"
+                    android:textColor="@color/fbutton_color_orange"
+                    android:textSize="25dp" />
+
+                <TextView
+                    android:id="@+id/joinedTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:text="Players Joined Goes Here"
+                    android:textColor="@color/fbutton_color_orange"
+                    android:textSize="25dp" />
+
+
+                    />
+            </LinearLayout>
+        </ScrollView>
     </LinearLayout>
 
     <Button
