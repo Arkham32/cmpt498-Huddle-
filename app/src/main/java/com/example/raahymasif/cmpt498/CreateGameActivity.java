@@ -100,7 +100,7 @@ public class CreateGameActivity extends Activity {
                 Bundle extras = getIntent().getExtras();
                 postedBy = extras.getString("username");
 
-                table_post.addValueEventListener(new ValueEventListener() {
+                table_post.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         // Check if uniqueID already exists

@@ -33,102 +33,25 @@ import android.widget.Toast;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
+    int a;
     public GoogleMap mMap;
     public LatLng newlocate;
     LocationManager locationManager;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-
-
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
-        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        if (locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
-            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, new LocationListener() {
-                @Override
-                public void onLocationChanged(Location location) {
-                    double latitude = location.getLatitude();
-                    double longitude = location.getLongitude();
-                    LatLng latLng = new LatLng(latitude, longitude);
-                    Geocoder geocoder = new Geocoder(getApplicationContext());
-                    try {
-                        List<Address> addressList = geocoder.getFromLocation(latitude, longitude, 1);
-                        String str = addressList.get(0).getLocality() + ",";
-                        str += addressList.get(0).getCountryName();
-                        newlocate = latLng;
-                        mMap.addMarker(new MarkerOptions().position(latLng).title(str));
-                        //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10.2f));
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-                @Override
-                public void onStatusChanged(String provider, int status, Bundle extras) {
-
-                }
-
-                @Override
-                public void onProviderEnabled(String provider) {
-
-                }
-
-                @Override
-                public void onProviderDisabled(String provider) {
-
-                }
-            });
-        } else {// (locationManager.isProviderEnabled((LocationManager.GPS_PROVIDER))) {
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, new LocationListener() {
-                @Override
-                public void onLocationChanged(Location location) {
-                    double latitude = location.getLatitude();
-                    double longitude = location.getLongitude();
-                    LatLng latLng = new LatLng(latitude, longitude);
-                    Geocoder geocoder = new Geocoder(getApplicationContext());
-                    try {
-                        List<Address> addressList = geocoder.getFromLocation(latitude, longitude, 1);
-                        String str = addressList.get(0).getLocality() + ",";
-                        str += addressList.get(0).getCountryName();
-                        mMap.addMarker(new MarkerOptions().position(latLng).title(str));
-                        //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10.2f));
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-                @Override
-                public void onStatusChanged(String provider, int status, Bundle extras) {
-
-                }
-
-                @Override
-                public void onProviderEnabled(String provider) {
-
-                }
-
-                @Override
-                public void onProviderDisabled(String provider) {
-
-                }
-            });
-        }
+        loadActivity();
     }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        loadActivity();
+
+    }
+
 
 
     /**
@@ -154,6 +77,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             return;
         }
         mMap.setMyLocationEnabled(true);
+
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Posts");
         ref.addListenerForSingleValueEvent(
@@ -209,16 +133,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         for (String g: location) {
             if (g != null) {
                 for(String i: locationID) {
-                    getLocationFromAddress(this, g, i);
+                        if(i != null) {
+                            getLocationFromAddress(this, g, i);
+                        }
                 }
             }
         }
+
     }
 
     public void getLocationFromAddress(Context context, String inputtedAddress, String id){
         Geocoder coder = new Geocoder(context);
         List<Address> address;
-        LatLng resLatLng = null;
+        LatLng resLatLng;
+        Double distance;
+        int test;
 
         try {
             // May throw an IOException
@@ -232,28 +161,150 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
 
             Address location = address.get(0);
-            location.getLatitude();
-            location.getLongitude();
+            //location.getLatitude();
+            //location.getLongitude();
+            //test = location.getLatitude();
+            System.out.println(a);
+            if(newlocate != null) {
+                resLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+                distance = SphericalUtil.computeDistanceBetween(newlocate, resLatLng);
+                String distancefromlocation = (String.valueOf(distance / 1000));
+                //int a = Integer.parseInt(distancefromlocation);
 
-            resLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+                mMap.addMarker(new MarkerOptions().position(resLatLng).title(distancefromlocation + " km"));
 
-        } catch (IOException ex) {
+
+            }
+            //mMap.addMarker(new MarkerOptions().position(resLatLng).title(id));
+            //System.out.println("========================");
+            //System.out.println(distance);
+            //mMap.addMarker(new MarkerOptions().position(resLatLng).title(id));
+            //mMap.addMarker(new MarkerOptions().position(resLatLng).title(distancefromlocation));
+            //if (newlocate != null) {
+                //distance = SphericalUtil.computeDistanceBetween(newlocate, resLatLng);
+                //System.out.println("=======================");
+                //System.out.println(distance);
+
+            //}
+
+        }catch (IOException ex) {
 
             ex.printStackTrace();
             Toast.makeText(context, ex.getMessage(), Toast.LENGTH_LONG).show();
         }
-        if(resLatLng != null) {
-            mMap.addMarker(new MarkerOptions().position(resLatLng).title(id));
-            if(newlocate != null) {
-                double distance = SphericalUtil.computeDistanceBetween(newlocate, resLatLng);
-                System.out.println("=======================");
-                System.out.println(distance);
-                distance = 0;
-            }
 
-        }
 
         //return resLatLng;
+    }
+
+    private void loadActivity() {
+
+
+
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        if (locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, new LocationListener() {
+                @Override
+                public void onLocationChanged(Location location) {
+                    double latitude = location.getLatitude();
+                    double longitude = location.getLongitude();
+                    LatLng latLng = new LatLng(latitude, longitude);
+                    Geocoder geocoder = new Geocoder(getApplicationContext());
+                    try {
+                        List<Address> addressList = geocoder.getFromLocation(latitude, longitude, 1);
+                        String str = addressList.get(0).getLocality() + ",";
+                        str += addressList.get(0).getCountryName();
+                        mMap.addMarker(new MarkerOptions().position(latLng).title(str));
+
+                        if(newlocate == null) {
+                            a=5;
+                            newlocate = latLng;
+                        }
+                        return;
+                        //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10.2f));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onStatusChanged(String provider, int status, Bundle extras) {
+
+                }
+
+                @Override
+                public void onProviderEnabled(String provider) {
+
+                }
+
+                @Override
+                public void onProviderDisabled(String provider) {
+
+                }
+
+
+
+
+
+
+            });
+            return;
+        } else {// (locationManager.isProviderEnabled((LocationManager.GPS_PROVIDER))) {
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, new LocationListener() {
+                @Override
+                public void onLocationChanged(Location location) {
+                    double latitude = location.getLatitude();
+                    double longitude = location.getLongitude();
+                    LatLng latLng = new LatLng(latitude, longitude);
+                    Geocoder geocoder = new Geocoder(getApplicationContext());
+                    try {
+                        List<Address> addressList = geocoder.getFromLocation(latitude, longitude, 1);
+                        String str = addressList.get(0).getLocality() + ",";
+                        str += addressList.get(0).getCountryName();
+                        mMap.addMarker(new MarkerOptions().position(latLng).title(str));
+                        if(newlocate == null) {
+                            a=5;
+                            newlocate = latLng;
+                        }
+                        //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10.2f));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onStatusChanged(String provider, int status, Bundle extras) {
+
+                }
+
+                @Override
+                public void onProviderEnabled(String provider) {
+
+                }
+
+                @Override
+                public void onProviderDisabled(String provider) {
+
+                }
+
+
+            });
+        }
+
     }
 
 
