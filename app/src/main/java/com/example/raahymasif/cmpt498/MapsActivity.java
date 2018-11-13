@@ -10,6 +10,7 @@ import android.location.LocationManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import com.google.android.gms.maps.CameraUpdateFactory;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -21,6 +22,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.maps.android.SphericalUtil;
+
 import java.util.Map;
 import android.content.Context;
 import java.io.IOException;
@@ -31,7 +34,7 @@ import android.widget.Toast;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     public GoogleMap mMap;
-
+    public LatLng newlocate;
     LocationManager locationManager;
 
     @Override
@@ -67,6 +70,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         List<Address> addressList = geocoder.getFromLocation(latitude, longitude, 1);
                         String str = addressList.get(0).getLocality() + ",";
                         str += addressList.get(0).getCountryName();
+                        newlocate = latLng;
                         mMap.addMarker(new MarkerOptions().position(latLng).title(str));
                         //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10.2f));
                     } catch (IOException e) {
@@ -203,9 +207,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //System.out.println (location.toString());
         //System.out.println(g.toString());
         for (String g: location) {
-            if (g == null) {
-                continue;
-            } else {
+            if (g != null) {
                 for(String i: locationID) {
                     getLocationFromAddress(this, g, i);
                 }
@@ -242,8 +244,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
         if(resLatLng != null) {
             mMap.addMarker(new MarkerOptions().position(resLatLng).title(id));
+            if(newlocate != null) {
+                double distance = SphericalUtil.computeDistanceBetween(newlocate, resLatLng);
+                System.out.println("=======================");
+                System.out.println(distance);
+                distance = 0;
+            }
+
         }
-        return;
+
         //return resLatLng;
     }
 
