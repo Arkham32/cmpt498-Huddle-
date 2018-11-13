@@ -102,11 +102,13 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
             //do not remove
             //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FindMatchFragment()).commit();
             String s = getIntent().getStringExtra("user_name");
+            String x = getIntent().getStringExtra("email");
 
             FindMatchFragment fragment = new FindMatchFragment();
             Bundle arguments = new Bundle();
 
             arguments.putString("username",s );
+            arguments.putString("email", x );
             fragment.setArguments(arguments);
 
             final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -121,6 +123,7 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         String s = getIntent().getStringExtra("user_name");
+        String x = getIntent().getStringExtra("email");
 
         switch (item.getItemId()){
             case R.id.nav_creategame:
@@ -129,6 +132,7 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
                 Bundle arguments = new Bundle();
 
                 arguments.putString("username",s );
+                arguments.putString("email",x );
                 fragment.setArguments(arguments);
 
                 final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -163,6 +167,7 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
                 Bundle argumentsChat = new Bundle();
 
                 argumentsChat.putString("username",s );
+                argumentsChat.putString("email",x );
                 fragmentChat.setArguments(argumentsChat);
 
                 final FragmentTransaction ftChat = getSupportFragmentManager().beginTransaction();

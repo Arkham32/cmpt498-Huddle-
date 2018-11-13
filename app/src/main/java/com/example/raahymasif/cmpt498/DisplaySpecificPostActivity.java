@@ -25,6 +25,7 @@ public class DisplaySpecificPostActivity extends Activity {
     private DatabaseReference mDatabase;
     String post_key = null;
     String username = null;
+    String email = null;
     int playersInt = 0;
     String post_joined, post_info, post_location, post_players, post_postedBy, post_sport;
 
@@ -55,6 +56,7 @@ public class DisplaySpecificPostActivity extends Activity {
         Bundle extras = getIntent().getExtras();
         post_key = extras.getString("post_key");
         username = extras.getString("username");
+        email = extras.getString("email");
 
 
         //connecting java variable to xml variable
@@ -72,7 +74,7 @@ public class DisplaySpecificPostActivity extends Activity {
         mDatabase.child(post_key).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                post_info = (String) dataSnapshot.child("id").getValue();
+                post_info = (String) dataSnapshot.child("info").getValue();
                 post_location = (String) dataSnapshot.child("location").getValue();
                 post_players = (String) dataSnapshot.child("players").getValue();
                 post_postedBy = (String) dataSnapshot.child("postedBy").getValue();
@@ -114,6 +116,7 @@ public class DisplaySpecificPostActivity extends Activity {
                     //exits and goes back home
                     Intent homePage = new Intent(DisplaySpecificPostActivity.this, HomePageActivity.class);
                     homePage.putExtra("user_name", username);
+                    homePage.putExtra("email",email);
                     startActivity(homePage);
                 }
 
@@ -136,6 +139,7 @@ public class DisplaySpecificPostActivity extends Activity {
 
                     Intent homePage = new Intent(DisplaySpecificPostActivity.this,HomePageActivity.class);
                     homePage.putExtra("user_name", username);
+                    homePage.putExtra("email",email);
                     startActivity(homePage);
 
                 }
@@ -150,6 +154,7 @@ public class DisplaySpecificPostActivity extends Activity {
 
                 Intent homePage = new Intent(DisplaySpecificPostActivity.this,HomePageActivity.class);
                 homePage.putExtra("user_name", username);
+                homePage.putExtra("email",email);
                 startActivity(homePage);
             }
         });
@@ -188,6 +193,7 @@ public class DisplaySpecificPostActivity extends Activity {
 
             Intent homePage = new Intent(DisplaySpecificPostActivity.this,HomePageActivity.class);
             homePage.putExtra("user_name", username);
+            homePage.putExtra("email",email);
             startActivity(homePage);
         }
 

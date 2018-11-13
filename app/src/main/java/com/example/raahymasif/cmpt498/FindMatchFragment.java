@@ -78,6 +78,7 @@ public class FindMatchFragment extends Fragment {
                 //this gets the username
                 Bundle arguments = getArguments();
                 final String user = arguments.getString("username");
+                final String email = arguments.getString("email");
 
                 viewHolder.setInfo(model.getInfo());
                 viewHolder.setLocation(model.getLocation());
@@ -88,7 +89,7 @@ public class FindMatchFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         //Toast.makeText(FindMatchFragment.this,"post clicked", Toast.LENGTH_LONG).show();
-                        System.out.println("--------------------post clicked-----------------"+ post_key);
+                        //System.out.println("--------------------post clicked-----------------"+ post_key);
 
                         /*Intent createGame = new Intent(getActivity(), CreateGameActivity.class);
                         createGame.putExtra("username", user);
@@ -98,6 +99,7 @@ public class FindMatchFragment extends Fragment {
                         Intent displayPost = new Intent(getActivity(),DisplaySpecificPostActivity.class);
                         displayPost.putExtra("post_key", post_key);
                         displayPost.putExtra("username",user);
+                        displayPost.putExtra("email",email);
                         startActivity(displayPost);
 
 
