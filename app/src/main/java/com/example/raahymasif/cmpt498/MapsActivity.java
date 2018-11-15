@@ -31,6 +31,8 @@ import java.util.List;
 import java.util.ArrayList;
 import android.widget.Toast;
 
+import static java.lang.String.format;
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     int a;
@@ -172,7 +174,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             if(newlocate != null) {
                 resLatLng = new LatLng(location.getLatitude(), location.getLongitude());
                 distance = SphericalUtil.computeDistanceBetween(newlocate, resLatLng);
-                String distancefromlocation = (String.valueOf(distance / 1000));
+                distance = distance/1000;
+                distance = Math.round(distance*10.0)/10.0;
+                String distancefromlocation = (String.valueOf(distance));
+
                 //int a = Integer.parseInt(distancefromlocation);
 
                 mMap.addMarker(new MarkerOptions().position(resLatLng).title(distancefromlocation + " km"));
