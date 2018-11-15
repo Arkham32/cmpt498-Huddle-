@@ -43,12 +43,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         loadActivity();
+
+
     }
 
     @Override
     protected void onResume(){
         super.onResume();
-        loadActivity();
+        if (newlocate == null){
+            loadActivity();
+        }
 
     }
 
@@ -206,6 +210,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
@@ -216,6 +221,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
+
+        Location oldlocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+        if(oldlocation != null) {
+            double oldlat = oldlocation.getLatitude();
+            double oldlong = oldlocation.getLongitude();
+            LatLng oldloc = new LatLng(oldlat, oldlong);
+            newlocate = oldloc;
+        }
+
         if (locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
             locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, new LocationListener() {
                 @Override
@@ -229,12 +243,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         String str = addressList.get(0).getLocality() + ",";
                         str += addressList.get(0).getCountryName();
                         mMap.addMarker(new MarkerOptions().position(latLng).title(str));
-
-                        if(newlocate == null) {
-                            a=5;
-                            newlocate = latLng;
-                        }
-                        return;
+                        a=5;
+                        newlocate = latLng;
                         //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10.2f));
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -276,10 +286,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         String str = addressList.get(0).getLocality() + ",";
                         str += addressList.get(0).getCountryName();
                         mMap.addMarker(new MarkerOptions().position(latLng).title(str));
-                        if(newlocate == null) {
-                            a=5;
-                            newlocate = latLng;
-                        }
+                        a=5;
+                        newlocate = latLng;
+
                         //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10.2f));
                     } catch (IOException e) {
                         e.printStackTrace();
