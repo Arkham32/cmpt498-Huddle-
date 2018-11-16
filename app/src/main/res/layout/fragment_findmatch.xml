@@ -6,18 +6,18 @@
     android:background="@android:color/darker_gray">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/eventsbutton"
         android:layout_width="203dp"
         android:layout_height="wrap_content"
 
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:text="Button" />
+        android:text="Events Near Me" />
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/button"
+        android:layout_below="@id/eventsbutton"
         android:id="@+id/myRecycleView">
 
     </android.support.v7.widget.RecyclerView>

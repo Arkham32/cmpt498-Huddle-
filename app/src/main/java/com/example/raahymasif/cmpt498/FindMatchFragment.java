@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -34,6 +35,7 @@ public class FindMatchFragment extends Fragment {
     //---------------
     private RecyclerView mPostList;
     private DatabaseReference mDatabase;
+    Button eventsnearme;
     //----------------
 
     public FindMatchFragment() {
@@ -48,6 +50,7 @@ public class FindMatchFragment extends Fragment {
 
         
         View view = inflater.inflate(R.layout.fragment_findmatch, container, false);
+
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Posts");
         mDatabase.keepSynced(true);
@@ -84,6 +87,18 @@ public class FindMatchFragment extends Fragment {
                 viewHolder.setLocation(model.getLocation());
                 viewHolder.setPlayers(model.getPlayers());
                 viewHolder.setSport(model.getSport());
+
+                eventsnearme = (Button) getView().findViewById(R.id.eventsbutton);
+
+                eventsnearme.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent maps = new Intent(getActivity(), MapsActivity.class);
+                        String string = "yes";
+                        maps.putExtra("buttonclicked", string);
+                        startActivity(maps);
+                    }
+                });
 
                 viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override

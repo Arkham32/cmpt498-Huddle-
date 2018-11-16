@@ -250,7 +250,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         mMap.addMarker(new MarkerOptions().position(latLng).title(str));
                         a=5;
                         newlocate = latLng;
-                        //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10.2f));
+                        String s = "no";
+                        s = getIntent().getStringExtra("buttonclicked");
+                        if(s.equals("yes")){
+                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10.2f));
+                        }
+
+
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
