@@ -1,12 +1,16 @@
 package com.example.raahymasif.cmpt498;
 
 import android.Manifest;
+import android.app.ActionBar;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
+import android.sax.StartElementListener;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -16,12 +20,14 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.maps.android.MarkerManager;
 import com.google.maps.android.SphericalUtil;
 
 import java.util.Map;
@@ -29,7 +35,16 @@ import android.content.Context;
 import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
+
+import android.view.Gravity;
+import android.view.ViewGroup.LayoutParams;
+import android.view.LayoutInflater;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
+import android.view.View;
 
 import static java.lang.String.format;
 
@@ -52,9 +67,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     protected void onResume(){
         super.onResume();
-        if (newlocate == null){
-            loadActivity();
-        }
+        loadActivity();
+
 
     }
 
@@ -148,7 +162,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
-    public void getLocationFromAddress(Context context, String inputtedAddress, String id){
+    public void getLocationFromAddress(Context context, String inputtedAddress, final String id){
         Geocoder coder = new Geocoder(context);
         List<Address> address;
         LatLng resLatLng;
@@ -174,29 +188,72 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             if(newlocate != null) {
                 resLatLng = new LatLng(location.getLatitude(), location.getLongitude());
                 distance = SphericalUtil.computeDistanceBetween(newlocate, resLatLng);
-                distance = distance/1000;
-                distance = Math.round(distance*10.0)/10.0;
+                distance = distance / 1000;
+                distance = Math.round(distance * 10.0) / 10.0;
                 String distancefromlocation = (String.valueOf(distance));
-
+                Bundle extras = getIntent().getExtras();
+                final String username = extras.getString("username");
+                final String email = extras.getString("email");
                 //int a = Integer.parseInt(distancefromlocation);
 
-                mMap.addMarker(new MarkerOptions().position(resLatLng).title(distancefromlocation + " km"));
+                Marker marker1 = mMap.addMarker(new MarkerOptions().position(resLatLng).title(distancefromlocation + " km"));
+
+                mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                    @Override
+                    public boolean onMarkerClick(Marker marker) {
+                        Intent newintent = new Intent(MapsActivity.this, PopupwindowActivity.class);
+                        newintent.putExtra("post_key", id);
+                        newintent.putExtra("user_name", username);
+                        newintent.putExtra("email", email);
+                        startActivity(newintent);
 
 
-            }
-            //mMap.addMarker(new MarkerOptions().position(resLatLng).title(id));
-            //System.out.println("========================");
-            //System.out.println(distance);
-            //mMap.addMarker(new MarkerOptions().position(resLatLng).title(id));
-            //mMap.addMarker(new MarkerOptions().position(resLatLng).title(distancefromlocation));
-            //if (newlocate != null) {
+
+                        /*Context mcontext = getApplicationContext();
+                        LayoutInflater inflater = (LayoutInflater) mcontext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                        View customview = inflater.inflate(R.layout.popup_window, null, false);
+                        PopupWindow mPopupwindow = new PopupWindow(customview, LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+                        if(Build.VERSION.SDK_INT>=21){
+                            mPopupwindow.setElevation(5.0f);
+                        }
+                        Button Joinbutton = (Button) customview.findViewById(R.id.joinbuttonevent);
+                        RelativeLayout mrelativelayout = (RelativeLayout) findViewById(R.id.rl);
+                        mPopupwindow.showAtLocation(mrelativelayout, Gravity.CENTER,0,0);
+                        Joinbutton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent newmarker = new Intent(MapsActivity.this, DisplaySpecificPostActivity.class);
+                                newmarker.putExtra("post_key", id);
+                                newmarker.putExtra("username", username);
+                                newmarker.putExtra("email", email);
+                                startActivity(newmarker);
+                            }
+
+                        });*/
+
+                        //
+                        return false;
+                    }
+                });
+                //Intent newmarker = new Intent(MapsActivity.this, DisplaySpecificPostActivity.class);
+                //newmarker.putExtra("post_key", id);
+                //newmarker.putExtra("username", username);
+                //newmarker.putExtra("email", email);
+
+
+                //mMap.addMarker(new MarkerOptions().position(resLatLng).title(id));
+                //System.out.println("========================");
+                //System.out.println(distance);
+                //mMap.addMarker(new MarkerOptions().position(resLatLng).title(id));
+                //mMap.addMarker(new MarkerOptions().position(resLatLng).title(distancefromlocation));
+                //if (newlocate != null) {
                 //distance = SphericalUtil.computeDistanceBetween(newlocate, resLatLng);
                 //System.out.println("=======================");
                 //System.out.println(distance);
 
-            //}
+                //}
 
-        }catch (IOException ex) {
+            }}catch (IOException ex) {
 
             ex.printStackTrace();
             Toast.makeText(context, ex.getMessage(), Toast.LENGTH_LONG).show();

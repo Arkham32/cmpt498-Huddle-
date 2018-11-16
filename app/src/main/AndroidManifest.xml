@@ -87,6 +87,11 @@
             android:label="Display Post"
             android:theme="@style/AppTheme"/>
 
+        <activity
+            android:name=".PopupwindowActivity"
+            android:label="Pop Upt"
+            android:theme="@style/AppTheme"/>
+
     </application>
 
 

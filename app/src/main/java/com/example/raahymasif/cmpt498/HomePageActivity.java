@@ -153,6 +153,8 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
                 Intent createmap = new Intent(getApplicationContext(), MapsActivity.class);
                 String string = "no";
                 createmap.putExtra("buttonclicked", string);
+                createmap.putExtra("username", s);
+                createmap.putExtra("email", x);
                 startActivity(createmap);
                 //break;
                 //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Map_Fragment()).commit();
