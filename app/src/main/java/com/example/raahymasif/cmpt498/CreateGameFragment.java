@@ -33,10 +33,12 @@ public class CreateGameFragment extends Fragment {
         //getting the username
         Bundle arguments = getArguments();
         String user = arguments.getString("username");
+        String email = arguments.getString("email");
 
         //calling createGameActivity and passing the username to it
         Intent createGame = new Intent(getActivity(), CreateGameActivity.class);
         createGame.putExtra("username", user);
+        createGame.putExtra("email",email);
         startActivity(createGame);
 
         return view;

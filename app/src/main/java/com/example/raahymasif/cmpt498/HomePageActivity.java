@@ -99,7 +99,22 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         //this is just for what we should see first at the homescreen when they login
         //we need to later change this to be able to see posts instead of the finding match
         if(savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FindMatchFragment()).commit();
+            //do not remove
+            //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FindMatchFragment()).commit();
+            String s = getIntent().getStringExtra("user_name");
+            String x = getIntent().getStringExtra("email");
+
+            FindMatchFragment fragment = new FindMatchFragment();
+            Bundle arguments = new Bundle();
+
+            arguments.putString("username",s );
+            arguments.putString("email", x );
+            fragment.setArguments(arguments);
+
+            final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.fragment_container, fragment, String.valueOf(new FindMatchFragment())).commit();
+
+            //do not remove
             navigationView.setCheckedItem(R.id.nav_findgame);
         }
 
@@ -108,6 +123,7 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         String s = getIntent().getStringExtra("user_name");
+        String x = getIntent().getStringExtra("email");
 
         switch (item.getItemId()){
             case R.id.nav_creategame:
@@ -116,6 +132,7 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
                 Bundle arguments = new Bundle();
 
                 arguments.putString("username",s );
+                arguments.putString("email",x );
                 fragment.setArguments(arguments);
 
                 final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -150,6 +167,7 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
                 Bundle argumentsChat = new Bundle();
 
                 argumentsChat.putString("username",s );
+                argumentsChat.putString("email",x );
                 fragmentChat.setArguments(argumentsChat);
 
                 final FragmentTransaction ftChat = getSupportFragmentManager().beginTransaction();

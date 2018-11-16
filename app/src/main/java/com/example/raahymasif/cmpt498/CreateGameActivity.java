@@ -38,8 +38,13 @@ public class CreateGameActivity extends Activity {
     Button PostButton, CancelButton;
     String uniqueId = new String();
     Place eventAddress;
-    String postedBy = new String();
     String usersJoined = " ";
+
+    //get the username;
+    //Bundle extras = getIntent().getExtras();
+    String postedBy;// = extras.getString("username");
+    String email;// = extras.getString("email");
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -77,11 +82,18 @@ public class CreateGameActivity extends Activity {
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference table_post = database.getReference("Posts");
 
+        //get the username;
+        Bundle extras = getIntent().getExtras();
+        postedBy = extras.getString("username");
+        email = extras.getString("email");
+
         //when cancel is clicked
         CancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent homePage = new Intent(CreateGameActivity.this,HomePageActivity.class);
+                homePage.putExtra("user_name", postedBy);
+                homePage.putExtra("email",email);
                 startActivity(homePage);
             }
         });
@@ -97,8 +109,9 @@ public class CreateGameActivity extends Activity {
                 uniqueId = generateUniqueId();
 
                 //get the username;
-                Bundle extras = getIntent().getExtras();
+                /*Bundle extras = getIntent().getExtras();
                 postedBy = extras.getString("username");
+                email = extras.getString("email");*/
 
                 table_post.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -124,6 +137,8 @@ public class CreateGameActivity extends Activity {
                             finish();
 
                             Intent homePage = new Intent(CreateGameActivity.this,HomePageActivity.class);
+                            homePage.putExtra("user_name", postedBy);
+                            homePage.putExtra("email", email);
                             startActivity(homePage);
 
                         }
@@ -132,7 +147,7 @@ public class CreateGameActivity extends Activity {
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                        //no code
                     }
                 });
 
