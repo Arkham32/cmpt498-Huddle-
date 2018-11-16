@@ -56,6 +56,7 @@ dependencies {
     implementation 'com.android.support:recyclerview-v7:27.1.1'
     implementation 'com.google.maps.android:android-maps-utils:0.5+'
 
-
+    // moduke to add permissions
+    implementation 'com.github.karanchuri:PermissionManager:0.1.0'
 
 }

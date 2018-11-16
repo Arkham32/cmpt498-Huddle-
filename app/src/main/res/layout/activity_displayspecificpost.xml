@@ -14,7 +14,8 @@
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
         android:text="Sport"
-        android:textColor="@color/fbutton_color_orange"
+        android:background="@color/fbutton_color_orange"
+        android:textColor="@android:color/white"
         android:textSize="36sp" />
 
     <LinearLayout
@@ -24,7 +25,7 @@
         android:layout_below="@+id/sportTextView"
         android:layout_alignParentStart="true"
         android:layout_marginTop="4dp"
-        android:background="#EEE6F1"
+        android:background="@android:color/white"
         android:orientation="vertical" >
 
 
@@ -161,6 +162,8 @@
         android:layout_alignParentStart="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="458dp"
+        android:background="@color/fbutton_color_orange"
+        android:textColor="@android:color/white"
         android:text="Cancel" />
 
     <Button
@@ -171,6 +174,8 @@
         android:layout_alignParentStart="true"
         android:layout_marginStart="205dp"
         android:layout_marginTop="458dp"
+        android:background="@color/btnSignActive"
+        android:textColor="@android:color/white"
         android:text="Join" />
 
 
