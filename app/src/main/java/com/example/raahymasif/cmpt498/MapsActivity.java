@@ -196,13 +196,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 final String email = extras.getString("email");
                 //int a = Integer.parseInt(distancefromlocation);
 
-                Marker marker1 = mMap.addMarker(new MarkerOptions().position(resLatLng).title(distancefromlocation + " km"));
+                final Marker marker1 = mMap.addMarker(new MarkerOptions().position(resLatLng).title(distancefromlocation + " km").snippet(id));
+                //mMap.addMarker(new MarkerOptions().position(resLatLng).title(distancefromlocation + " km"));
 
                 mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                     @Override
                     public boolean onMarkerClick(Marker marker) {
                         Intent newintent = new Intent(MapsActivity.this, PopupwindowActivity.class);
-                        newintent.putExtra("post_key", id);
+                        String newid = marker1.getSnippet();
+                        System.out.println("+++++++++++++++++++++++++++++"+ newid);
+                        newintent.putExtra("post_key", newid);
                         newintent.putExtra("user_name", username);
                         newintent.putExtra("email", email);
                         startActivity(newintent);
