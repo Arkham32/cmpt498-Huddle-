@@ -24,7 +24,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="77dp" />
-
+<!--
     <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/SportText"
         android:layout_width="match_parent"
@@ -36,7 +36,20 @@
         android:textColorHint="@color/fbutton_color_orange"
         android:inputType="textAutoComplete|textPersonName"
         android:textSize="24sp" />
-
+-->
+    <com.rengwuxian.materialedittext.MaterialAutoCompleteTextView
+        android:id="@+id/SportText"
+        android:layout_width="match_parent"
+        android:layout_height="79dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/LocationText"
+        android:completionThreshold="0"
+        android:completionHint="Sport"
+        android:ems="10"
+        android:hint="Sport"
+        android:textColorHint="@color/fbutton_color_orange"
+        android:inputType="textAutoComplete|textPersonName"
+        android:textSize="24sp" />
 
     <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/InfoText"

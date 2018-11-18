@@ -9,6 +9,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -34,16 +36,22 @@ import java.util.Random;
 
 
 public class CreateGameActivity extends Activity {
-    MaterialEditText LocationText, SportText, NumberOfPlayersText, InfoText;
+    MaterialEditText LocationText, NumberOfPlayersText, InfoText;
     Button PostButton, CancelButton;
     String uniqueId = new String();
     Place eventAddress;
     String usersJoined = " ";
+    AutoCompleteTextView SportText;
 
     //get the username;
     //Bundle extras = getIntent().getExtras();
     String postedBy;// = extras.getString("username");
     String email;// = extras.getString("email");
+
+    //autocomplete text for the sports that can be chosen
+    private static final String[] sportCategory = new String[]{
+            "Baseball", "Basketball", "Bowling","Cricket","Curling","Esports","Football","Hockey","Lacrosse","Rugby","Soccer"
+    };
 
 
     @Override
@@ -70,7 +78,17 @@ public class CreateGameActivity extends Activity {
                 Log.e("ERROR", status.getStatusMessage());
             }
         });
-        SportText = (MaterialEditText)findViewById(R.id.SportText);
+
+
+        SportText = (AutoCompleteTextView) findViewById(R.id.SportText);
+        //SportText = (MaterialEditText)findViewById(R.id.SportText);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,sportCategory);
+        SportText.setAdapter(adapter);
+
+
+
+
+
         NumberOfPlayersText = (MaterialEditText)findViewById(R.id.NumberOfPlayerText);
         InfoText  = (MaterialEditText)findViewById(R.id.InfoText);
 
