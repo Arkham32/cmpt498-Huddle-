@@ -59,7 +59,7 @@ public class CreateGameActivity extends Activity implements View.OnClickListener
 
     //autocomplete text for the sports that can be chosen
     private static final String[] sportCategory = new String[]{
-            "Baseball", "Basketball", "Bowling","Cricket","Curling","Esports","Football","Hockey","Lacrosse","Rugby","Soccer"
+            "Baseball", "Basketball", "Bowling","Cricket","Curling","ESports","Football","Hockey","Lacrosse","Rugby","Soccer"
     };
 
 
@@ -102,6 +102,8 @@ public class CreateGameActivity extends Activity implements View.OnClickListener
 
         btnDatePicker.setOnClickListener((View.OnClickListener) this);
         btnTimePicker.setOnClickListener((View.OnClickListener) this);
+
+
 
 
 
@@ -164,7 +166,10 @@ public class CreateGameActivity extends Activity implements View.OnClickListener
                             mDialog.dismiss();
                             // add to the database
                             //(info, address, num of players, sport, user, joined users)
-                            CreatePosts createPosts = new CreatePosts(InfoText.getText().toString(),eventAddress.getAddress().toString(),NumberOfPlayersText.getText().toString(), SportText.getText().toString(), postedBy.toString(), usersJoined.toString(), uniqueId.toString());
+                            CreatePosts createPosts = new CreatePosts(InfoText.getText().toString(),eventAddress.getAddress().toString(),NumberOfPlayersText.getText().toString(),
+                                    SportText.getText().toString(), postedBy.toString(), usersJoined.toString(), uniqueId.toString(), txtDate.getText().toString(),txtTime.getText().toString());
+
+                            
                             table_post.child(uniqueId.toString()).setValue(createPosts);
                             //Toast.makeText(CreateGameActivity.this, "Post Submitted!", Toast.LENGTH_SHORT).show();
                             Toast.makeText(CreateGameActivity.this, uniqueId, Toast.LENGTH_SHORT).show();
@@ -211,6 +216,7 @@ public class CreateGameActivity extends Activity implements View.OnClickListener
                                               int monthOfYear, int dayOfMonth) {
 
                             txtDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                            //System.out.println(txtDate.getText().toString()+"==============================================");
 
                         }
                     }, mYear, mMonth, mDay);
@@ -232,6 +238,7 @@ public class CreateGameActivity extends Activity implements View.OnClickListener
                                               int minute) {
 
                             txtTime.setText(hourOfDay + ":" + minute);
+                            //System.out.println(txtTime.getText().toString()+"-----------------------------------");
                         }
                     }, mHour, mMinute, false);
             timePickerDialog.show();

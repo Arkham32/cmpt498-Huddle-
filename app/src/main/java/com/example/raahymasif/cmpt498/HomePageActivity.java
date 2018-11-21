@@ -141,7 +141,17 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
 
                 break;
             case R.id.nav_findgame:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FindMatchFragment()).commit();
+                //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FindMatchFragment()).commit();
+                FindMatchFragment findFragment = new FindMatchFragment();
+                Bundle argumentsFind = new Bundle();
+
+                argumentsFind.putString("Username",s);
+                argumentsFind.putString("email",x);
+                findFragment.setArguments(argumentsFind);
+
+                final FragmentTransaction ftFind = getSupportFragmentManager().beginTransaction();
+                ftFind.replace(R.id.fragment_container, findFragment, String.valueOf(new FindMatchFragment())).commit();
+
                 break;
             case R.id.nav_map:
                 //Fragment frg = null;
