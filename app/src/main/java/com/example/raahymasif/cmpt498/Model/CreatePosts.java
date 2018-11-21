@@ -6,6 +6,9 @@ public class CreatePosts {
     private String Location;
     private String Players;
     private String Sport;
+    private String PostedBy;
+    private String UsersJoined;
+
 
     public String getId() {
         return Id;
@@ -14,6 +17,24 @@ public class CreatePosts {
     public void setId(String id) {
         Id = id;
     }
+
+
+    public String getPostedBy() {
+        return PostedBy;
+    }
+
+    public void setPostedBy(String postedBy) {
+        PostedBy = postedBy;
+    }
+
+    public String getUsersJoined() {
+        return UsersJoined;
+    }
+
+    public void setUsersJoined(String usersJoined) {
+        UsersJoined = usersJoined;
+    }
+
 
     public String getInfo() {
         return Info;
@@ -51,12 +72,15 @@ public class CreatePosts {
 
     }
 
-    public CreatePosts(String info, String location, String players, String sport){ //String username) {
-        //this.Id = id;
+    public CreatePosts(String info, String location, String players, String sport, String postedBy, String usersJoined, String Id){ //String username) {
+        this.Id = Id;
         this.Info = info;
         this.Location = location;
         this.Players = players;
         this.Sport = sport;
+        this.PostedBy = postedBy;
+        this.UsersJoined = usersJoined;
+
     }
 
 }

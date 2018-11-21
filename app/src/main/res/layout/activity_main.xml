@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@drawable/huddlelogin"
     tools:context=".MainActivity">
 
 
@@ -15,12 +15,12 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            
+
             android:src="@drawable/logo"
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:contentDescription="@null" />
-        
+
         <TextView
             android:gravity="center"
             android:id="@+id/txtSlogan"
@@ -28,7 +28,7 @@
             android:textColor="@android:color/white"
             android:layout_width="200dp"
             android:layout_height="wrap_content" />
-        
+
     </LinearLayout>
 
     <LinearLayout
@@ -37,7 +37,7 @@
         android:weightSum="2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    
+
         <info.hoang8f.widget.FButton
             android:id="@+id/btnSignUp"
             android:text="Sign Up"
@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             app:fButtonColor="@color/btnSignUp"
-            app:shadowColor="@android:color/black"
+            app:shadowColor="@android:color/white"
             app:shadowEnabled="true"
             app:shadowHeight="5dp"
             app:cornerRadius="4dp"
@@ -64,7 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             app:fButtonColor="@color/btnSignActive"
-            app:shadowColor="@android:color/black"
+            app:shadowColor="@android:color/white"
             app:shadowEnabled="true"
             app:shadowHeight="5dp"
             app:cornerRadius="4dp"

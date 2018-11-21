@@ -3,11 +3,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_red_light">
+    android:background="@android:color/darker_gray">
+
+    <Button
+        android:id="@+id/eventsbutton"
+        android:layout_width="203dp"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:text="Events Near Me" />
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/eventsbutton"
         android:id="@+id/myRecycleView">
 
     </android.support.v7.widget.RecyclerView>

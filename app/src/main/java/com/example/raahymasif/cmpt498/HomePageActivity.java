@@ -99,7 +99,22 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
         //this is just for what we should see first at the homescreen when they login
         //we need to later change this to be able to see posts instead of the finding match
         if(savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FindMatchFragment()).commit();
+            //do not remove
+            //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FindMatchFragment()).commit();
+            String s = getIntent().getStringExtra("user_name");
+            String x = getIntent().getStringExtra("email");
+
+            FindMatchFragment fragment = new FindMatchFragment();
+            Bundle arguments = new Bundle();
+
+            arguments.putString("username",s );
+            arguments.putString("email", x );
+            fragment.setArguments(arguments);
+
+            final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.fragment_container, fragment, String.valueOf(new FindMatchFragment())).commit();
+
+            //do not remove
             navigationView.setCheckedItem(R.id.nav_findgame);
         }
 
@@ -107,10 +122,23 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        String s = getIntent().getStringExtra("user_name");
+        String x = getIntent().getStringExtra("email");
 
         switch (item.getItemId()){
             case R.id.nav_creategame:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CreateGameFragment()).commit();
+                //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CreateGameFragment()).commit();
+                CreateGameFragment fragment = new CreateGameFragment();
+                Bundle arguments = new Bundle();
+
+                arguments.putString("username",s );
+                arguments.putString("email",x );
+                fragment.setArguments(arguments);
+
+                final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.fragment_container, fragment, String.valueOf(new CreateGameFragment())).commit();
+
+
                 break;
             case R.id.nav_findgame:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FindMatchFragment()).commit();
@@ -123,6 +151,10 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
                 //fragmentTransaction.attach(currentFragment);
                 //fragmentTransaction.commit();
                 Intent createmap = new Intent(getApplicationContext(), MapsActivity.class);
+                String string = "no";
+                createmap.putExtra("buttonclicked", string);
+                createmap.putExtra("username", s);
+                createmap.putExtra("email", x);
                 startActivity(createmap);
                 //break;
                 //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Map_Fragment()).commit();
@@ -134,7 +166,16 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
                 Toast.makeText(this, "Message Sent", Toast.LENGTH_SHORT).show();
                 break;*/
             case R.id.nav_send:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SendMessageFragment()).commit();
+                //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SendMessageFragment()).commit();
+                SendMessageFragment fragmentChat = new SendMessageFragment();
+                Bundle argumentsChat = new Bundle();
+
+                argumentsChat.putString("username",s );
+                argumentsChat.putString("email",x );
+                fragmentChat.setArguments(argumentsChat);
+
+                final FragmentTransaction ftChat = getSupportFragmentManager().beginTransaction();
+                ftChat.replace(R.id.fragment_container, fragmentChat, String.valueOf(new SendMessageFragment())).commit();
                 break;
         }
 

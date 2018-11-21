@@ -9,9 +9,16 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
+import android.widget.DatePicker;
+import android.widget.TimePicker;
+import java.util.Calendar;
 
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
@@ -33,11 +40,28 @@ import java.util.Random;
 
 
 
-public class CreateGameActivity extends Activity {
-    MaterialEditText LocationText, SportText, NumberOfPlayersText, InfoText;
-    Button PostButton, CancelButton;
+public class CreateGameActivity extends Activity implements View.OnClickListener {
+    MaterialEditText LocationText, NumberOfPlayersText, InfoText;
+    Button PostButton, CancelButton, btnDatePicker, btnTimePicker;;
     String uniqueId = new String();
     Place eventAddress;
+    String usersJoined = " ";
+    AutoCompleteTextView SportText;
+
+
+    EditText txtDate, txtTime;
+    private int mYear, mMonth, mDay, mHour, mMinute;
+
+    //get the username;
+    //Bundle extras = getIntent().getExtras();
+    String postedBy;// = extras.getString("username");
+    String email;// = extras.getString("email");
+
+    //autocomplete text for the sports that can be chosen
+    private static final String[] sportCategory = new String[]{
+            "Baseball", "Basketball", "Bowling","Cricket","Curling","Esports","Football","Hockey","Lacrosse","Rugby","Soccer"
+    };
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,9 +72,9 @@ public class CreateGameActivity extends Activity {
         final PlaceAutocompleteFragment LocationText = (PlaceAutocompleteFragment)getFragmentManager().findFragmentById(R.id.LocationText);
         LocationText.getView().findViewById(R.id.place_autocomplete_search_button).setVisibility(View.GONE);
         ((EditText) LocationText.getView().findViewById(R.id.place_autocomplete_search_input))
-                .setHint("Enter an address");
+                .setHint(" Click To Select A Location ");
         ((EditText) LocationText.getView().findViewById(R.id.place_autocomplete_search_input))
-                .setTextSize(14);
+                .setTextSize(20);
 
         LocationText.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
@@ -63,7 +87,24 @@ public class CreateGameActivity extends Activity {
                 Log.e("ERROR", status.getStatusMessage());
             }
         });
-        SportText = (MaterialEditText)findViewById(R.id.SportText);
+
+
+        SportText = (AutoCompleteTextView) findViewById(R.id.SportText);
+        //SportText = (MaterialEditText)findViewById(R.id.SportText);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,sportCategory);
+        SportText.setAdapter(adapter);
+
+        // data for date and time picker
+        btnDatePicker=(Button)findViewById(R.id.btn_date);
+        btnTimePicker=(Button)findViewById(R.id.btn_time);
+        txtDate=(EditText)findViewById(R.id.in_date);
+        txtTime=(EditText)findViewById(R.id.in_time);
+
+        btnDatePicker.setOnClickListener((View.OnClickListener) this);
+        btnTimePicker.setOnClickListener((View.OnClickListener) this);
+
+
+
         NumberOfPlayersText = (MaterialEditText)findViewById(R.id.NumberOfPlayerText);
         InfoText  = (MaterialEditText)findViewById(R.id.InfoText);
 
@@ -75,14 +116,22 @@ public class CreateGameActivity extends Activity {
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference table_post = database.getReference("Posts");
 
+        //get the username;
+        Bundle extras = getIntent().getExtras();
+        postedBy = extras.getString("username");
+        email = extras.getString("email");
+
+        //when cancel is clicked
         CancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent homePage = new Intent(CreateGameActivity.this,HomePageActivity.class);
+                homePage.putExtra("user_name", postedBy);
+                homePage.putExtra("email",email);
                 startActivity(homePage);
             }
         });
-
+        //when post is clicked
         PostButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -90,12 +139,18 @@ public class CreateGameActivity extends Activity {
                 mDialog.setMessage("Please wait...");
                 mDialog.show();
 
+                //generates the ID
                 uniqueId = generateUniqueId();
 
-                table_post.addValueEventListener(new ValueEventListener() {
+                //get the username;
+                /*Bundle extras = getIntent().getExtras();
+                postedBy = extras.getString("username");
+                email = extras.getString("email");*/
+
+                table_post.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        // Check if username already exists
+                        // Check if uniqueID already exists
                         if(dataSnapshot.child(uniqueId.toString()).exists()) {
                             mDialog.dismiss();
                             //if unique id exists it will redo the unique id to find the one that doesn't exist
@@ -108,12 +163,16 @@ public class CreateGameActivity extends Activity {
                         {
                             mDialog.dismiss();
                             // add to the database
-                            CreatePosts createPosts = new CreatePosts(InfoText.getText().toString(),eventAddress.getAddress().toString(),NumberOfPlayersText.getText().toString(), SportText.getText().toString());
+                            //(info, address, num of players, sport, user, joined users)
+                            CreatePosts createPosts = new CreatePosts(InfoText.getText().toString(),eventAddress.getAddress().toString(),NumberOfPlayersText.getText().toString(), SportText.getText().toString(), postedBy.toString(), usersJoined.toString(), uniqueId.toString());
                             table_post.child(uniqueId.toString()).setValue(createPosts);
-                            Toast.makeText(CreateGameActivity.this, "Post Submitted!", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(CreateGameActivity.this, "Post Submitted!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(CreateGameActivity.this, uniqueId, Toast.LENGTH_SHORT).show();
                             finish();
 
                             Intent homePage = new Intent(CreateGameActivity.this,HomePageActivity.class);
+                            homePage.putExtra("user_name", postedBy);
+                            homePage.putExtra("email", email);
                             startActivity(homePage);
 
                         }
@@ -122,7 +181,7 @@ public class CreateGameActivity extends Activity {
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                        //no code
                     }
                 });
 
@@ -131,6 +190,54 @@ public class CreateGameActivity extends Activity {
 
 
     }
+
+    @Override
+    public void onClick(View v) {
+
+        if (v == btnDatePicker) {
+
+            // Get Current Date
+            final Calendar c = Calendar.getInstance();
+            mYear = c.get(Calendar.YEAR);
+            mMonth = c.get(Calendar.MONTH);
+            mDay = c.get(Calendar.DAY_OF_MONTH);
+
+
+            DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                    new DatePickerDialog.OnDateSetListener() {
+
+                        @Override
+                        public void onDateSet(DatePicker view, int year,
+                                              int monthOfYear, int dayOfMonth) {
+
+                            txtDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+
+                        }
+                    }, mYear, mMonth, mDay);
+            datePickerDialog.show();
+        }
+        if (v == btnTimePicker) {
+
+            // Get Current Time
+            final Calendar c = Calendar.getInstance();
+            mHour = c.get(Calendar.HOUR_OF_DAY);
+            mMinute = c.get(Calendar.MINUTE);
+
+            // Launch Time Picker Dialog
+            TimePickerDialog timePickerDialog = new TimePickerDialog(this,
+                    new TimePickerDialog.OnTimeSetListener() {
+
+                        @Override
+                        public void onTimeSet(TimePicker view, int hourOfDay,
+                                              int minute) {
+
+                            txtTime.setText(hourOfDay + ":" + minute);
+                        }
+                    }, mHour, mMinute, false);
+            timePickerDialog.show();
+        }
+    }
+
     //generates unique Id for the posts to distinguish between them
     //later have to implement characters to make it more unique
     public String generateUniqueId(){
@@ -145,3 +252,5 @@ public class CreateGameActivity extends Activity {
 
 
 }
+
+

@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/sportTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:text="Sport"
+        android:background="@color/fbutton_color_orange"
+        android:textColor="@android:color/white"
+        android:textSize="36sp" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="447dp"
+        android:layout_below="@+id/sportTextView"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="4dp"
+        android:background="@android:color/white"
+        android:orientation="vertical" >
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:text="Posted By:"
+                    android:textColor="@color/fbutton_color_orange"
+                    android:textSize="25dp" />
+
+                <TextView
+                    android:id="@+id/postedByTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:text="Posted By Goes Here"
+                    android:textColor="@color/fbutton_color_orange"
+                    android:textSize="25dp" />
+
+
+                <TextView
+                    android:id="@+id/locationTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:text="Location"
+                    android:textColor="@color/fbutton_color_orange"
+                    android:textSize="36sp" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:text="Info:"
+                    android:textColor="@color/fbutton_color_orange"
+                    android:textSize="36sp" />
+
+                <TextView
+                    android:id="@+id/postInfoTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="93dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:maxLines="5"
+                    android:text="Post Info"
+                    android:textColor="@color/fbutton_color_orange"
+                    android:textSize="30dp" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:text="Players Needed:"
+                    android:textColor="@color/fbutton_color_orange"
+                    android:textSize="30dp" />
+
+                <TextView
+                    android:id="@+id/playersNeededTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:text="Players Needed Goes Here"
+                    android:textColor="@color/fbutton_color_orange"
+                    android:textSize="25dp" />
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:text="Players Joined:"
+                    android:textColor="@color/fbutton_color_orange"
+                    android:textSize="25dp" />
+
+                <TextView
+                    android:id="@+id/joinedTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="0dp"
+                    android:text="Players Joined Goes Here"
+                    android:textColor="@color/fbutton_color_orange"
+                    android:textSize="25dp" />
+
+
+                    />
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/cancelButton"
+        android:layout_width="179dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sportTextView"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="458dp"
+        android:background="@color/fbutton_color_orange"
+        android:textColor="@android:color/white"
+        android:text="Cancel" />
+
+    <Button
+        android:id="@+id/joinButton"
+        android:layout_width="179dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sportTextView"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="205dp"
+        android:layout_marginTop="458dp"
+        android:background="@color/btnSignActive"
+        android:textColor="@android:color/white"
+        android:text="Join" />
+
+
+</RelativeLayout>

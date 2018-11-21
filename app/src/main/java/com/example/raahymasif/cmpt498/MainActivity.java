@@ -8,7 +8,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.karan.churi.PermissionManager.PermissionManager;
+
 public class MainActivity extends AppCompatActivity {
+
+    PermissionManager permissionManager;
 
     Button btnSignIn,btnSignUp;
     TextView txtSlogan;
@@ -16,6 +20,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //for requesting permission to use location
+        permissionManager = new PermissionManager() {};
+        permissionManager.checkAndRequestPermissions(this);
 
         btnSignIn = (Button)findViewById(R.id.btnSignIn);
         btnSignUp = (Button)findViewById(R.id.btnSignUp);
