@@ -1,6 +1,7 @@
 package com.example.raahymasif.cmpt498;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.icu.text.IDNA;
@@ -30,18 +31,23 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.android.gms.location.places.Place;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Random;
 
 
 
 
 public class CreateGameActivity extends Activity {
-    MaterialEditText LocationText, NumberOfPlayersText, InfoText;
+    MaterialEditText LocationText, NumberOfPlayersText, InfoText, DateText;
     Button PostButton, CancelButton;
     String uniqueId = new String();
     Place eventAddress;
     String usersJoined = " ";
     AutoCompleteTextView SportText;
+
+    //on date set is used for getting the date
+    DatePickerDialog.OnDateSetListener mDatesetListener;
 
     //get the username;
     //Bundle extras = getIntent().getExtras();
@@ -86,7 +92,18 @@ public class CreateGameActivity extends Activity {
         SportText.setAdapter(adapter);
 
 
+        //getting the date
+        DateText = (MaterialEditText) findViewById(R.id.DateText);
 
+        DateText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int date = cal.get(Calendar.DAY_OF_MONTH);
+            }
+        });
 
 
         NumberOfPlayersText = (MaterialEditText)findViewById(R.id.NumberOfPlayerText);
