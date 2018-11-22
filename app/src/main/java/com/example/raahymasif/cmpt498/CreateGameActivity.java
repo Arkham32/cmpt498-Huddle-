@@ -59,7 +59,7 @@ public class CreateGameActivity extends Activity implements View.OnClickListener
 
     //autocomplete text for the sports that can be chosen
     private static final String[] sportCategory = new String[]{
-            "Baseball", "Basketball", "Bowling","Cricket","Curling","ESports","Football","Hockey","Lacrosse","Rugby","Soccer"
+            "Baseball","Badminton", "Basketball", "Bowling","Cricket","Curling","ESports","Football","Hockey","Lacrosse","Rugby","Soccer"
     };
 
 

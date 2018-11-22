@@ -23,6 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.example.raahymasif.cmpt498.Model.CreatePosts;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -75,7 +76,7 @@ public class FindMatchFragment extends Fragment {
         super.onStart();
 
         //delete old posts
-        //deleteOldPosts();
+        deleteOldPosts();
 
         FirebaseRecyclerAdapter<CreatePosts,FindMatchActivity.PostViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<CreatePosts,FindMatchActivity.PostViewHolder>
                 (CreatePosts.class,R.layout.post_row,FindMatchActivity.PostViewHolder.class,mDatabase){
@@ -142,28 +143,73 @@ public class FindMatchFragment extends Fragment {
 
     public void deleteOldPosts(){
 
-        /*SimpleDateFormat currentTimeHour = new SimpleDateFormat("HH");
-        SimpleDateFormat currentTimeMin = new SimpleDateFormat("mm");
-
-        SimpleDateFormat currentDateYear = new SimpleDateFormat("yyyy");
-        SimpleDateFormat currentDateMonth = new SimpleDateFormat("MM");
-        SimpleDateFormat currentDateDay = new SimpleDateFormat("dd");*/
-        SimpleDateFormat currentTimeHour = new SimpleDateFormat("HH/mm");
-        String currentHourStr = currentTimeHour.toString();
-
 
         Date date = new Date();
-        //System.out.println(sdf.format(date));
 
-        DatabaseReference dbPost = FirebaseDatabase.getInstance().getReference("Posts");
+        String strTimeFormat = "HH:mm";
+        String strDateFormat = "dd/MM/yyyy";
+
+        DateFormat dateFormat = new SimpleDateFormat(strDateFormat);
+        DateFormat timeFormat = new SimpleDateFormat(strTimeFormat);
+
+        String formattedDate= dateFormat.format(date);
+        String formattedTime = timeFormat.format(date);
+
+        String currentDate[] = formattedDate.split("/"); //[dd],[MM],[yyyy]
+        String currentTime[] = formattedTime.split(":"); //[HH],[mm]
+
+        final int curDate = Integer.parseInt(currentDate[0]);
+        final int curMonth = Integer.parseInt(currentDate[1]);
+        final int curYear = Integer.parseInt(currentDate[2]);
+
+        final int curHour = Integer.parseInt(currentTime[0]);
+        final int curMin = Integer.parseInt(currentTime[1]);
+
+
+        final DatabaseReference dbPost = FirebaseDatabase.getInstance().getReference("Posts");
         //final DatabaseReference table_user = database.getReference("Posts");
 
         dbPost.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot data : dataSnapshot.getChildren()){
-                    String postDate = data.child("date").toString(); // dd/mm/yyyy
-                    String postTime = data.child("time").toString();// HH:mm
+
+                    CreatePosts post = data.getValue(CreatePosts.class);
+
+                    String id = post.getId().toString();
+
+                    String postDateString = post.getDate().toString();
+                    String postTimeString = post.getTime().toString();
+                    //String postDateString = data.child("date").toString(); // dd/mm/yyyy
+                    //String postTimeString = data.child("time").toString();// HH:mm
+
+                    String postDateArray[] = postDateString.split("-");
+                    String postTimeArray[] = postTimeString.split(":");
+
+                    int postDate = Integer.parseInt(postDateArray[0]);
+                    int postMonth = Integer.parseInt(postDateArray[1]);
+                    int postYear = Integer.parseInt(postDateArray[2]);
+
+                    int postHour = Integer.parseInt(postTimeArray[0]);
+                    int postMin = Integer.parseInt(postTimeArray[1]);
+
+                    if(curYear >= postYear){
+                        if(curMonth >= postMonth ){
+                            if(curDate > postDate){
+                                dbPost.child(id).removeValue();
+                                //dbPost.removeValue();
+                                System.out.println("deleting==================================");
+                            }
+
+                        }
+
+                    }
+                    else{
+                        System.out.println("nothing needs deleting =======================");
+                        break;
+                    }
+
+                    //check if current time and date surpasses the post time and date and delete if true
 
 
                 }
