@@ -31,6 +31,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.maps.android.MarkerManager;
 import com.google.maps.android.SphericalUtil;
 
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import android.content.Context;
 import java.io.IOException;
@@ -166,81 +168,91 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //System.out.println (location.toString());
         //System.out.println(g.toString());
-        for (String g: location) {
-            if (g != null) {
-                for(String i: locationID) {
-                        if(i != null) {
-                            getLocationFromAddress(this, g, i);
-                        }
-                }
-            }
-        }
+        //HashMap<Integer, String> hmap = new HashMap<Integer, String>();
+
+        //for (String g: location) {
+          //  if (g != null) {
+
+            //    for(String i: locationID) {
+              //          if(i != null) {
+                //            Integer j = Integer.parseInt(i);
+                  //          hmap.put(j, g);
+                            //getLocationFromAddress(this, g, i);
+                    //    }
+                //}
+            //}
+        //}
+        getLocationFromAddress(this, location, locationID);
 
     }
 
-    public void getLocationFromAddress(Context context, String inputtedAddress, final String id){
+    public void getLocationFromAddress(Context context, ArrayList<String> locationname, ArrayList<String> locationid){
         Geocoder coder = new Geocoder(context);
         List<Address> address;
         LatLng resLatLng;
         Double distance;
         int test;
 
-        try {
-            // May throw an IOException
-            address = coder.getFromLocationName(inputtedAddress, 5);
-            if (address == null) {
-                return;
+        for (int i = 0; i < locationid.size(); i++) {
+            //System.out.println("Key: " + me.getKey() + " & Value: " + me.getValue());
+
+
+            try {
+                // May throw an IOException
+                address = coder.getFromLocationName(locationname.get(i), 5);
+                if (address == null) {
+                    return;
+                }
+
+                if (address.size() == 0) {
+                    return;
+                }
+
+                Address location = address.get(0);
+                //location.getLatitude();
+                //location.getLongitude();
+                //test = location.getLatitude();
+                if (newlocate == null) {
+                    System.out.println(a);
+                }
+                if (newlocate != null) {
+                    resLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+                    distance = SphericalUtil.computeDistanceBetween(newlocate, resLatLng);
+                    distance = distance / 1000;
+                    distance = Math.round(distance * 10.0) / 10.0;
+                    String distancefromlocation = (String.valueOf(distance));
+                    Bundle extras = getIntent().getExtras();
+                    final String username = extras.getString("username");
+                    final String email = extras.getString("email");
+                    //int a = Integer.parseInt(distancefromlocation);
+                    address=null;
+                    Marker marker = mMap.addMarker(new MarkerOptions().position(resLatLng).title(distancefromlocation + " km"));
+                    marker.setTag(locationid.get(i));
+                    //mMap.addMarker(new MarkerOptions().position(resLatLng).title(distancefromlocation + " km"));
+
+                    mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                        @Override
+                        public boolean onMarkerClick(Marker marker) {
+                            Intent newintent = new Intent(MapsActivity.this, PopupwindowActivity.class);
+                            newintent.putExtra("post_key", marker.getTag().toString());
+                            newintent.putExtra("user_name", username);
+                            newintent.putExtra("email", email);
+                            startActivity(newintent);
+                            //System.out.println(marker.getTag());
+
+
+                            return false;
+                        }
+                    });
+
+
+                }
+            } catch (IOException ex) {
+
+                ex.printStackTrace();
+                Toast.makeText(context, ex.getMessage(), Toast.LENGTH_LONG).show();
             }
-
-            if (address.size() == 0) {
-                return;
-            }
-
-            Address location = address.get(0);
-            //location.getLatitude();
-            //location.getLongitude();
-            //test = location.getLatitude();
-            if(newlocate == null) {
-                System.out.println(a);
-            }
-            if(newlocate != null) {
-                resLatLng = new LatLng(location.getLatitude(), location.getLongitude());
-                distance = SphericalUtil.computeDistanceBetween(newlocate, resLatLng);
-                distance = distance / 1000;
-                distance = Math.round(distance * 10.0) / 10.0;
-                String distancefromlocation = (String.valueOf(distance));
-                Bundle extras = getIntent().getExtras();
-                final String username = extras.getString("username");
-                final String email = extras.getString("email");
-                //int a = Integer.parseInt(distancefromlocation);
-
-                Marker marker = mMap.addMarker(new MarkerOptions().position(resLatLng).title(distancefromlocation + " km"));
-                marker.setTag(id);
-                //mMap.addMarker(new MarkerOptions().position(resLatLng).title(distancefromlocation + " km"));
-
-                mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-                    @Override
-                    public boolean onMarkerClick(Marker marker) {
-                        //Intent newintent = new Intent(MapsActivity.this, PopupwindowActivity.class);
-                        //newintent.putExtra("post_key", marker1.getTag().toString());
-                        //newintent.putExtra("user_name", username);
-                        //newintent.putExtra("email", email);
-                        //startActivity(newintent);
-                        System.out.println(marker.getTag());
-
-
-
-                        return false;
-                    }
-                });
-
-
-            }}catch (IOException ex) {
-
-            ex.printStackTrace();
-            Toast.makeText(context, ex.getMessage(), Toast.LENGTH_LONG).show();
         }
-
 
         //return resLatLng;
     }
