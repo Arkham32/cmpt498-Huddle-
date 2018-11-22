@@ -68,4 +68,8 @@ public class SettingsFragment extends Fragment {
         }
     }
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> d5698b368ac7d29b6e3b5eccba5aaa21837ddf58
