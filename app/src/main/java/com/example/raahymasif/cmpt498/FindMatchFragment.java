@@ -23,6 +23,9 @@ import com.google.firebase.database.ValueEventListener;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.example.raahymasif.cmpt498.Model.CreatePosts;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 public class FindMatchFragment extends Fragment {
     //private TextView textView;
@@ -70,6 +73,10 @@ public class FindMatchFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+
+        //delete old posts
+        //deleteOldPosts();
+
         FirebaseRecyclerAdapter<CreatePosts,FindMatchActivity.PostViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<CreatePosts,FindMatchActivity.PostViewHolder>
                 (CreatePosts.class,R.layout.post_row,FindMatchActivity.PostViewHolder.class,mDatabase){
             @Override
@@ -131,6 +138,42 @@ public class FindMatchFragment extends Fragment {
 
         mPostList.setAdapter(firebaseRecyclerAdapter);
 
+    }
+
+    public void deleteOldPosts(){
+
+        /*SimpleDateFormat currentTimeHour = new SimpleDateFormat("HH");
+        SimpleDateFormat currentTimeMin = new SimpleDateFormat("mm");
+
+        SimpleDateFormat currentDateYear = new SimpleDateFormat("yyyy");
+        SimpleDateFormat currentDateMonth = new SimpleDateFormat("MM");
+        SimpleDateFormat currentDateDay = new SimpleDateFormat("dd");*/
+        SimpleDateFormat currentTimeHour = new SimpleDateFormat("HH/mm");
+        String currentHourStr = currentTimeHour.toString();
+
+
+        Date date = new Date();
+        //System.out.println(sdf.format(date));
+
+        DatabaseReference dbPost = FirebaseDatabase.getInstance().getReference("Posts");
+        //final DatabaseReference table_user = database.getReference("Posts");
+
+        dbPost.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot data : dataSnapshot.getChildren()){
+                    String postDate = data.child("date").toString(); // dd/mm/yyyy
+                    String postTime = data.child("time").toString();// HH:mm
+
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                //nothing
+            }
+        });
     }
 
 

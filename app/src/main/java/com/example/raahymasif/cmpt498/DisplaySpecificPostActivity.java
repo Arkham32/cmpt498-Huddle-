@@ -27,7 +27,7 @@ public class DisplaySpecificPostActivity extends Activity {
     String username = null;
     String email = null;
     int playersInt = 0;
-    String post_joined, post_info, post_location, post_players, post_postedBy, post_sport;
+    String post_joined, post_info, post_location, post_players, post_postedBy, post_sport, post_date, post_time;
 
 
     private TextView sportText;
@@ -36,6 +36,8 @@ public class DisplaySpecificPostActivity extends Activity {
     private TextView playersNeededText;
     private TextView joinedText;
     private TextView postedByText;
+    private TextView datetText;
+    private TextView timeText;
 
     Button joinButton, cancelButton;
 
@@ -66,6 +68,8 @@ public class DisplaySpecificPostActivity extends Activity {
         playersNeededText = (TextView) findViewById(R.id.playersNeededTextView);
         joinedText = (TextView) findViewById(R.id.joinedTextView);
         postedByText = (TextView) findViewById(R.id.postedByTextView);
+        datetText = (TextView) findViewById(R.id.dateTextView);
+        timeText = (TextView) findViewById(R.id.timeTextView);
 
         //button
         joinButton = (Button) findViewById(R.id.joinButton);
@@ -80,6 +84,8 @@ public class DisplaySpecificPostActivity extends Activity {
                 post_postedBy = (String) dataSnapshot.child("postedBy").getValue();
                 post_sport = (String) dataSnapshot.child("sport").getValue();
                 post_joined = (String) dataSnapshot.child("usersJoined").getValue();
+                post_date = (String) dataSnapshot.child("date").getValue();
+                post_time = (String) dataSnapshot.child("time").getValue();
 
                 //post_players int variable for updating
                 playersInt = Integer.parseInt(post_players);
@@ -91,6 +97,8 @@ public class DisplaySpecificPostActivity extends Activity {
                 playersNeededText.setText(post_players);
                 joinedText.setText(post_joined);
                 postedByText.setText(post_postedBy);
+                datetText.setText(post_date);
+                timeText.setText(post_time);
 
             }
 
@@ -130,9 +138,11 @@ public class DisplaySpecificPostActivity extends Activity {
                     String postedBy = post_postedBy.toString();
                     String sport = post_sport.toString();
                     String joined = post_joined.toString();
+                    String date = post_date.toString();
+                    String time = post_time.toString();
 
 
-                    updateJoined(info,location,players,sport,postedBy,joined,post_key);
+                    updateJoined(info,location,players,sport,postedBy,joined,post_key,date,time);
 
                     //Toast.makeText(DisplaySpecificPostActivity.this, "Joined!", Toast.LENGTH_SHORT).show();
 
@@ -160,7 +170,7 @@ public class DisplaySpecificPostActivity extends Activity {
         });
     }
 
-    private boolean updateJoined(String info, String location, String players, String sport, String postedBy, String usersJoined, String Id){
+    private boolean updateJoined(String info, String location, String players, String sport, String postedBy, String usersJoined, String Id, String date, String time){
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Posts").child(post_key);
 
         String checkExisting = "false";
@@ -182,7 +192,7 @@ public class DisplaySpecificPostActivity extends Activity {
             a--;
             players = Integer.toString(a);
 
-            CreatePosts modifyPost = new CreatePosts(info ,location,  players, sport, postedBy, joined, Id);
+            CreatePosts modifyPost = new CreatePosts(info ,location,  players, sport, postedBy, joined, Id, date, time);
 
             databaseReference.setValue(modifyPost);
             Toast.makeText(DisplaySpecificPostActivity.this, "Joined", Toast.LENGTH_SHORT).show();

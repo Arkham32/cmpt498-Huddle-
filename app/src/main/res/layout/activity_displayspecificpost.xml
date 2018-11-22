@@ -6,6 +6,18 @@
     android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/timeTextView"
+        android:layout_width="159dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sportTextView"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="225dp"
+        android:layout_marginTop="3dp"
+        android:text="Time"
+        android:textColor="@color/fbutton_color_orange"
+        android:textSize="25dp" />
+
+    <TextView
         android:id="@+id/sportTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,11 +30,21 @@
         android:textColor="@android:color/white"
         android:textSize="36sp" />
 
+    <TextView
+        android:id="@+id/dateTextView"
+        android:layout_width="159dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sportTextView"
+        android:layout_alignParentStart="true"
+        android:text="Date"
+        android:textColor="@color/fbutton_color_orange"
+        android:textSize="25dp" />
+
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="447dp"
-        android:layout_below="@+id/sportTextView"
+        android:layout_below="@+id/dateTextView"
         android:layout_alignParentStart="true"
         android:layout_marginTop="4dp"
         android:background="@android:color/white"
@@ -31,12 +53,12 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="417dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/textView5"
@@ -149,7 +171,7 @@
                     android:textSize="25dp" />
 
 
-                    />
+                />
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
@@ -160,11 +182,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/sportTextView"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="458dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="470dp"
         android:background="@color/fbutton_color_orange"
-        android:textColor="@android:color/white"
-        android:text="Cancel" />
+        android:text="Cancel"
+        android:textColor="@android:color/white" />
 
     <Button
         android:id="@+id/joinButton"
@@ -173,10 +195,20 @@
         android:layout_below="@+id/sportTextView"
         android:layout_alignParentStart="true"
         android:layout_marginStart="205dp"
-        android:layout_marginTop="458dp"
+        android:layout_marginTop="470dp"
         android:background="@color/btnSignActive"
-        android:textColor="@android:color/white"
-        android:text="Join" />
+        android:text="Join"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="67dp"
+        android:layout_height="36dp"
+        android:layout_below="@+id/sportTextView"
+        android:layout_toEndOf="@+id/dateTextView"
+        android:textSize="25dp"
+        android:textColor="@color/fbutton_color_orange"
+        android:text="At" />
 
 
 </RelativeLayout>

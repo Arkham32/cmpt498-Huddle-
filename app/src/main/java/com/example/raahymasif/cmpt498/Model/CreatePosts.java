@@ -8,7 +8,24 @@ public class CreatePosts {
     private String Sport;
     private String PostedBy;
     private String UsersJoined;
+    private String Date;
+    private String Time;
 
+    public String getDate() {
+        return Date;
+    }
+
+    public void setDate(String date) {
+        Date = date;
+    }
+
+    public String getTime() {
+        return Time;
+    }
+
+    public void setTime(String time) {
+        Time = time;
+    }
 
     public String getId() {
         return Id;
@@ -72,7 +89,7 @@ public class CreatePosts {
 
     }
 
-    public CreatePosts(String info, String location, String players, String sport, String postedBy, String usersJoined, String Id){ //String username) {
+    public CreatePosts(String info, String location, String players, String sport, String postedBy, String usersJoined, String Id, String date, String time){ //String username) {
         this.Id = Id;
         this.Info = info;
         this.Location = location;
@@ -80,6 +97,8 @@ public class CreatePosts {
         this.Sport = sport;
         this.PostedBy = postedBy;
         this.UsersJoined = usersJoined;
+        this.Date = date;
+        this.Time = time;
 
     }
 

@@ -14,6 +14,11 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
+import android.widget.DatePicker;
+import android.widget.TimePicker;
+import java.util.Calendar;
 
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
@@ -35,13 +40,17 @@ import java.util.Random;
 
 
 
-public class CreateGameActivity extends Activity {
+public class CreateGameActivity extends Activity implements View.OnClickListener {
     MaterialEditText LocationText, NumberOfPlayersText, InfoText;
-    Button PostButton, CancelButton;
+    Button PostButton, CancelButton, btnDatePicker, btnTimePicker;;
     String uniqueId = new String();
     Place eventAddress;
     String usersJoined = " ";
     AutoCompleteTextView SportText;
+
+
+    EditText txtDate, txtTime;
+    private int mYear, mMonth, mDay, mHour, mMinute;
 
     //get the username;
     //Bundle extras = getIntent().getExtras();
@@ -50,7 +59,7 @@ public class CreateGameActivity extends Activity {
 
     //autocomplete text for the sports that can be chosen
     private static final String[] sportCategory = new String[]{
-            "Baseball", "Basketball", "Bowling","Cricket","Curling","Esports","Football","Hockey","Lacrosse","Rugby","Soccer"
+            "Baseball", "Basketball", "Bowling","Cricket","Curling","ESports","Football","Hockey","Lacrosse","Rugby","Soccer"
     };
 
 
@@ -84,6 +93,15 @@ public class CreateGameActivity extends Activity {
         //SportText = (MaterialEditText)findViewById(R.id.SportText);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,sportCategory);
         SportText.setAdapter(adapter);
+
+        // data for date and time picker
+        btnDatePicker=(Button)findViewById(R.id.btn_date);
+        btnTimePicker=(Button)findViewById(R.id.btn_time);
+        txtDate=(EditText)findViewById(R.id.in_date);
+        txtTime=(EditText)findViewById(R.id.in_time);
+
+        btnDatePicker.setOnClickListener((View.OnClickListener) this);
+        btnTimePicker.setOnClickListener((View.OnClickListener) this);
 
 
 
@@ -148,7 +166,10 @@ public class CreateGameActivity extends Activity {
                             mDialog.dismiss();
                             // add to the database
                             //(info, address, num of players, sport, user, joined users)
-                            CreatePosts createPosts = new CreatePosts(InfoText.getText().toString(),eventAddress.getAddress().toString(),NumberOfPlayersText.getText().toString(), SportText.getText().toString(), postedBy.toString(), usersJoined.toString(), uniqueId.toString());
+                            CreatePosts createPosts = new CreatePosts(InfoText.getText().toString(),eventAddress.getAddress().toString(),NumberOfPlayersText.getText().toString(),
+                                    SportText.getText().toString(), postedBy.toString(), usersJoined.toString(), uniqueId.toString(), txtDate.getText().toString(),txtTime.getText().toString());
+
+                            
                             table_post.child(uniqueId.toString()).setValue(createPosts);
                             //Toast.makeText(CreateGameActivity.this, "Post Submitted!", Toast.LENGTH_SHORT).show();
                             Toast.makeText(CreateGameActivity.this, uniqueId, Toast.LENGTH_SHORT).show();
@@ -174,6 +195,56 @@ public class CreateGameActivity extends Activity {
 
 
     }
+
+    @Override
+    public void onClick(View v) {
+
+        if (v == btnDatePicker) {
+
+            // Get Current Date
+            final Calendar c = Calendar.getInstance();
+            mYear = c.get(Calendar.YEAR);
+            mMonth = c.get(Calendar.MONTH);
+            mDay = c.get(Calendar.DAY_OF_MONTH);
+
+
+            DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                    new DatePickerDialog.OnDateSetListener() {
+
+                        @Override
+                        public void onDateSet(DatePicker view, int year,
+                                              int monthOfYear, int dayOfMonth) {
+
+                            txtDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                            //System.out.println(txtDate.getText().toString()+"==============================================");
+
+                        }
+                    }, mYear, mMonth, mDay);
+            datePickerDialog.show();
+        }
+        if (v == btnTimePicker) {
+
+            // Get Current Time
+            final Calendar c = Calendar.getInstance();
+            mHour = c.get(Calendar.HOUR_OF_DAY);
+            mMinute = c.get(Calendar.MINUTE);
+
+            // Launch Time Picker Dialog
+            TimePickerDialog timePickerDialog = new TimePickerDialog(this,
+                    new TimePickerDialog.OnTimeSetListener() {
+
+                        @Override
+                        public void onTimeSet(TimePicker view, int hourOfDay,
+                                              int minute) {
+
+                            txtTime.setText(hourOfDay + ":" + minute);
+                            //System.out.println(txtTime.getText().toString()+"-----------------------------------");
+                        }
+                    }, mHour, mMinute, false);
+            timePickerDialog.show();
+        }
+    }
+
     //generates unique Id for the posts to distinguish between them
     //later have to implement characters to make it more unique
     public String generateUniqueId(){
@@ -188,3 +259,5 @@ public class CreateGameActivity extends Activity {
 
 
 }
+
+
