@@ -220,7 +220,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     distance = SphericalUtil.computeDistanceBetween(newlocate, resLatLng);
                     distance = distance / 1000;
                     distance = Math.round(distance * 10.0) / 10.0;
-                    String distancefromlocation = (String.valueOf(distance));
+                    final String distancefromlocation = (String.valueOf(distance));
                     Bundle extras = getIntent().getExtras();
                     final String username = extras.getString("username");
                     final String email = extras.getString("email");
@@ -237,6 +237,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             newintent.putExtra("post_key", marker.getTag().toString());
                             newintent.putExtra("user_name", username);
                             newintent.putExtra("email", email);
+                            newintent.putExtra("distance", marker.getTitle());
                             startActivity(newintent);
                             //System.out.println(marker.getTag());
 

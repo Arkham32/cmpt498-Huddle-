@@ -6,20 +6,22 @@
     android:layout_height="match_parent">
 
     <RelativeLayout
+        android:id="@+id/rl"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/rl"
-        >
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <TextView
             android:id="@+id/eventinfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="143dp"
-            android:textColor="@color/fbutton_color_orange"
-            android:text="TextView" />
+            android:text="Sport Info"
+            android:textColor="@color/fbutton_color_orange" />
 
         <TextView
             android:id="@+id/eventsport"
@@ -27,9 +29,19 @@
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/eventinfo"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="221dp"
-            android:textColor="@color/fbutton_color_orange"
-            android:text="TextView" />
+            android:layout_centerInParent="true"
+            android:layout_marginStart="13dp"
+            android:layout_marginTop="209dp"
+            android:text="Sport"
+            android:textColor="@color/fbutton_color_orange" />
+
+
+        <TextView
+            android:id="@+id/distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Distance" />
 
         <Button
             android:id="@+id/joinbuttonevent"
@@ -39,8 +51,8 @@
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="200dp"
             android:background="@color/btnSignActive"
-            android:textColor="@android:color/white"
-            android:text="Join" />
+            android:text="Join"
+            android:textColor="@android:color/white" />
 
         <Button
             android:id="@+id/cancelbuttonevent"
@@ -50,7 +62,7 @@
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="85dp"
             android:background="@color/fbutton_color_orange"
-            android:textColor="@android:color/white"
-            android:text="Cancel" />
+            android:text="Cancel"
+            android:textColor="@android:color/white" />
     </RelativeLayout>
 </android.support.constraint.ConstraintLayout>
