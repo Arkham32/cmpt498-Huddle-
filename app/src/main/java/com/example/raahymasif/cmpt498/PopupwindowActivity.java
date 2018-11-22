@@ -20,10 +20,10 @@ public class PopupwindowActivity extends Activity {
 
 
     Button Join, Cancel;
-    TextView info, sport;
+    TextView info, sport, distance1;
     private DatabaseReference mDatabase;
-    String post_info, post_sport;
-    String post_key, username, email;
+    String post_info, post_sport, post_distance;
+    String post_key, username, email, distance;
 
 
     @Override
@@ -39,23 +39,26 @@ public class PopupwindowActivity extends Activity {
         Cancel = (Button)findViewById(R.id.cancelbuttonevent);
         info = (TextView)findViewById(R.id.eventinfo);
         sport = (TextView)findViewById(R.id.eventsport);
+        distance1 = (TextView)findViewById(R.id.distance);
         Bundle extras = getIntent().getExtras();
         post_key = extras.getString("post_key");
         username = extras.getString("username");
         email = extras.getString("email");
+        distance = extras.getString("distance");
 
         mDatabase.child(post_key).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 post_info = (String) dataSnapshot.child("info").getValue();
                 post_sport = (String) dataSnapshot.child("sport").getValue();
-
+                post_distance = (String)distance;
 
                 //post_players int variable for updating
 
 
                 sport.setText(post_sport);
                 info.setText(post_info);
+                distance1.setText(post_distance);
 
 
             }
@@ -83,7 +86,7 @@ public class PopupwindowActivity extends Activity {
             public void onClick(View v) {
                 Intent newmarker = new Intent(PopupwindowActivity.this, HomePageActivity.class);
                 newmarker.putExtra("post_key", post_key);
-                newmarker.putExtra("username", username);
+                newmarker.putExtra("user_name", username);
                 newmarker.putExtra("email", email);
                 startActivity(newmarker);
             }
