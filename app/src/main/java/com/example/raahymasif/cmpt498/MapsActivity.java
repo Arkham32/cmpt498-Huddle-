@@ -10,6 +10,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
+import android.os.Handler;
 import android.sax.StartElementListener;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
@@ -30,6 +31,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.maps.android.MarkerManager;
 import com.google.maps.android.SphericalUtil;
 
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import android.content.Context;
 import java.io.IOException;
@@ -54,6 +57,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public GoogleMap mMap;
     public LatLng newlocate;
     LocationManager locationManager;
+    LocationListener mlocListener;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -66,9 +70,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     protected void onResume(){
-        super.onResume();
         loadActivity();
+        super.onResume();
 
+    }
+
+    @Override
+    protected void onPause(){
+        mMap = null;
+        super.onPause();
 
     }
 
@@ -97,6 +107,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             return;
         }
         mMap.setMyLocationEnabled(true);
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                // Actions to do after 3 seconds
+
 
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Posts");
@@ -113,6 +128,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         //handle databaseError
                     }
                 });
+
+            }
+        }, 500);
 
 
 
@@ -150,118 +168,91 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //System.out.println (location.toString());
         //System.out.println(g.toString());
-        for (String g: location) {
-            if (g != null) {
-                for(String i: locationID) {
-                        if(i != null) {
-                            getLocationFromAddress(this, g, i);
-                        }
-                }
-            }
-        }
+        //HashMap<Integer, String> hmap = new HashMap<Integer, String>();
+
+        //for (String g: location) {
+          //  if (g != null) {
+
+            //    for(String i: locationID) {
+              //          if(i != null) {
+                //            Integer j = Integer.parseInt(i);
+                  //          hmap.put(j, g);
+                            //getLocationFromAddress(this, g, i);
+                    //    }
+                //}
+            //}
+        //}
+        getLocationFromAddress(this, location, locationID);
 
     }
 
-    public void getLocationFromAddress(Context context, String inputtedAddress, final String id){
+    public void getLocationFromAddress(Context context, ArrayList<String> locationname, ArrayList<String> locationid){
         Geocoder coder = new Geocoder(context);
         List<Address> address;
         LatLng resLatLng;
         Double distance;
         int test;
 
-        try {
-            // May throw an IOException
-            address = coder.getFromLocationName(inputtedAddress, 5);
-            if (address == null) {
-                return;
-            }
-
-            if (address.size() == 0) {
-                return;
-            }
-
-            Address location = address.get(0);
-            //location.getLatitude();
-            //location.getLongitude();
-            //test = location.getLatitude();
-            System.out.println(a);
-            if(newlocate != null) {
-                resLatLng = new LatLng(location.getLatitude(), location.getLongitude());
-                distance = SphericalUtil.computeDistanceBetween(newlocate, resLatLng);
-                distance = distance / 1000;
-                distance = Math.round(distance * 10.0) / 10.0;
-                String distancefromlocation = (String.valueOf(distance));
-                Bundle extras = getIntent().getExtras();
-                final String username = extras.getString("username");
-                final String email = extras.getString("email");
-                //int a = Integer.parseInt(distancefromlocation);
-
-                final Marker marker1 = mMap.addMarker(new MarkerOptions().position(resLatLng).title(distancefromlocation + " km").snippet(id));
-                //mMap.addMarker(new MarkerOptions().position(resLatLng).title(distancefromlocation + " km"));
-
-                mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-                    @Override
-                    public boolean onMarkerClick(Marker marker) {
-                        Intent newintent = new Intent(MapsActivity.this, PopupwindowActivity.class);
-                        String newid = marker1.getSnippet();
-                        System.out.println("+++++++++++++++++++++++++++++"+ newid);
-                        newintent.putExtra("post_key", newid);
-                        newintent.putExtra("user_name", username);
-                        newintent.putExtra("email", email);
-                        startActivity(newintent);
+        for (int i = 0; i < locationid.size(); i++) {
+            //System.out.println("Key: " + me.getKey() + " & Value: " + me.getValue());
 
 
+            try {
+                // May throw an IOException
+                address = coder.getFromLocationName(locationname.get(i), 5);
+                if (address == null) {
+                    return;
+                }
 
-                        /*Context mcontext = getApplicationContext();
-                        LayoutInflater inflater = (LayoutInflater) mcontext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                        View customview = inflater.inflate(R.layout.popup_window, null, false);
-                        PopupWindow mPopupwindow = new PopupWindow(customview, LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-                        if(Build.VERSION.SDK_INT>=21){
-                            mPopupwindow.setElevation(5.0f);
+                if (address.size() == 0) {
+                    return;
+                }
+
+                Address location = address.get(0);
+                //location.getLatitude();
+                //location.getLongitude();
+                //test = location.getLatitude();
+                if (newlocate == null) {
+                    System.out.println(a);
+                }
+                if (newlocate != null) {
+                    resLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+                    distance = SphericalUtil.computeDistanceBetween(newlocate, resLatLng);
+                    distance = distance / 1000;
+                    distance = Math.round(distance * 10.0) / 10.0;
+                    String distancefromlocation = (String.valueOf(distance));
+                    Bundle extras = getIntent().getExtras();
+                    final String username = extras.getString("username");
+                    final String email = extras.getString("email");
+                    //int a = Integer.parseInt(distancefromlocation);
+                    address=null;
+                    Marker marker = mMap.addMarker(new MarkerOptions().position(resLatLng).title(distancefromlocation + " km"));
+                    marker.setTag(locationid.get(i));
+                    //mMap.addMarker(new MarkerOptions().position(resLatLng).title(distancefromlocation + " km"));
+
+                    mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                        @Override
+                        public boolean onMarkerClick(Marker marker) {
+                            Intent newintent = new Intent(MapsActivity.this, PopupwindowActivity.class);
+                            newintent.putExtra("post_key", marker.getTag().toString());
+                            newintent.putExtra("user_name", username);
+                            newintent.putExtra("email", email);
+                            startActivity(newintent);
+                            //System.out.println(marker.getTag());
+
+
+                            return false;
                         }
-                        Button Joinbutton = (Button) customview.findViewById(R.id.joinbuttonevent);
-                        RelativeLayout mrelativelayout = (RelativeLayout) findViewById(R.id.rl);
-                        mPopupwindow.showAtLocation(mrelativelayout, Gravity.CENTER,0,0);
-                        Joinbutton.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Intent newmarker = new Intent(MapsActivity.this, DisplaySpecificPostActivity.class);
-                                newmarker.putExtra("post_key", id);
-                                newmarker.putExtra("username", username);
-                                newmarker.putExtra("email", email);
-                                startActivity(newmarker);
-                            }
-
-                        });*/
-
-                        //
-                        return false;
-                    }
-                });
-                //Intent newmarker = new Intent(MapsActivity.this, DisplaySpecificPostActivity.class);
-                //newmarker.putExtra("post_key", id);
-                //newmarker.putExtra("username", username);
-                //newmarker.putExtra("email", email);
+                    });
 
 
-                //mMap.addMarker(new MarkerOptions().position(resLatLng).title(id));
-                //System.out.println("========================");
-                //System.out.println(distance);
-                //mMap.addMarker(new MarkerOptions().position(resLatLng).title(id));
-                //mMap.addMarker(new MarkerOptions().position(resLatLng).title(distancefromlocation));
-                //if (newlocate != null) {
-                //distance = SphericalUtil.computeDistanceBetween(newlocate, resLatLng);
-                //System.out.println("=======================");
-                //System.out.println(distance);
+                }
+            } catch (IOException ex) {
 
-                //}
-
-            }}catch (IOException ex) {
-
-            ex.printStackTrace();
-            Toast.makeText(context, ex.getMessage(), Toast.LENGTH_LONG).show();
+                ex.printStackTrace();
+                Toast.makeText(context, ex.getMessage(), Toast.LENGTH_LONG).show();
+            }
         }
-
 
         //return resLatLng;
     }
@@ -269,12 +260,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private void loadActivity() {
 
 
-
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+
+
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
@@ -288,15 +280,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         Location oldlocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-        if(oldlocation != null) {
+        if (oldlocation != null) {
             double oldlat = oldlocation.getLatitude();
             double oldlong = oldlocation.getLongitude();
             LatLng oldloc = new LatLng(oldlat, oldlong);
             newlocate = oldloc;
         }
 
+
         if (locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
-            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, new LocationListener() {
+            mlocListener = new LocationListener() {
                 @Override
                 public void onLocationChanged(Location location) {
                     double latitude = location.getLatitude();
@@ -307,13 +300,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         List<Address> addressList = geocoder.getFromLocation(latitude, longitude, 1);
                         String str = addressList.get(0).getLocality() + ",";
                         str += addressList.get(0).getCountryName();
-                        mMap.addMarker(new MarkerOptions().position(latLng).title(str));
-                        a=5;
+                        if(mMap != null) {
+                            mMap.addMarker(new MarkerOptions().position(latLng).title(str));
+                        }
+                        a = 5;
                         newlocate = latLng;
                         String s = "no";
                         s = getIntent().getStringExtra("buttonclicked");
-                        if(s.equals("yes")){
-                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10.2f));
+                        if (s.equals("yes")) {
+                            if(mMap != null) {
+                                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10.2f));
+                            }
                         }
 
 
@@ -323,70 +320,78 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
 
                 @Override
-                public void onStatusChanged(String provider, int status, Bundle extras) {
+                public void onStatusChanged(String s, int i, Bundle bundle) {
 
                 }
 
                 @Override
-                public void onProviderEnabled(String provider) {
+                public void onProviderEnabled(String s) {
 
                 }
 
                 @Override
-                public void onProviderDisabled(String provider) {
+                public void onProviderDisabled(String s) {
 
                 }
+            };
 
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, mlocListener);
 
+        } else {
+            if (locationManager.isProviderEnabled((LocationManager.GPS_PROVIDER))) {
+                mlocListener = new LocationListener() {
+                    @Override
+                    public void onLocationChanged(Location location) {
+                        double latitude = location.getLatitude();
+                        double longitude = location.getLongitude();
+                        LatLng latLng = new LatLng(latitude, longitude);
+                        Geocoder geocoder = new Geocoder(getApplicationContext());
+                        try {
+                            List<Address> addressList = geocoder.getFromLocation(latitude, longitude, 1);
+                            String str = addressList.get(0).getLocality() + ",";
+                            str += addressList.get(0).getCountryName();
+                            if(mMap != null) {
+                                mMap.addMarker(new MarkerOptions().position(latLng).title(str));
+                            }
+                            a = 5;
+                            newlocate = latLng;
+                            String s = "no";
+                            s = getIntent().getStringExtra("buttonclicked");
+                            if (s.equals("yes")) {
+                                if(mMap != null) {
+                                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10.2f));
+                                }
 
+                            }
 
-
-
-            });
-            return;
-        } else {// (locationManager.isProviderEnabled((LocationManager.GPS_PROVIDER))) {
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, new LocationListener() {
-                @Override
-                public void onLocationChanged(Location location) {
-                    double latitude = location.getLatitude();
-                    double longitude = location.getLongitude();
-                    LatLng latLng = new LatLng(latitude, longitude);
-                    Geocoder geocoder = new Geocoder(getApplicationContext());
-                    try {
-                        List<Address> addressList = geocoder.getFromLocation(latitude, longitude, 1);
-                        String str = addressList.get(0).getLocality() + ",";
-                        str += addressList.get(0).getCountryName();
-                        mMap.addMarker(new MarkerOptions().position(latLng).title(str));
-                        a=5;
-                        newlocate = latLng;
-
-                        //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10.2f));
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                            //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10.2f));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
-                }
 
-                @Override
-                public void onStatusChanged(String provider, int status, Bundle extras) {
+                    @Override
+                    public void onStatusChanged(String s, int i, Bundle bundle) {
 
-                }
+                    }
 
-                @Override
-                public void onProviderEnabled(String provider) {
+                    @Override
+                    public void onProviderEnabled(String s) {
 
-                }
+                    }
 
-                @Override
-                public void onProviderDisabled(String provider) {
+                    @Override
+                    public void onProviderDisabled(String s) {
 
-                }
+                    }
+                };
 
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, mlocListener);
 
-            });
+            }
+
         }
-
     }
-
 
 }
 
