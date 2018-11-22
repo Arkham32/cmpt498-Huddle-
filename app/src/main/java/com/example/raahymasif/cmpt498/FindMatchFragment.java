@@ -70,6 +70,8 @@ public class FindMatchFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+
+
         FirebaseRecyclerAdapter<CreatePosts,FindMatchActivity.PostViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<CreatePosts,FindMatchActivity.PostViewHolder>
                 (CreatePosts.class,R.layout.post_row,FindMatchActivity.PostViewHolder.class,mDatabase){
             @Override
