@@ -15,6 +15,7 @@ import android.sax.StartElementListener;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+
 import com.google.android.gms.maps.CameraUpdateFactory;
 
 import com.google.android.gms.maps.GoogleMap;
@@ -132,7 +133,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         }, 500);
 
-
+        Context context = getApplicationContext();
+        Toast.makeText(context, "Loading Map...", Toast.LENGTH_SHORT).show();
 
 
         // Add a marker in Sydney and move the camera
@@ -164,24 +166,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             //Get phone field and append to list
             locationID.add((String) singleUser.get("id"));
         }
-        //System.out.println("=====================================================================");
 
-        //System.out.println (location.toString());
-        //System.out.println(g.toString());
-        //HashMap<Integer, String> hmap = new HashMap<Integer, String>();
-
-        //for (String g: location) {
-          //  if (g != null) {
-
-            //    for(String i: locationID) {
-              //          if(i != null) {
-                //            Integer j = Integer.parseInt(i);
-                  //          hmap.put(j, g);
-                            //getLocationFromAddress(this, g, i);
-                    //    }
-                //}
-            //}
-        //}
         getLocationFromAddress(this, location, locationID);
 
     }

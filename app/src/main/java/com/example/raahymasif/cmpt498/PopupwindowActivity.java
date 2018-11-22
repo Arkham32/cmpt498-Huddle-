@@ -86,7 +86,7 @@ public class PopupwindowActivity extends Activity {
             public void onClick(View v) {
                 Intent newmarker = new Intent(PopupwindowActivity.this, HomePageActivity.class);
                 newmarker.putExtra("post_key", post_key);
-                newmarker.putExtra("username", username);
+                newmarker.putExtra("user_name", username);
                 newmarker.putExtra("email", email);
                 startActivity(newmarker);
             }
