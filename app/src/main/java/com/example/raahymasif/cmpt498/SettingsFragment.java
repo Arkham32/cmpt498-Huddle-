@@ -36,14 +36,14 @@ public class SettingsFragment extends Fragment {
         return view;
     }
 
-    private void setupFirebaseListener(){
+    private void setupFirebaseListener() {
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
-                if(user != null){
+                if (user != null) {
                     System.out.println("Oops something broke");
-                }else{
+                } else {
                     Toast.makeText(getActivity(), "Signed Out", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getActivity(), MainActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -56,20 +56,17 @@ public class SettingsFragment extends Fragment {
     }
 
     @Override
-    public void onStart(){
+    public void onStart() {
         super.onStart();
         FirebaseAuth.getInstance().addAuthStateListener(mAuthStateListener);
     }
 
     public void onStop() {
         super.onStop();
-        if(mAuthStateListener != null){
+        if (mAuthStateListener != null) {
             FirebaseAuth.getInstance().removeAuthStateListener(mAuthStateListener);
         }
     }
+}
 
-<<<<<<< HEAD
-}
-=======
-}
->>>>>>> d5698b368ac7d29b6e3b5eccba5aaa21837ddf58
+

@@ -5,15 +5,16 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="12dp"
-                android:text="Create Game"
-                android:textColor="@color/fbutton_color_orange"
-                android:textSize="36sp" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="61dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp"
+        android:background="@color/fbutton_color_orange"
+        android:text="Create Game"
+        android:textColor="@android:color/white"
+        android:textSize="36sp" />
 
     <fragment
         android:id="@+id/LocationText"
@@ -53,13 +54,13 @@
 
     <EditText
         android:id="@+id/in_date"
-        android:layout_width="200dp"
+        android:layout_width="270dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="70dp"
-        android:layout_marginLeft="70dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
         android:layout_marginTop="184dp"
         android:hint="dd-mm-yyyy" />
 
@@ -77,13 +78,13 @@
 
     <EditText
         android:id="@+id/in_time"
-        android:layout_width="200dp"
+        android:layout_width="270dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/in_date"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:layout_marginStart="70dp"
-        android:layout_marginLeft="70dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
         android:layout_marginTop="0dp"
         android:hint="24-hour format" />
 
@@ -114,11 +115,12 @@
 
     <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/NumberOfPlayerText"
-        android:layout_width="78dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_width="77dp"
+        android:layout_height="46dp"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="95dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginBottom="89dp"
         android:ems="10"
         android:hint="    #"
         android:inputType="number"
@@ -132,7 +134,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignTop="@+id/CancelButton"
         android:layout_marginEnd="27dp"
-        android:background="@color/fbutton_color_orange"
+        android:background="@color/btnSignActive"
         android:textColor="@android:color/white"
         android:text="Post" />
 
@@ -154,8 +156,8 @@
         android:layout_height="49dp"
         android:layout_alignEnd="@+id/CancelButton"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="-187dp"
-        android:layout_marginBottom="80dp"
+        android:layout_marginEnd="-206dp"
+        android:layout_marginBottom="86dp"
         android:text="Players Needed"
         android:textSize="20dp" />
 
