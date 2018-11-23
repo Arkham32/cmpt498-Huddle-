@@ -12,7 +12,8 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
 
     </RelativeLayout>
@@ -55,13 +56,15 @@
         android:layout_height="0dp"
         android:layout_alignStart="@+id/textView6"
         android:layout_alignTop="@+id/distance"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="17dp"
         android:text="Distance: "
-        android:textColor="@color/colorPrimaryDark"
         android:textAlignment="center"
+        android:textColor="@color/colorPrimaryDark"
         app:layout_constraintBottom_toTopOf="@+id/distance"
-        app:layout_constraintEnd_toEndOf="@+id/distance"
-        app:layout_constraintStart_toStartOf="@+id/distance"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/eventinfo" />
 
     <Button
@@ -101,7 +104,8 @@
         android:layout_width="68dp"
         android:layout_height="0dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="150dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="196dp"
         android:layout_toEndOf="@+id/textView6"
         android:inputType="textMultiLine"
@@ -109,7 +113,8 @@
         android:textAlignment="center"
         android:textColor="@color/colorPrimaryDark"
         app:layout_constraintBottom_toTopOf="@+id/joinbuttonevent"
-        app:layout_constraintStart_toStartOf="@+id/eventinfo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
     <TextView
@@ -119,14 +124,16 @@
         android:layout_alignStart="@+id/eventinfo"
         android:layout_alignParentTop="true"
         android:layout_centerInParent="true"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="2dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="20dp"
         android:text="Sport"
         android:textAlignment="center"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="32dp"
         app:layout_constraintBottom_toTopOf="@+id/textView6"
-        app:layout_constraintEnd_toEndOf="@+id/textView6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>

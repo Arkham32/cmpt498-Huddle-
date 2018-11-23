@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -16,6 +17,15 @@
 
 
         <TextView
+            android:id="@+id/textView8"
+            android:layout_width="match_parent"
+            android:layout_height="27dp"
+            android:text="Info:"
+            android:textColor="@android:color/white"
+            tools:text="Info: "
+            android:textSize="20sp" />
+
+        <TextView
             android:id="@+id/post_info"
             android:layout_width="match_parent"
             android:layout_height="35dp"
@@ -26,15 +36,15 @@
         <TextView
             android:id="@+id/textView2"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:text="Sport"
+            android:layout_height="27dp"
+            android:text="Sport:"
             android:textColor="@android:color/white"
             android:textSize="20sp" />
 
         <TextView
             android:id="@+id/post_sport"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
+            android:layout_height="27dp"
             android:text="Sport"
             android:textColor="@android:color/white"
             android:textSize="20sp" />
@@ -42,8 +52,8 @@
         <TextView
             android:id="@+id/textView3"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Location"
+            android:layout_height="27dp"
+            android:text="Location:"
             android:textColor="@android:color/white"
             android:textSize="20sp" />
 
@@ -58,15 +68,15 @@
         <TextView
             android:id="@+id/textView4"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:text="Players Needed"
+            android:layout_height="27dp"
+            android:text="Players Needed: "
             android:textColor="@android:color/white"
             android:textSize="20sp" />
 
         <TextView
             android:id="@+id/post_players"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
+            android:layout_height="27dp"
             android:text="Player Needed"
             android:textColor="@android:color/white"
             android:textSize="20sp" />
