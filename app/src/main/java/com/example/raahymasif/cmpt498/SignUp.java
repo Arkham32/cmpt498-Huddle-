@@ -18,6 +18,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
+import java.util.ArrayList;
+import java.util.Map;
+
 public class SignUp extends AppCompatActivity {
 
 
@@ -68,27 +71,28 @@ public class SignUp extends AppCompatActivity {
                             Toast.makeText(SignUp.this, "Username already exists!", Toast.LENGTH_SHORT).show();
 
                         }
-                        else
+                        ArrayList email = get_Location((Map <String,Object>) dataSnapshot.getValue());
+
+                        if (email.contains(encodeEmail.toString()))
                             {
                                 // check if email already exists
-                            if(dataSnapshot.child(encodeEmail.toString()).exists()) {
                                 mDialog.dismiss();
                                 Toast.makeText(SignUp.this, "Account already exists under this email!", Toast.LENGTH_SHORT).show();
                             }
-                            else
-                                {
-                                mDialog.dismiss();
-                                // add to the database
-                                User user = new User(edtFirstName.getText().toString(),edtLastName.getText().toString(),edtPassword.getText().toString(),encodeEmail.toString(), adminStatus.toString());
-                                table_user.child(edtUsername.getText().toString()).setValue(user);
-                                Toast.makeText(SignUp.this, "Account Created!", Toast.LENGTH_SHORT).show();
-                                finish();
+                        else
+                            {
+                            mDialog.dismiss();
+                            // add to the database
+                            User user = new User(edtFirstName.getText().toString(),edtLastName.getText().toString(),edtPassword.getText().toString(),encodeEmail.toString(), adminStatus.toString());
+                            table_user.child(edtUsername.getText().toString()).setValue(user);
+                            Toast.makeText(SignUp.this, "Account Created!", Toast.LENGTH_SHORT).show();
+                            finish();
 
                             }
 
                         }
 
-                    }
+
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -100,8 +104,27 @@ public class SignUp extends AppCompatActivity {
 
     }
 
+    private ArrayList get_Location(Map<String,Object> users) {
+
+        ArrayList<String> location = new ArrayList<>();
+
+        //iterate through each user, ignoring their UID
+        for (Map.Entry<String, Object> entry : users.entrySet()) {
+
+            //Get user map
+            Map singleUser = (Map) entry.getValue();
+            //Get phone field and append to list
+            location.add((String) singleUser.get("email"));
+
+        }
+        return location;
+    }
+
     //since fire base can not handle "." we need to replace it with ","
     public static String EncodeString(String string) {
         return string.replace(".", ",");
+    }
+    public static String DecodeString(String string) {
+        return string.replace(",", ".");
     }
 }
