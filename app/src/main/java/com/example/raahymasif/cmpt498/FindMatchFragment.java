@@ -88,7 +88,7 @@ public class FindMatchFragment extends Fragment {
 
                 //this gets the username
                 Bundle arguments = getArguments();
-                final String user = arguments.getString("username");
+                final String user = arguments.getString("user_name");
                 final String email = arguments.getString("email");
 
                 viewHolder.setInfo(model.getInfo());
@@ -121,7 +121,7 @@ public class FindMatchFragment extends Fragment {
 
                         Intent displayPost = new Intent(getActivity(),DisplaySpecificPostActivity.class);
                         displayPost.putExtra("post_key", post_key);
-                        displayPost.putExtra("username",user);
+                        displayPost.putExtra("user_name",user);
                         displayPost.putExtra("email",email);
                         startActivity(displayPost);
 

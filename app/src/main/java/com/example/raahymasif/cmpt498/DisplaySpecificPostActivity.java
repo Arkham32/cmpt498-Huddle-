@@ -57,7 +57,7 @@ public class DisplaySpecificPostActivity extends Activity {
         //gets the post UID
         Bundle extras = getIntent().getExtras();
         post_key = extras.getString("post_key");
-        username = extras.getString("username");
+        username = extras.getString("user_name");
         email = extras.getString("email");
 
 

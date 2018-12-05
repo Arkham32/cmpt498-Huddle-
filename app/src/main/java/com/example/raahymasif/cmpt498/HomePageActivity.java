@@ -107,7 +107,7 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
             FindMatchFragment fragment = new FindMatchFragment();
             Bundle arguments = new Bundle();
 
-            arguments.putString("username",s );
+            arguments.putString("user_name",s );
             arguments.putString("email", x );
             fragment.setArguments(arguments);
 
@@ -131,7 +131,7 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
                 CreateGameFragment fragment = new CreateGameFragment();
                 Bundle arguments = new Bundle();
 
-                arguments.putString("username",s );
+                arguments.putString("user_name",s );
                 arguments.putString("email",x );
                 fragment.setArguments(arguments);
 
@@ -145,7 +145,7 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
                 FindMatchFragment findFragment = new FindMatchFragment();
                 Bundle argumentsFind = new Bundle();
 
-                argumentsFind.putString("Username",s);
+                argumentsFind.putString("user_name",s);
                 argumentsFind.putString("email",x);
                 findFragment.setArguments(argumentsFind);
 
@@ -163,7 +163,7 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
                 Intent createmap = new Intent(getApplicationContext(), MapsActivity.class);
                 String string = "no";
                 createmap.putExtra("buttonclicked", string);
-                createmap.putExtra("username", s);
+                createmap.putExtra("user_name", s);
                 createmap.putExtra("email", x);
                 startActivity(createmap);
                 //break;
@@ -180,7 +180,7 @@ public class HomePageActivity extends AppCompatActivity implements NavigationVie
                 SendMessageFragment fragmentChat = new SendMessageFragment();
                 Bundle argumentsChat = new Bundle();
 
-                argumentsChat.putString("username",s );
+                argumentsChat.putString("user_name",s );
                 argumentsChat.putString("email",x );
                 fragmentChat.setArguments(argumentsChat);
 

@@ -207,7 +207,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     distance = Math.round(distance * 10.0) / 10.0;
                     final String distancefromlocation = (String.valueOf(distance));
                     Bundle extras = getIntent().getExtras();
-                    final String username = extras.getString("username");
+                    final String username = extras.getString("user_name");
                     final String email = extras.getString("email");
                     //int a = Integer.parseInt(distancefromlocation);
                     address=null;

@@ -64,7 +64,7 @@ public class SendMessageFragment extends Fragment {
 
 
         Bundle arguments = getArguments();
-        String user = arguments.getString("username");
+        String user = arguments.getString("user_name");
         String email = arguments.getString("email");
 
         //testing

@@ -120,7 +120,7 @@ public class CreateGameActivity extends Activity implements View.OnClickListener
 
         //get the username;
         Bundle extras = getIntent().getExtras();
-        postedBy = extras.getString("username");
+        postedBy = extras.getString("user_name");
         email = extras.getString("email");
 
         //when cancel is clicked

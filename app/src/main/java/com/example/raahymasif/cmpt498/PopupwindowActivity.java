@@ -42,7 +42,7 @@ public class PopupwindowActivity extends Activity {
         distance1 = (TextView)findViewById(R.id.distance);
         Bundle extras = getIntent().getExtras();
         post_key = extras.getString("post_key");
-        username = extras.getString("username");
+        username = extras.getString("user_name");
         email = extras.getString("email");
         distance = extras.getString("distance");
 
@@ -75,7 +75,7 @@ public class PopupwindowActivity extends Activity {
             public void onClick(View v) {
                 Intent newmarker = new Intent(PopupwindowActivity.this, DisplaySpecificPostActivity.class);
                 newmarker.putExtra("post_key", post_key);
-                newmarker.putExtra("username", username);
+                newmarker.putExtra("user_name", username);
                 newmarker.putExtra("email", email);
                 startActivity(newmarker);
             }
