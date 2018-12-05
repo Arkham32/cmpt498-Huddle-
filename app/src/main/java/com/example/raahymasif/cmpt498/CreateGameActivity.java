@@ -91,7 +91,7 @@ public class CreateGameActivity extends Activity implements View.OnClickListener
 
         SportText = (AutoCompleteTextView) findViewById(R.id.SportText);
         //SportText = (MaterialEditText)findViewById(R.id.SportText);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,sportCategory);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, sportCategory);
         SportText.setAdapter(adapter);
 
         // data for date and time picker
@@ -137,6 +137,20 @@ public class CreateGameActivity extends Activity implements View.OnClickListener
         PostButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                int j = 0;
+                for (int i = 0; i < sportCategory.length; i++)
+                {
+                    if (SportText.getText().toString().equals(sportCategory[i])){ // (you use the word "contains". either equals or indexof might be appropriate)
+
+                        j = 1;
+                    }
+                }
+                if(j == 0){
+                    Toast.makeText(CreateGameActivity.this, "Invalid Sport, please select from list", Toast.LENGTH_SHORT).show();
+
+                }
+                if(j == 1){
+
                 final ProgressDialog mDialog = new ProgressDialog(CreateGameActivity.this);
                 mDialog.setMessage("Please wait...");
                 mDialog.show();
@@ -172,7 +186,7 @@ public class CreateGameActivity extends Activity implements View.OnClickListener
                             
                             table_post.child(uniqueId.toString()).setValue(createPosts);
                             //Toast.makeText(CreateGameActivity.this, "Post Submitted!", Toast.LENGTH_SHORT).show();
-                            Toast.makeText(CreateGameActivity.this, uniqueId, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(CreateGameActivity.this, "Post Submitted!", Toast.LENGTH_SHORT).show();
                             finish();
 
                             Intent homePage = new Intent(CreateGameActivity.this,HomePageActivity.class);
@@ -191,9 +205,9 @@ public class CreateGameActivity extends Activity implements View.OnClickListener
                 });
 
             }
+        }
+
         });
-
-
     }
 
     @Override
