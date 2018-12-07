@@ -64,17 +64,15 @@ public class SignUp extends AppCompatActivity {
                 table_user.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
+                        ArrayList username = get_username((Map <String,Object>) dataSnapshot.getValue());
+                        ArrayList email = get_email((Map <String,Object>) dataSnapshot.getValue());
                         // Check if username already exists
-                        if(dataSnapshot.child(edtUsername.getText().toString()).exists()) {
+                        //if(dataSnapshot.child(edtUsername.getText().toString()).exists()) {
+                        if(username.contains(edtUsername)){
                             mDialog.dismiss();
                             Toast.makeText(SignUp.this, "Username already exists!", Toast.LENGTH_SHORT).show();
 
-                        }
-                        ArrayList email = get_Location((Map <String,Object>) dataSnapshot.getValue());
-
-                        if (email.contains(encodeEmail.toString()))
-                            {
+                        } else if (email.contains(encodeEmail.toString())) {
                                 // check if email already exists
                                 mDialog.dismiss();
                                 Toast.makeText(SignUp.this, "Account already exists under this email!", Toast.LENGTH_SHORT).show();
@@ -104,7 +102,7 @@ public class SignUp extends AppCompatActivity {
 
     }
 
-    private ArrayList get_Location(Map<String,Object> users) {
+    private ArrayList get_email(Map<String,Object> users) {
 
         ArrayList<String> location = new ArrayList<>();
 
@@ -115,6 +113,22 @@ public class SignUp extends AppCompatActivity {
             Map singleUser = (Map) entry.getValue();
             //Get phone field and append to list
             location.add((String) singleUser.get("email"));
+
+        }
+        return location;
+    }
+
+    private ArrayList get_username(Map<String,Object> users) {
+
+        ArrayList<String> location = new ArrayList<>();
+
+        //iterate through each user, ignoring their UID
+        for (Map.Entry<String, Object> entry : users.entrySet()) {
+
+            //Get user map
+            Map singleUser = (Map) entry.getValue();
+            //Get phone field and append to list
+            location.add((String) singleUser.toString());
 
         }
         return location;
