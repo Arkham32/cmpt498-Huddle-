@@ -103,6 +103,8 @@ public class FindMatchFragment extends Fragment {
                     public void onClick(View v) {
                         Intent maps = new Intent(getActivity(), MapsActivity.class);
                         String string = "yes";
+                        maps.putExtra("user_name", user);
+                        maps.putExtra("email", email);
                         maps.putExtra("buttonclicked", string);
                         startActivity(maps);
                     }

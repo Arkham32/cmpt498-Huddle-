@@ -41,6 +41,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.ViewGroup.LayoutParams;
 import android.view.LayoutInflater;
 import android.widget.Button;
@@ -59,11 +60,27 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public LatLng newlocate;
     LocationManager locationManager;
     LocationListener mlocListener;
+    Button backbutton;
+
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+        Bundle extras = getIntent().getExtras();
+        final String username = extras.getString("user_name");
+        final String email = extras.getString("email");
+        backbutton = (Button) findViewById(R.id.backbutton);
+        backbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent homePage = new Intent(MapsActivity.this,HomePageActivity.class);
+                homePage.putExtra("user_name", username);
+                homePage.putExtra("email",email);
+                startActivity(homePage);
+            }
+        });
         loadActivity();
 
 
@@ -96,7 +113,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
+
         mMap = googleMap;
+
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
@@ -286,16 +305,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         List<Address> addressList = geocoder.getFromLocation(latitude, longitude, 1);
                         String str = addressList.get(0).getLocality() + ",";
                         str += addressList.get(0).getCountryName();
-                        if(mMap != null) {
-                            mMap.addMarker(new MarkerOptions().position(latLng).title(str));
-                        }
+                        //if(mMap != null) {
+                        //    mMap.addMarker(new MarkerOptions().position(latLng).title(str));
+                        //}
                         a = 5;
                         newlocate = latLng;
                         String s = "no";
                         s = getIntent().getStringExtra("buttonclicked");
+                        Bundle extras = getIntent().getExtras();
+                        final String username = extras.getString("user_name");
+                        final String email = extras.getString("email");
                         if (s.equals("yes")) {
                             if(mMap != null) {
-                                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10.2f));
+                                //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10.2f));
+                                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10.2f));
                             }
                         }
 
@@ -336,16 +359,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             List<Address> addressList = geocoder.getFromLocation(latitude, longitude, 1);
                             String str = addressList.get(0).getLocality() + ",";
                             str += addressList.get(0).getCountryName();
-                            if(mMap != null) {
-                                mMap.addMarker(new MarkerOptions().position(latLng).title(str));
-                            }
+                            //if(mMap != null) {
+                            //    mMap.addMarker(new MarkerOptions().position(latLng).title(str));
+                            //}
                             a = 5;
                             newlocate = latLng;
                             String s = "no";
                             s = getIntent().getStringExtra("buttonclicked");
+                            Bundle extras = getIntent().getExtras();
+                            final String username = extras.getString("user_name");
+                            final String email = extras.getString("email");
                             if (s.equals("yes")) {
                                 if(mMap != null) {
-                                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10.2f));
+                                    //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10.2f));
+                                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10.2f));
                                 }
 
                             }
@@ -378,6 +405,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         }
     }
+    @Override
+    public void onBackPressed(){
+
+    }
+
 
 }
 
