@@ -203,14 +203,15 @@ public class FindMatchFragment extends Fragment {
                             if(curDate > postDate){
                                 dbPost.child(id).removeValue();
                                 //dbPost.removeValue();
-                                System.out.println("deleting==================================");
+                                //System.out.println("deleting==================================");
+
                             }
 
                         }
 
                     }
                     else{
-                        System.out.println("nothing needs deleting =======================");
+                        //System.out.println("nothing needs deleting =======================");
                         break;
                     }
 

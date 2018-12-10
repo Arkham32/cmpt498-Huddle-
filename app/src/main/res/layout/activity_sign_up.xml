@@ -111,7 +111,7 @@
         android:background="#2c3e50"
         android:drawableLeft="@drawable/ic_action_name"
         android:inputType="textPersonName"
-        android:text="Last Name"
+        android:hint="Last Name"
         android:textColor="#fff"
         android:textColorHint="#fff"
         android:textSize="18sp" />

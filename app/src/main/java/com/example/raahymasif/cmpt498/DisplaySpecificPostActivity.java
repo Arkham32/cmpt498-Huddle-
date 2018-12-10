@@ -176,7 +176,7 @@ public class DisplaySpecificPostActivity extends Activity {
 
         String checkExisting = "false";
 
-        String users[] = usersJoined.split(",");
+        String users[] = usersJoined.split("/");
 
         for(int i = 0; i<users.length; i++){
 
@@ -187,8 +187,7 @@ public class DisplaySpecificPostActivity extends Activity {
 
 
         if(checkExisting.equals("false")){
-
-            String joined = usersJoined + "," + username;
+            String joined = usersJoined + "/ " +  username ;
             int a = Integer.parseInt(players);
             a--;
             players = Integer.toString(a);
