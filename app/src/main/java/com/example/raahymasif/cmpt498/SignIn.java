@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,16 +22,16 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 public class SignIn extends AppCompatActivity {
 
     EditText edtPassword,edtUsername;
-    Button btnSignIn;
+    CardView btnSignIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
-        edtPassword = (MaterialEditText)findViewById(R.id.edtPassword);
-        edtUsername = (MaterialEditText)findViewById(R.id.edtUsername);
-        btnSignIn = (Button)findViewById(R.id.btnSignIn);
+        edtPassword = (EditText)findViewById(R.id.edtPassword);
+        edtUsername = (EditText)findViewById(R.id.edtUsername);
+        btnSignIn =  (CardView)findViewById(R.id.btnSignIn);
 
         // Initialize the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();

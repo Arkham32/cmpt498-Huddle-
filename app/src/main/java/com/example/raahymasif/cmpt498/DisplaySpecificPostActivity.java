@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -39,7 +40,7 @@ public class DisplaySpecificPostActivity extends Activity {
     private TextView datetText;
     private TextView timeText;
 
-    Button joinButton, cancelButton;
+    CardView joinButton, cancelButton;
 
 
     @Override
@@ -72,8 +73,8 @@ public class DisplaySpecificPostActivity extends Activity {
         timeText = (TextView) findViewById(R.id.timeTextView);
 
         //button
-        joinButton = (Button) findViewById(R.id.joinButton);
-        cancelButton = (Button) findViewById(R.id.cancelButton);
+        joinButton = (CardView) findViewById(R.id.joinButton);
+        cancelButton = (CardView) findViewById(R.id.cancelButton);
 
         mDatabase.child(post_key).addValueEventListener(new ValueEventListener() {
             @Override

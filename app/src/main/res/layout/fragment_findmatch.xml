@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white">
+    android:background="@drawable/field">
 
     <Button
         android:id="@+id/eventsbutton"
@@ -15,7 +15,7 @@
         android:layout_centerVertical="true"
         android:layout_marginTop="0dp"
         android:layout_marginEnd="86dp"
-        android:background="@color/btnSignActive"
+        android:background="#27ae60"
         android:text="Events Near Me"
         android:textAlignment="center"
         android:textColor="@android:color/white"

@@ -4,85 +4,102 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/huddlelogin"
+    android:background="@drawable/bluegradient"
     tools:context=".SignIn">
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="162dp"
-        android:layout_marginRight="8dp"
-        android:orientation="vertical">
+        android:layout_marginStart="154dp"
+        android:layout_marginTop="172dp"
+        android:fontFamily="@font/aldrich"
+        android:text="HUDDLE"
+        android:textColor="#fff"
+        android:textSize="18sp" />
 
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/edtUsername"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Username"
-            android:inputType="textPersonName"
-            android:textColor="@android:color/black"
-            android:textColorHint="@android:color/black"
-            android:textSize="34sp"
-            app:met_baseColor="@android:color/black"
-            app:met_floatingLabel="highlight"
-            app:met_maxCharacters="12"
-            app:met_primaryColor="@android:color/black"
-            app:met_singleLineEllipsis="true" />
-        <!--
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/edtName"
-            android:hint="Name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColorHint="@android:color/white"
-            android:text="Raahym Asif"
-            android:textColor="@android:color/white"
-            android:textSize="34sp"
-            android:inputType="textPersonName"
-            app:met_baseColor="@android:color/white"
-            app:met_floatingLabel="highlight"
-            app:met_maxCharacters="12"
-            app:met_primaryColor="@android:color/white"
-            app:met_singleLineEllipsis="true"
+    <EditText
+        android:id="@+id/edtUsername"
+        android:layout_width="200dp"
+        android:layout_height="20dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="91dp"
+        android:layout_marginTop="213dp"
+        android:layout_marginEnd="93dp"
+        android:background="#2c3e50"
+        android:drawableLeft="@drawable/ic_action_user"
+        android:hint="Username"
+        android:inputType="textPersonName"
+        android:textColor="#fff"
+        android:textColorHint="#fff"
+        android:textSize="18sp" />
 
-            />
--->
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/edtPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:textColor="@android:color/black"
-            android:textColorHint="@android:color/black"
-            android:textSize="34sp"
-            app:met_baseColor="@android:color/black"
-            app:met_floatingLabel="highlight"
-            app:met_maxCharacters="12"
-            app:met_primaryColor="@android:color/black"
-            app:met_singleLineEllipsis="true"
 
-            />
+    <EditText
+        android:id="@+id/edtPassword"
+        android:layout_width="200dp"
+        android:layout_height="20dp"
 
-    </LinearLayout>
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="91dp"
+        android:layout_marginTop="260dp"
+        android:layout_marginEnd="93dp"
+        android:background="#2c3e50"
+        android:drawableLeft="@drawable/ic_action_lock"
+        android:hint="Password"
+        android:textColor="#fff"
+        android:inputType="textPassword"
+        android:textColorHint="#ffff"
+        android:textSize="18sp" />
 
-    <info.hoang8f.widget.FButton
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="135dp"
+        android:layout_height="135dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="125dp"
+        android:layout_marginTop="29dp"
+        android:layout_marginEnd="124dp"
+        app:srcCompat="@drawable/huddlelogo" />
+
+    <android.support.v7.widget.CardView
+        android:layout_width="300dp"
+        android:layout_height="50dp"
         android:id="@+id/btnSignIn"
-        android:text="Sign In"
-        android:textColor="@android:color/white"
-        android:layout_marginRight="8dp"
-        android:layout_marginLeft="8dp"
         android:layout_alignParentBottom="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        app:fButtonColor="@color/fbutton_color_orange"
-        app:cornerRadius="4dp"
-        />
+        android:layout_centerHorizontal="true"
+        app:cardBackgroundColor="#8e44ad"
+        app:cardCornerRadius="25dp"
+        app:cardElevation="10dp"
+        android:layout_marginBottom="128dp" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="Login"
+                android:textColor="#fff"
+                android:textSize="18sp" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
 
 
 </RelativeLayout>

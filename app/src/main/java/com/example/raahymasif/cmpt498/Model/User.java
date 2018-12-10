@@ -23,7 +23,11 @@ public class User {
     public String getFirstName() {
         return FirstName;
     }
-    
+
+    public String getUsername() {
+        return Username;
+    }
+
     public String getLastName() {return LastName;}
 
     public void setFirstName(String Fname) {

@@ -1,11 +1,16 @@
 package com.example.raahymasif.cmpt498;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -19,15 +24,18 @@ import com.google.firebase.database.ValueEventListener;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 
 public class SignUp extends AppCompatActivity {
 
 
-    MaterialEditText edtFirstName,edtLastName,edtPassword,edtEmail,edtUsername;
-    Button btnSignUp;
+    EditText edtFirstName, edtLastName, edtPassword, edtEmail, edtUsername;
+    CardView btnSignUp;
     String encodeEmail;
     String adminStatus = "admin";
+    Context context = this;
+
 
     //private ProgressDialog progressDialog;
 
@@ -36,14 +44,14 @@ public class SignUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        edtFirstName = (MaterialEditText)findViewById(R.id.edtFirstName);
-        edtLastName = (MaterialEditText)findViewById(R.id.edtLastName);
-        edtEmail = (MaterialEditText)findViewById(R.id.edtEmail);
-        edtPassword = (MaterialEditText)findViewById(R.id.edtPassword);
-        edtUsername = (MaterialEditText)findViewById(R.id.edtUsername);
+        edtFirstName = (EditText) findViewById(R.id.edtFirstName);
+        edtLastName = (EditText) findViewById(R.id.edtLastName);
+        edtEmail = (EditText) findViewById(R.id.edtEmail);
+        edtPassword = (EditText) findViewById(R.id.edtPassword);
+        edtUsername = (EditText) findViewById(R.id.edtUsername);
 
 
-        btnSignUp = (Button)findViewById(R.id.btnSignUp);
+        btnSignUp = (CardView) findViewById(R.id.btnSignUp);
 
 
         // Initialize the database
@@ -53,44 +61,42 @@ public class SignUp extends AppCompatActivity {
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final ProgressDialog mDialog = new ProgressDialog(SignUp.this);
-                mDialog.setMessage("Please wait...");
-                mDialog.show();
+                encodeEmail = EncodeString(edtEmail.getText().toString());
+                final User user = new User(edtFirstName.getText().toString(), edtLastName.getText().toString(), edtPassword.getText().toString(), encodeEmail.toString(), adminStatus.toString());
+                //Toast.makeText(SignUp.this, "Account Created!", Toast.LENGTH_SHORT).show();
+                //finish();
 
                 //need to replace any "." due to firebase not being able to handle them
-                encodeEmail = EncodeString(edtEmail.getText().toString());
 
 
-                table_user.addValueEventListener(new ValueEventListener() {
+
+                table_user.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        ArrayList username = get_username((Map <String,Object>) dataSnapshot.getValue());
-                        ArrayList email = get_email((Map <String,Object>) dataSnapshot.getValue());
-                        // Check if username already exists
-                        //if(dataSnapshot.child(edtUsername.getText().toString()).exists()) {
-                        if(username.contains(edtUsername)){
-                            mDialog.dismiss();
-                            Toast.makeText(SignUp.this, "Username already exists!", Toast.LENGTH_SHORT).show();
 
-                        } else if (email.contains(encodeEmail.toString())) {
-                                // check if email already exists
-                                mDialog.dismiss();
-                                Toast.makeText(SignUp.this, "Account already exists under this email!", Toast.LENGTH_SHORT).show();
-                            }
-                        else
-                            {
-                            mDialog.dismiss();
-                            // add to the database
-                            User user = new User(edtFirstName.getText().toString(),edtLastName.getText().toString(),edtPassword.getText().toString(),encodeEmail.toString(), adminStatus.toString());
+                        ArrayList email = get_email((Map<String, Object>) dataSnapshot.getValue());
+                        if (dataSnapshot.child((edtUsername.getText().toString())).exists()) {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                            builder.setTitle("Error")
+                                    .setMessage("Username already exists!")
+                                    .setNeutralButton("OK", null);
+
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
+                        } else if (email.contains(encodeEmail)) {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                            builder.setTitle("Error")
+                                    .setMessage("Email already exists!")
+                                    .setNeutralButton("OK", null);
+
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
+                        } else {
                             table_user.child(edtUsername.getText().toString()).setValue(user);
                             Toast.makeText(SignUp.this, "Account Created!", Toast.LENGTH_SHORT).show();
                             finish();
-
-                            }
-
                         }
-
-
+                    }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -102,7 +108,7 @@ public class SignUp extends AppCompatActivity {
 
     }
 
-    private ArrayList get_email(Map<String,Object> users) {
+    private ArrayList get_email(Map<String, Object> users) {
 
         ArrayList<String> location = new ArrayList<>();
 
@@ -112,33 +118,22 @@ public class SignUp extends AppCompatActivity {
             //Get user map
             Map singleUser = (Map) entry.getValue();
             //Get phone field and append to list
+            //System.out.println(entry.getKey().toString());
+            //System.out.println("###########################");
             location.add((String) singleUser.get("email"));
 
         }
         return location;
     }
 
-    private ArrayList get_username(Map<String,Object> users) {
-
-        ArrayList<String> location = new ArrayList<>();
-
-        //iterate through each user, ignoring their UID
-        for (Map.Entry<String, Object> entry : users.entrySet()) {
-
-            //Get user map
-            Map singleUser = (Map) entry.getValue();
-            //Get phone field and append to list
-            location.add((String) singleUser.toString());
-
-        }
-        return location;
-    }
-
     //since fire base can not handle "." we need to replace it with ","
-    public static String EncodeString(String string) {
+    public String EncodeString(String string) {
         return string.replace(".", ",");
     }
-    public static String DecodeString(String string) {
+
+    public String DecodeString(String string) {
         return string.replace(",", ".");
     }
 }
+
+

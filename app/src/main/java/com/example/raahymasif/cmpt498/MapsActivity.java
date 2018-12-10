@@ -40,6 +40,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
 
+import android.support.v7.widget.CardView;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.ViewGroup.LayoutParams;
@@ -60,7 +61,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public LatLng newlocate;
     LocationManager locationManager;
     LocationListener mlocListener;
-    Button backbutton;
+    CardView backbutton;
 
 
     @Override
@@ -70,7 +71,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Bundle extras = getIntent().getExtras();
         final String username = extras.getString("user_name");
         final String email = extras.getString("email");
-        backbutton = (Button) findViewById(R.id.backbutton);
+        backbutton = (CardView) findViewById(R.id.backbutton);
         backbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

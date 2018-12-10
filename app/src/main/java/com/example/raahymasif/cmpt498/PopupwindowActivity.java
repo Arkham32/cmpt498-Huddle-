@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -19,7 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 public class PopupwindowActivity extends Activity {
 
 
-    Button Join, Cancel;
+    CardView Join, Cancel;
     TextView info, sport, distance1;
     private DatabaseReference mDatabase;
     String post_info, post_sport, post_distance;
@@ -35,8 +36,8 @@ public class PopupwindowActivity extends Activity {
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference table_post = database.getReference("Posts");
 
-        Join = (Button)findViewById(R.id.joinbuttonevent);
-        Cancel = (Button)findViewById(R.id.cancelbuttonevent);
+        Join = (CardView) findViewById(R.id.joinbuttonevent);
+        Cancel = (CardView) findViewById(R.id.cancelbuttonevent);
         info = (TextView)findViewById(R.id.eventinfo);
         sport = (TextView)findViewById(R.id.eventsport);
         distance1 = (TextView)findViewById(R.id.distance);

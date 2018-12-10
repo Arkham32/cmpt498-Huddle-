@@ -4,117 +4,171 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/huddlelogin"
+    android:background="@drawable/bluegradient"
     tools:context=".SignUp">
 
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="135dp"
+        android:layout_height="135dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="123dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="126dp"
+        app:srcCompat="@drawable/huddlelogo" />
 
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_centerInParent="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="152dp"
+        android:layout_marginTop="143dp"
+        android:fontFamily="@font/aldrich"
+        android:text="HUDDLE"
+        android:textColor="#fff"
+        android:textSize="18sp" />
 
         <!--user name -->
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/edtUsername"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Username"
-            android:inputType="textPersonName"
-            android:singleLine="false"
-            android:textColor="@android:color/black"
-            android:textColorHint="@android:color/black"
-            android:textSize="34sp"
-            app:met_baseColor="@android:color/black"
-            app:met_floatingLabel="highlight"
-            app:met_maxCharacters="12"
-            app:met_primaryColor="@android:color/black"
-            app:met_singleLineEllipsis="true" />
+    <EditText
+        android:id="@+id/edtUsername"
+        android:layout_width="200dp"
+        android:layout_height="20dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="91dp"
+        android:layout_marginTop="180dp"
+        android:layout_marginEnd="93dp"
+
+        android:background="#2c3e50"
+        android:drawableLeft="@drawable/ic_action_user"
+        android:hint="Username"
+        android:inputType="textPersonName"
+        android:singleLine="false"
+        android:textColor="#fff"
+        android:textColorHint="#fff"
+        android:textSize="18sp" />
 
         <!--Password-->
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/edtPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:textColor="@android:color/black"
-            android:textColorHint="@android:color/black"
-            android:textSize="34sp"
-            app:met_baseColor="@android:color/black"
-            app:met_floatingLabel="highlight"
-            app:met_maxCharacters="12"
-            app:met_primaryColor="@android:color/black"
-            app:met_singleLineEllipsis="true" />
+    <EditText
+        android:id="@+id/edtPassword"
+        android:layout_width="200dp"
+        android:layout_height="20dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="92dp"
+        android:layout_marginTop="220dp"
+        android:layout_marginEnd="92dp"
+        android:background="#2c3e50"
+        android:drawableLeft="@drawable/ic_action_lock"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:textColor="#fff"
+        android:textColorHint="#fff"
+        android:textSize="18sp" />
 
         <!--first name -->
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/edtFirstName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="First Name"
-            android:inputType="textPersonName"
-            android:textColor="@android:color/black"
-            android:textColorHint="@android:color/black"
-            android:textSize="34sp"
-            app:met_baseColor="@android:color/black"
-            app:met_floatingLabel="highlight"
-            app:met_maxCharacters="12"
-            app:met_primaryColor="@android:color/black"
-            app:met_singleLineEllipsis="true" />
+    <EditText
+        android:id="@+id/edtFirstName"
+        android:layout_width="200dp"
+        android:layout_height="20dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="92dp"
+        android:layout_marginTop="260dp"
+        android:layout_marginEnd="92dp"
+        android:background="#2c3e50"
+        android:drawableLeft="@drawable/ic_action_name"
+        android:hint="First Name"
+        android:inputType="textPersonName"
+        android:textColor="#fff"
+        android:textColorHint="#fff"
+        android:textSize="18sp" />
 
-        <!--last name -->
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/edtLastName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Last Name"
-            android:inputType="textPersonName"
-            android:textColor="@android:color/black"
-            android:textColorHint="@android:color/black"
-            android:textSize="34sp"
-            app:met_baseColor="@android:color/black"
-            app:met_floatingLabel="highlight"
-            app:met_maxCharacters="12"
-            app:met_primaryColor="@android:color/black"
-            app:met_singleLineEllipsis="true" />
+    <!--last name -->
+    <EditText
+        android:id="@+id/edtLastName"
+        android:layout_width="200dp"
+        android:layout_height="20dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="92dp"
+        android:layout_marginTop="300dp"
+        android:layout_marginEnd="92dp"
+        android:background="#2c3e50"
+        android:drawableLeft="@drawable/ic_action_name"
+        android:inputType="textPersonName"
+        android:text="Last Name"
+        android:textColor="#fff"
+        android:textColorHint="#fff"
+        android:textSize="18sp" />
 
 
-        <!--email-->
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/edtEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Email"
-            android:inputType="textEmailAddress"
-            android:textColor="@android:color/black"
-            android:textColorHint="@android:color/black"
-            android:textSize="34sp"
-            app:met_baseColor="@android:color/black"
-            app:met_floatingLabel="highlight"
-            app:met_primaryColor="@android:color/black"
-            app:met_singleLineEllipsis="true" />
+    <!--email-->
+    <EditText
+        android:id="@+id/edtEmail"
+        android:layout_width="200dp"
+        android:layout_height="20dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="94dp"
+        android:layout_marginTop="340dp"
+        android:layout_marginEnd="90dp"
+        android:background="#2c3e50"
+        android:drawableLeft="@drawable/ic_action_email"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:textColor="#fff"
+        android:textColorHint="#fff"
+        android:textSize="18sp" />
 
-    </LinearLayout>
 
-    <!--signup button-->
-    <info.hoang8f.widget.FButton
+    <android.support.v7.widget.CardView
         android:id="@+id/btnSignUp"
-        android:text="Sign Up"
-        android:textColor="@android:color/white"
-        android:layout_marginRight="8dp"
-        android:layout_marginLeft="8dp"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        app:fButtonColor="@color/btnSignUp"
-        app:cornerRadius="4dp"
-        />
+        android:layout_marginStart="43dp"
+        android:layout_marginEnd="41dp"
+        android:layout_marginBottom="12dp"
+        app:cardBackgroundColor="#8e44ad"
+        app:cardCornerRadius="25dp"
+        app:cardElevation="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="Sign Up"
+                android:textColor="#fff"
+                android:textSize="18sp" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+
 
 
 </RelativeLayout>

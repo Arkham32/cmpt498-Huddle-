@@ -7,6 +7,7 @@ import android.icu.text.IDNA;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -41,8 +42,9 @@ import java.util.Random;
 
 
 public class CreateGameActivity extends Activity implements View.OnClickListener {
-    MaterialEditText LocationText, NumberOfPlayersText, InfoText;
-    Button PostButton, CancelButton, btnDatePicker, btnTimePicker;;
+    EditText LocationText, NumberOfPlayersText, InfoText;
+    Button  btnDatePicker, btnTimePicker;
+    CardView PostButton, CancelButton;
     String uniqueId = new String();
     Place eventAddress;
     String usersJoined = " ";
@@ -107,12 +109,12 @@ public class CreateGameActivity extends Activity implements View.OnClickListener
 
 
 
-        NumberOfPlayersText = (MaterialEditText)findViewById(R.id.NumberOfPlayerText);
-        InfoText  = (MaterialEditText)findViewById(R.id.InfoText);
+        NumberOfPlayersText = (EditText)findViewById(R.id.NumberOfPlayerText);
+        InfoText  = (EditText)findViewById(R.id.InfoText);
 
         //buttons for posting and cancelling
-        PostButton = (Button)findViewById(R.id.PostButton);
-        CancelButton = (Button)findViewById(R.id.CancelButton);
+        PostButton = (CardView) findViewById(R.id.PostButton);
+        CancelButton = (CardView) findViewById(R.id.CancelButton);
 
         // Initialize the database
         final FirebaseDatabase database = FirebaseDatabase.getInstance();

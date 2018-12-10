@@ -3,15 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/arena">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="61dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="0dp"
-        android:background="@color/fbutton_color_orange"
         android:text="Create Game"
         android:textColor="@android:color/white"
         android:textSize="36sp" />
@@ -24,7 +23,8 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="77dp" />
+        android:layout_marginTop="77dp"
+        android:textColor="#fff" />
 <!--
     <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/SportText"
@@ -38,7 +38,7 @@
         android:inputType="textAutoComplete|textPersonName"
         android:textSize="24sp" />
 -->
-    <com.rengwuxian.materialedittext.MaterialAutoCompleteTextView
+    <AutoCompleteTextView
         android:id="@+id/SportText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -49,7 +49,8 @@
         android:ems="10"
         android:hint="Sport"
         android:inputType="textAutoComplete|textPersonName"
-        android:textColorHint="@color/fbutton_color_orange"
+        android:textColorHint="#fff"
+        android:textColor="#fff"
         android:textSize="24sp" />
 
     <EditText
@@ -62,7 +63,9 @@
         android:layout_marginStart="0dp"
         android:layout_marginLeft="0dp"
         android:layout_marginTop="184dp"
-        android:hint="dd-mm-yyyy" />
+        android:hint="dd-mm-yyyy"
+        android:textColorHint="#fff"
+        android:textColor="#fff"/>
 
     <Button
         android:id="@+id/btn_date"
@@ -71,10 +74,14 @@
         android:layout_alignBottom="@+id/in_date"
         android:layout_marginStart="0dp"
         android:layout_marginLeft="0dp"
-        android:layout_marginBottom="0dp"
+        android:layout_marginBottom="1dp"
         android:layout_toEndOf="@+id/in_date"
         android:layout_toRightOf="@+id/in_date"
-        android:text="SELECT DATE" />
+        android:background="#3498db"
+        android:drawableLeft="@drawable/ic_action_calender"
+        android:text="SELECT DATE"
+        android:textColor="#fff" />
+
 
     <EditText
         android:id="@+id/in_time"
@@ -86,11 +93,13 @@
         android:layout_marginStart="0dp"
         android:layout_marginLeft="0dp"
         android:layout_marginTop="0dp"
-        android:hint="24-hour format" />
+        android:hint="24-hour format"
+        android:textColorHint="#fff"
+        android:textColor="#fff"/>
 
     <Button
         android:id="@+id/btn_time"
-        android:layout_width="wrap_content"
+        android:layout_width="113dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/btn_date"
         android:layout_alignStart="@+id/btn_date"
@@ -98,67 +107,111 @@
         android:layout_marginStart="0dp"
         android:layout_marginLeft="0dp"
         android:layout_marginTop="0dp"
-        android:text="SELECT TIME" />
+        android:background="#e74c3c"
+        android:drawableLeft="@drawable/ic_action_time"
+        android:text="SELECT TIME"
+        android:textColor="#fff"/>
 
-    <com.rengwuxian.materialedittext.MaterialEditText
+    <EditText
         android:id="@+id/InfoText"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="80dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="233dp"
+        android:layout_marginBottom="206dp"
         android:ems="10"
         android:hint="Info"
         android:inputType="textMultiLine"
-        android:textColor="@android:color/holo_orange_dark"
+        android:textColor="#fff"
+        android:textColorHint="#fff"
         android:textSize="24sp" />
 
-    <com.rengwuxian.materialedittext.MaterialEditText
+    <EditText
         android:id="@+id/NumberOfPlayerText"
         android:layout_width="77dp"
         android:layout_height="46dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="0dp"
-        android:layout_marginBottom="89dp"
+        android:layout_marginBottom="146dp"
         android:ems="10"
         android:hint="    #"
         android:inputType="number"
-        android:textColor="@android:color/holo_orange_dark"
+        android:textColor="#fff"
+        android:textColorHint="#fff"
         android:textSize="24sp" />
 
-    <Button
+    <android.support.v7.widget.CardView
         android:id="@+id/PostButton"
-        android:layout_width="151dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/CancelButton"
-        android:layout_marginEnd="27dp"
-        android:background="@color/btnSignActive"
-        android:textColor="@android:color/white"
-        android:text="Post" />
-
-    <Button
-        android:id="@+id/CancelButton"
-        android:layout_width="151dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="13dp"
-        android:layout_marginStart="27dp"
-        android:background="@color/fbutton_color_orange"
-        android:textColor="@android:color/white"
-        android:text="Cancel" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="43dp"
+        android:layout_marginEnd="41dp"
+        android:layout_marginBottom="12dp"
+        app:cardBackgroundColor="#27ae60"
+        app:cardCornerRadius="25dp"
+        app:cardElevation="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="Create"
+                android:textColor="#fff"
+                android:textSize="18sp" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/CancelButton"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="43dp"
+        android:layout_marginEnd="41dp"
+        android:layout_marginBottom="70dp"
+        app:cardBackgroundColor="#8e44ad"
+        app:cardCornerRadius="25dp"
+        app:cardElevation="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="Cancel"
+                android:textColor="#fff"
+                android:textSize="18sp" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="263dp"
-        android:layout_height="49dp"
-        android:layout_alignEnd="@+id/CancelButton"
+        android:layout_width="151dp"
+        android:layout_height="51dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="-206dp"
-        android:layout_marginBottom="86dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginBottom="141dp"
+        android:layout_toEndOf="@+id/NumberOfPlayerText"
         android:text="Players Needed"
+        android:textAlignment="center"
+        android:textColor="#fff"
         android:textSize="20dp" />
 
 
