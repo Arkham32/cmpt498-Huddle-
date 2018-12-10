@@ -19,6 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 
 public class SignUp extends AppCompatActivity {
@@ -68,15 +69,26 @@ public class SignUp extends AppCompatActivity {
                         ArrayList email = get_email((Map <String,Object>) dataSnapshot.getValue());
                         // Check if username already exists
                         //if(dataSnapshot.child(edtUsername.getText().toString()).exists()) {
-                        if(username.contains(edtUsername)){
-                            mDialog.dismiss();
-                            Toast.makeText(SignUp.this, "Username already exists!", Toast.LENGTH_SHORT).show();
+                        System.out.println(username);
 
-                        } else if (email.contains(encodeEmail.toString())) {
+
+
+                        if(dataSnapshot.child(edtUsername.getText().toString()).exists()){
+                        //if(Arrays.asList(username).contains(edtUsername)){
+                            mDialog.dismiss();
+
+                            //Toast.makeText(SignUp.this, "Username already exists!", Toast.LENGTH_LONG);
+                           edtUsername.setText("INVALID USERNAME");
+
+                        }
+                        else if (email.contains(encodeEmail)) {
                                 // check if email already exists
                                 mDialog.dismiss();
+
                                 Toast.makeText(SignUp.this, "Account already exists under this email!", Toast.LENGTH_SHORT).show();
-                        } else {
+
+                        }
+                        else{
                             mDialog.dismiss();
 
                             // add to the database
@@ -111,6 +123,7 @@ public class SignUp extends AppCompatActivity {
             //Get user map
             Map singleUser = (Map) entry.getValue();
             //Get phone field and append to list
+
             location.add((String) singleUser.get("email"));
 
         }
@@ -127,7 +140,9 @@ public class SignUp extends AppCompatActivity {
             //Get user map
             Map singleUser = (Map) entry.getValue();
             //Get phone field and append to list
-            location.add((String) singleUser.toString());
+            //System.out.println(entry.getKey().toString());
+            //System.out.println("###########################");
+            location.add((String) entry.getKey());
 
         }
         return location;
