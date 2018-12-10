@@ -76,10 +76,9 @@ public class SignUp extends AppCompatActivity {
                                 // check if email already exists
                                 mDialog.dismiss();
                                 Toast.makeText(SignUp.this, "Account already exists under this email!", Toast.LENGTH_SHORT).show();
-                            }
-                        else
-                            {
+                        } else {
                             mDialog.dismiss();
+
                             // add to the database
                             User user = new User(edtFirstName.getText().toString(),edtLastName.getText().toString(),edtPassword.getText().toString(),encodeEmail.toString(), adminStatus.toString());
                             table_user.child(edtUsername.getText().toString()).setValue(user);
